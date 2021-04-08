@@ -1,0 +1,243 @@
+body{
+    /* background-color: rgb(96, 96, 107); */
+     margin:0px ;
+     padding:0px; 
+}
+
+
+.header{
+     background-color: rgb(194, 166, 221);
+     display: flex;
+     color:white;
+     justify-content: space-around;
+     padding:5px 20px;
+     height: 21px;
+     padding-bottom:0px;
+     
+}
+
+.head-title{
+    background-color: rgba(161, 131, 189, 0.24);
+    padding:0px 5px;
+
+     cursor: default;
+}
+.head-title:hover{
+    background-color: rgba(161, 131, 189, 0.918);
+   
+    border-bottom:2px solid white;
+     box-sizing: border-box;
+
+    
+}
+
+
+.obj-name{
+  font-size: 23px;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Times New Roman', Times, serif;
+}
+.obj-hr{
+    text-align: center;
+    width: 90%;
+
+    background-color: rgba(253, 253, 253, 0.288);
+}
+.main-box{
+    width:80%; 
+   /* box-shadow: 0px 0px 10px 0px rgba(26, 26, 26, 0.151); */
+    margin:auto;
+    text-align: center;
+
+}
+
+.img-box{
+    display: inline-block;
+    
+    /* text-align: center; */
+    margin:8px;
+    width:220px; 
+    /* min-height: 250px; */
+    box-shadow: 1px 1px 10px 1px   rgba(56, 54, 54, 0.2) ;
+
+    position: relative;
+}
+
+.img-box:hover{
+    box-shadow: 0px 5px 10px 0px rgba(56, 54, 54, 0.5) ;
+    cursor: pointer;
+    
+    transform:   translateY(-10px);
+
+    transition-duration: 500ms ;
+    
+    
+    /* cursor: zoom-in; */
+}
+.img-title{
+    font-size:14px; 
+    color:blue; 
+    /* border:1px solid black;  */
+
+}
+
+.img-body{
+    display: inline-block;
+   /* border-top-left-radius: 2px;
+   border-top-right-radius: 2px; */
+    /* border:2px solid rgb(92, 92, 54); */
+    width: 100%;
+    height:137px; 
+    background-image: url('../image/test2.jpg');
+    background-size: cover;
+
+    background-repeat:no-repeat; 
+    background-position:center ;
+}
+.img-detail{
+ text-align: center;
+}
+.img-title{
+    padding:0px ; 
+    margin:0px; 
+    color:rgb(46, 55, 63);
+    /* border:1px solid rgb(0, 195, 255);  */
+    
+}
+.img-desc{
+    padding: 14px 10px ; 
+    
+    margin:0px; 
+    font-size: 10px;
+    color: rgba(3, 6, 7, 0.596); 
+    
+}
+
+
+.modal-box{
+    display:inline-block;
+      position: fixed;
+      left:0px; 
+  background-color: rgba(72, 72, 121, 0.411);
+  margin:0px; 
+  padding:0px; 
+  /* display: none; */
+      z-index: 1 ;
+      /* height:95vh;
+      width: 100vw; */
+      border:1px solid black; 
+
+}
+.modal-body{
+    background-image:url('WhatsApp Image 2021-03-02 at 10.19.15 AM.jpeg');
+        background-repeat:no-repeat; 
+        background-position:center ;
+        background-size: contain;
+        margin:0px; 
+        padding:0px; 
+        height: 70vh;
+        width: 97vw;
+
+}
+
+.control{
+
+       
+        height: 10vh;;
+        
+        margin:auto; 
+    border:1px solid rgb(15, 51, 21); 
+   text-align: center;
+     position: relative;
+     bottom:0px; 
+
+}
+
+.control-butt{
+   
+    /* border:1px solid rgb(15, 51, 21);  */
+    display: inline-block;
+    position: relative;
+}
+.control-butt:hover{
+    background-color: rgb(208, 208, 212);
+    cursor:pointer; 
+
+    /* color:rgb(172, 106, 106); */
+}
+
+@media only screen and (min-width:1200px ){
+    .main-box{
+        width:920px ; 
+    }
+}
+
+/* @media only screen and (max-width:1200px ){
+    .main-box{
+        width:250px; 
+    }
+    .obj-hr{
+        width: 90%;
+    }
+
+    .img-box{
+         width:90%;
+          
+    }
+    .img-body{
+        height: 250px;
+    }
+
+   
+} */
+
+
+@media only screen and (max-width:800px ){
+    .main-box{
+        width:95% ; 
+    }
+    .obj-hr{
+        width: 90%;
+    }
+
+    .img-box{
+         width:90%;
+          
+    }
+    .img-body{
+        height: 250px;
+    }
+
+   
+}
+
+
+#left_butt_img{
+    width:30px; 
+    height: 30px;
+    
+}
+#mid_butt_img{
+    width:20px; 
+    height: 20px;
+    position: relative;
+    top:-5px
+}
+#right_butt_img{
+    width:30px; 
+    height: 30px;
+}
+
+
+#drag_it{
+    height:50px ;
+
+    width:100px ;
+    z-index: 1;
+    margin:5px;
+    padding:5px; 
+    border:1px  dashed rgb(18, 18, 19) ; 
+    background-color: rgba(255, 0, 119, 0.014);
+    position:fixed;
+}

@@ -1,0 +1,74 @@
+body{
+    /* background-color: rgb(96, 96, 107); */
+     margin:0px ;
+     padding:0px; 
+}
+
+#main_box{
+    border:1px solid blue;  
+   position: relative;
+
+}
+
+.header{
+
+height: 50px;
+border:1px solid black; 
+}
+#back_button{
+    display: inline-block;
+    height:50px; 
+    width:50px; 
+    position: absolute;
+    top:7px; 
+    left:10px;
+    margin-left:10px; 
+    /* border:2px solid black;  */
+  
+}
+#back_button_img{
+    
+    width:72%;  
+}
+#add_folder{
+    display: inline-block;
+    position: absolute;
+    top:0px;
+    left:60px;  
+    height:50px; 
+    width:50px; 
+    margin-left:10px; 
+    /* border:1px solid black;  */
+}
+
+#add_fold_img{
+    height:50px; 
+}
+#add_fold_img:hover ,#back_button_img{
+    cursor: pointer;
+}
+.new_folder{
+    /* border: 1px solid green;  */
+    display: inline-block;
+    width:100px; 
+    margin:10px; 
+    min-height: 130px; 
+    position: relative;
+    /* top:0px; */
+}
+.new_folder_img:hover{
+border: 1px solid rgb(0, 0, 0);
+}
+.new_folder_img{
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top:0px; 
+}
+.folder_name{
+    text-align: center;
+    position: absolute;
+    bottom:0px; 
+    max-height: 20px;
+    width:100%;
+}
