@@ -1,11 +1,11 @@
 
 "use strict";
-var add_folder = document.getElementById("add_folder");
+var upload_img_but = document.getElementById("upload_img_but");
 var main_box = document.getElementById("main_box");
 var first_fold = document.getElementById("first_fold");
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
 
 
 
@@ -78,7 +78,7 @@ function selectElementText(el, win) {
 }
 
 
-add_folder.addEventListener("click", () => {
+upload_img_but.addEventListener("click", () => {
 
     let temp = document.createElement("div");
     temp.className = "new_folder";
