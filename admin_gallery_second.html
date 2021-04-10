@@ -24,11 +24,11 @@
 
     <div class="main-box" id="main_box">
 
-        <div id="drop_zone" style="display: none;">
+        <div id="drop_zone"  >
             <div id="drop_body">
                 <div id="cancel_upload_but" class="div_but"> X </div>
                 <div class="drop_detail">
-
+                   <input type="file" multiple id="upload_file_input" hidden> 
                     <div id="browser_file_but" class="div_but"> Browse Files</div>
                     <br> <br>
                     <hr class="hor_rule">OR
@@ -46,74 +46,23 @@
 
         </div>
 
-        <div id="disp_uploadable_file_box">
-
+        <div id="disp_uploadable_file_box" style="display: none;">
+            <!-- <div id="cancel_upload_but" class="div_but"> X </div> -->
             <div id="disp_uploadable_file">
 
 
 
 
 
-                <div class="upload_img_box">
-                    <img class="upload_img" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
-
-
-
-                <div class="upload_img_box">
-                    <div class="upload_img"> </div>
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
-
-                <div class="upload_img_box">
-                    <div class="upload_img"> </div>
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
-
-
-
-                <div class="upload_img_box">
-                    <div class="upload_img"> </div>
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
-
-
-
-                <div class="upload_img_box">
-                    <div class="upload_img"> </div>
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
-
-
-                <div class="upload_img_box">
-                    <img class="upload_img" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
-                    <div class="upload_img_name">this is image name</div>
-                    <div class="rm_img_but">
-                        <img class="rm_img_icon" src="public\image\remove_file_icon.svg" alt="">
-                    </div>
-                </div>
+            
 
             </div>
  
             <div class="upload_img_box" id="upload_but_box">
                 <div id="upload_file_but" class="div_but">Upload</div>
+                <div id="cancel_upload_file_but" class="div_but">Cancel</div>
             </div>
+        
         
         </div>
 

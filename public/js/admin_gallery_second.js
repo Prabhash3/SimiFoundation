@@ -2,7 +2,21 @@
 "use strict";
 var upload_img_but = document.getElementById("upload_img_but");
 var main_box = document.getElementById("main_box");
-var first_fold = document.getElementById("first_fold");
+var drop_zone = document.getElementById("drop_zone");
+var browser_file_but = document.getElementById("browser_file_but"); 
+var upload_file_input = document.getElementById("upload_file_input"); 
+var upload_file_data = document.getElementById("upload_file_data"); 
+var disp_uploadable_file_box = document.getElementById("disp_uploadable_file_box"); 
+var disp_uploadable_file = document.getElementById("disp_uploadable_file"); 
+var upload_img_but = document.getElementById("upload_img_but"); 
+var cancel_upload_but = document.getElementById("cancel_upload_but"); 
+var cancel_upload_file_but = document.getElementById("cancel_upload_file_but"); 
+
+
+
+var not_upload_file_table = {}; 
+var not_upload_file_count = 0; 
+
 // var upload_img_but = document.getElementById("upload_img_but"); 
 // var upload_img_but = document.getElementById("upload_img_but"); 
 // var upload_img_but = document.getElementById("upload_img_but"); 
@@ -41,59 +55,79 @@ function send_ajax(param, url, method = "post", set_header = true) {
 
 }
 
-// send_ajax("name=mohan&age=33","./create_folder.php?name=get&age=33","post").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-
-// send_ajax("2","https://jsonplaceholder.typicode.com/posts/2","get").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-// fetch('https://jsonplaceholder.typicode.com/posts')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
 
 
 
-//stackoverflow function  to select  text of souce id
-function selectElementText(el, win) {
-    win = win || window;
-    var doc = win.document, sel, range;
-    if (win.getSelection && doc.createRange) {
-        sel = win.getSelection();
-        range = doc.createRange();
-        range.selectNodeContents(el);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    } else if (doc.body.createTextRange) {
-        range = doc.body.createTextRange();
-        range.moveToElementText(el);
-        range.select();
-    }
-}
+cancel_upload_but.addEventListener("click", () => {
+    console.log("remove d files "); 
+    upload_file_data=null; 
+    disp_uploadable_file.innerHTML=""; 
+    // drop_zone.style.display="none"; 
+}); 
 
+cancel_upload_file_but.addEventListener("click", () => {
+    console.log("canceling uploading ... files "); 
+    upload_file_data=null; 
+    disp_uploadable_file.innerHTML=""; 
+    disp_uploadable_file_box.style.display="none"; 
+}); 
+
+
+browser_file_but.addEventListener("click", () => {
+
+    upload_file_input.click(); 
+    
+}); 
+
+upload_file_input.addEventListener("change", (e) => {
+    upload_file_data = e.target.files; 
+    console.log(upload_file_data); 
+    drop_zone.style.display="none"; 
+     disp_uploadable_file_box.style.display="block"; 
+   if(!(upload_file_data) || upload_file_data.length<1){
+      console.log("file not found");    
+    return; 
+   }   
+   disp_uploadable_file.innerHTML=""; 
+   for(let i = 0; i<upload_file_data.length ; i++){
+
+            let temp = document.createElement("div"); 
+                temp.className = "upload_img_box"; 
+                
+                temp.innerHTML =  `<div class="upload_img"> </div>
+                                        <div class="upload_img_name">${upload_file_data[i].name}</div>
+                                        <div class="rm_img_but" id="f_no-${i}">
+                                            <img  id="f_img_no-${i}" class="rm_img_icon" src="public\\image\\remove_file_icon.svg" alt="">
+                                    </div>`; 
+          temp.firstElementChild.style.backgroundImage = "url('"+URL.createObjectURL(upload_file_data[i]) + "')";
+// temp.children[2].firstElementChild.src  = URL.createObjectURL(upload_file_data[i]); 
+            console.log(); 
+             disp_uploadable_file.appendChild(temp); 
+   }
+
+    
+
+    
+}); 
 
 upload_img_but.addEventListener("click", () => {
 
-    let temp = document.createElement("div");
-    temp.className = "new_folder";
-    temp.id = "folder-no-" + (main_box.childElementCount + 1);
-    temp.innerHTML = `
-      <img class="new_folder_img" id=${"folder_img_no-" + (main_box.childElementCount + 1)}  src="public\\image\\new_folder.png" alt="new_folder_img" draggable="false">
-      <div class="folder_name" id=${"folder_name_no-" + (main_box.childElementCount + 1)} contenteditable="">New folder</div>
-   `;
-    main_box.appendChild(temp);
-    selectElementText(main_box.lastElementChild.lastElementChild);
+    drop_zone.style.display="block"; 
+}); 
 
+disp_uploadable_file.addEventListener("click", (e) => {
 
-    // main_box.lastElementChild.lastElementChild.focus();
+    if( e.target.className=="rm_img_but" || e.target.className == "rm_img_icon"  ){
 
-    // main_box.lastElementChild.lastElementChild
+          console.log(e.target.className); 
+    let file_id = e.target.id.split("-")[1] ; 
+    console.log(file_id); 
+    not_upload_file_table[file_id]=true; 
+    console.log(not_upload_file_table);
+    document.getElementById("f_no-"+file_id).parentElement.remove(); 
+    }
+    // document.getElementById("f_no-1").parentElement.remove(); 
+   
 }); 
 
 main_box.addEventListener("focusout", (e) => {

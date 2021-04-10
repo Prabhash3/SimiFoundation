@@ -81,6 +81,7 @@ border:1px solid black;
     padding:5px 10px;
     border-radius: 4px  ;
     cursor:pointer; 
+    
 }
 .div_but:hover{
 
@@ -152,7 +153,10 @@ border:1px solid black;
 }
 .upload_img_name{
     display: inline-block;
-    width:50%;
+    min-width: 50%;
+    max-width:75%; 
+    height:16px ;
+    overflow: hidden;
     margin:10px; 
     position: absolute;
     top:15px;
@@ -186,7 +190,15 @@ border:1px solid black;
     /* position: relative; */
     
 }
-#upload_file_but{
+#upload_file_but,#cancel_upload_file_but{
     position: relative;
     top:-15px;
+    text-align: center;
+    /* display:block;  */
+    margin-top:10px; 
+
+    margin-bottom:5px; 
+}
+#cancel_upload_file_but{
+    margin-left:15px; 
 }
