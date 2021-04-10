@@ -165,8 +165,8 @@ border:1px solid black;
     color:rgba(55, 37, 88, 0.822);
     padding-bottom:3px;
     
-    border-bottom:0.1px solid rgba(82, 78, 78, 0.397); 
-    
+    border:0.1px solid rgba(82, 78, 78, 0.397); 
+    word-break: break-all;
 }
 .rm_img_but{
     display: inline-block;
