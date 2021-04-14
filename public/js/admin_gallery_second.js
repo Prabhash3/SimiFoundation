@@ -16,9 +16,6 @@ var upload_file_but = document.getElementById("upload_file_but");
 // var upload_img_but = document.getElementById("upload_img_but"); 
 // var upload_img_but = document.getElementById("upload_img_but"); 
 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-
-
 
 
 var not_upload_file_table = {}; 
@@ -218,7 +215,7 @@ upload_file_input.addEventListener("change", (e) => {
             let temp = document.createElement("div"); 
                 temp.className = "upload_img_box"; 
                 
-                temp.innerHTML =  `<div class="upload_img"> </div>
+                temp.innerHTML =  `<div title="folder" class="upload_img"> </div>
                                         <div class="upload_img_name">${upload_file_data[i].name}</div>
                                         <div class="rm_img_but" id="f_no-${i}">
                                             <img  id="f_img_no-${i}" class="rm_img_icon" src="public\\image\\remove_file_icon.svg" alt="">

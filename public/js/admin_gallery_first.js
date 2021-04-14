@@ -8,6 +8,13 @@ var first_fold = document.getElementById("first_fold");
 // var add_folder = document.getElementById("add_folder"); 
 
 
+var test = document.getElementById("test"); 
+    test.addEventListener("click",    (e)=>{
+        
+        console.log("Df");
+          console.log(e.target.className)
+    }); 
+
 
 function send_ajax(param, url, method = "post", set_header = true) {
 
@@ -85,6 +92,7 @@ add_folder.addEventListener("click", () => {
     temp.id = "folder-no-" + (main_box.childElementCount + 1);
     temp.innerHTML = `
       <img class="new_folder_img" id=${"folder_img_no-" + (main_box.childElementCount + 1)}  src="public\\image\\new_folder.png" alt="new_folder_img" draggable="false">
+      <i class="fa fa-folder fa-fw"  style="color:rgb(37, 196, 37)"></i>
       <div class="folder_name" id=${"folder_name_no-" + (main_box.childElementCount + 1)} contenteditable="">New folder</div>
    `;
     main_box.appendChild(temp);

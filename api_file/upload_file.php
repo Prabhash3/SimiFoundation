@@ -9,12 +9,12 @@
 // print_r( $_GET); 
 // print_r( $_REQUEST); 
 if(isset($_FILES["upload_file"])   && $_FILES["upload_file"]['size'] > 0    ){
-   sleep(2); 
+   sleep(1); 
     echo json_encode(   array("status"=>"ok", "message"=>"file received" , "file name " => $_FILES["upload_file"]['name'] )); 
     //   echo json_encode(array("status"=>"ok", "message"=>"file received" )) ; 
 }
 else{
-    sleep(2); 
+    sleep(1); 
     http_response_code(500);
     echo json_encode(array("status"=>"error", "message"=>"file not found")) ; 
 }

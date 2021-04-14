@@ -7,29 +7,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="public/css/admin_gallery_first.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" />
 
 </head>
 
 <body>
 
-  <div class="header">
-    <div id="back_button" ><img id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
+<!-- 
+  <div class="modal-box">
+    <div class="modal-body-inside">
+      <div class="modal-box-head">Edit folder </div>
+      <div class="modal-box-body">body</div>
+      <div class="modal-box-foot">foot</div>
+
     </div>
 
-    <div id="add_folder" ><img id="add_fold_img" src="public\image\add_folder.svg" alt="add_folder" draggable="false">
+  </div> -->
+
+  <div class="header">
+    <div id="back_button"><img id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
     </div>
+
+    <div id="add_folder"><img id="add_fold_img" src="public\image\add_folder.svg" alt="add_folder" draggable="false">
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div id="add_folder"><img id="add_fold_img" src="public\image\add_folder.svg" alt="add_folder" draggable="false">
+  </div>
+
+
+  <div class="second-head">
+
+
+
+    <div class="path-detail">
+      <div class="second-icon home-icon">
+        <i class="fa fa-home fa-fw" style="font-size:15px;position:relative;top:-1px;  color: rgb(74 68 71 /90%);;;"></i>
+      </div>
+
+      <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
+
+      <div class="second-icon home-icon"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, in! folder
+      </div>
+      <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
+
+
+
+
+
+
+    </div>
+
   </div>
 
   <div class="main-box" id="main_box">
 
-    <!-- <div class="new_folder">
-      <img class="new_folder_img" src="public\image\new_folder.png" alt="new_folder_img" draggable="false">
-      <div class="folder_name" id="first_fold" contenteditable="true"  >this is a new folder </div>
-    </div> -->
-    
+    <!-- <div class="main-box-heading"> name , edit </div> -->
+    <div class="new_folder">
+      <span class=""> name</span>
+
+
+
+      <!-- <span class="edit_folder_img"> name</span> -->
+      <!-- <span class="edit_folder_img">  <i class="fas fa-wrench"></i></span> -->
+
+    </div>
+
+    <div class="new_folder">
+      <span class="new_folder_img"><i class="fa fa-folder fa-fw n"></i></span>
+
+      <span   title="Edit Folder name " class="folder_name" id="first_fold" contenteditable="true">this is alrome Lorem ipsum dolor, sit amet
+        consectetur adipisicing elit. Aspernatur, corrupti! new folder </span>
+ 
+          <!-- <span title="Hide Folder" class="hide-folder"><i class="fas fa-eye"></i>
+           </span> -->
+            <span title="Unhide Folder" class="hide-folder"><i class="fas fa-eye-slash"></i>
+            </span>
+           
+          <span title="Edit Image" class="edit-folder-img"id="test">  <i  class="far fa-edit"></i> </span>
+          <span title="Delete Folder" class="delete-folder"><i  class="fa fa-trash" aria-hidden="true"></i> </span>
+          
+  
+     
+   
+    </div>
+
 
 
   </div>
+
+
+  <br><br><br><br><br><br><br><br><br>
+  <i class="fa fa-trash" aria-hidden="true"></i>
+  <i class="fa fa-trash-o" aria-hidden="true"></i>
+  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+  <span class="st">
+    <i class="fas fa-camera"></i>
+  </span>
+  <i class="fas fa-wrench"></i>
+  <i class="far fa-edit"></i>
+  hidden , remove ,change image , folder name
 
   <script src="public/js/admin_gallery_first.js"></script>
 </body>

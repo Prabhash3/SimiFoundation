@@ -2,6 +2,7 @@ body{
     /* background-color: rgb(96, 96, 107); */
      margin:0px ;
      padding:0px; 
+     background-image: url('C:\\Users\\rohini\\Downloads\\pattern15.png');
 }
 
 #main_box{
@@ -167,6 +168,9 @@ border:1px solid black;
     
     border:0.1px solid rgba(82, 78, 78, 0.397); 
     word-break: break-all;
+}
+.rm_img_icon{
+    width:100%; 
 }
 .rm_img_but{
     display: inline-block;
