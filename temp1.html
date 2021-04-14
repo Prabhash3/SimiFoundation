@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div style="width: 15%">
+        <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 5%" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+
+    <div class="container" style="width: 80%">
+        <h2>Modal Example</h2>
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button"   id="test" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card" style="width: 100%;">
+
+                            <img style="width: 100%;" class="card-img-top"
+                                src="C:\Users\rohini\Downloads\fileupload.png" alt="Card image cap">
+
+                            <div class="card-body">
+                                <br><br>
+                                <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 25%"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <p> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati quae aut molestias sed voluptatibus ex consequatur eum magnam. Ab provident similique quas doloremque quae ipsam ipsum! Labore illum reiciendis, velit inventore ex animi tempore, laudantium nostrum itaque cum eius adipisci.  </p>
+                    </div>
+                   
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+<script>
+    var test = document.getElementById("test");
+    test.addEventListener("click",(e)=>{
+        console.log("click')"); 
+    })
+</script>
+</body>
+
+</html>
