@@ -104,14 +104,14 @@ add_folder.addEventListener("click", () => {
 temp.innerHTML=` 
 <span  title="Open Folder" class="new_folder_img" id=${"f_img_no-" + (curr_fold_no )} ><i class="fa fa-folder fa-fw" id=${"f_img_c_no-" + (curr_fold_no )} ></i></span>
 
-<span title="Edit Folder name " class="folder_name"  contenteditable="true" id=${"folder_name_no-" + (curr_fold_no )}> New Folder </span>
+<span title="Edit Objective name " class="folder_name"  contenteditable="true" id=${"folder_name_no-" + (curr_fold_no )}>Objective Title </span>
 <span title="Hide Folder" class="hide-folder" id=${"f_vis_no-" + (curr_fold_no )} ><i class="fas fa-eye" id=${"folder_vis_c_no-" + (curr_fold_no )}></i> </span>
-<span title="Edit Image" class="edit-folder-img" id=${"f_edit_no-" + (curr_fold_no )}> <i class="far fa-edit" id=${"f_edit_c_no-" + (curr_fold_no )}></i> </span>
+<span title="Change Image" class="edit-folder-img" id=${"f_edit_no-" + (curr_fold_no )}> <i class="far fa-edit" id=${"f_edit_c_no-" + (curr_fold_no )}></i> </span>
 <span title="Delete Folder" class="delete-folder" id=${"f_name_no-" + (curr_fold_no )}><i class="fa fa-trash" aria-hidden="true" id=${"f_name_c_no-" + (curr_fold_no )}></i> </span>
 
 `;
 
-// console.log(temp.childElementCount); 
+console.log(temp.childElementCount); 
     main_box.appendChild(temp);
     selectElementText(main_box.lastElementChild.children[1]);
    
@@ -123,8 +123,14 @@ temp.innerHTML=`
 
 main_box.addEventListener("focusout", (e) => {
     if (e.target.className == "folder_name") {
-        let type="cr_fd" ; 
-        let f_id  = e.target.id.split("-")[1]; 
+       
+           
+      
+        let f_id_part  = e.target.id.split("-"); 
+        let f_id = f_id_part[0]; 
+        let f_id_name = f_id_part[1]; 
+        let  type=  f_id_name=="new_fold"? "creat_fold" :"update_fold";; 
+       
         let f_name  =  String( e.target.innerHTML) ;
         // console.log("before repl = ",f_name)
         f_name = f_name.replace(/&nbsp;/g,"") ;
@@ -168,7 +174,6 @@ main_box.addEventListener("click", (e) => {
     let folder_id ; 
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
-      
       console.log( " id = " + folder_id ); 
       console.log( " class = '" + class_name+ "'" ); 
     }else{
@@ -178,21 +183,34 @@ main_box.addEventListener("click", (e) => {
 
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
     //this is folder image 
-     window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
+         window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
     }
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder
         console.log("->  hide-folder"); 
+        send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + f_id, "./admin_gallery_first.php", "post").then((data) => {
+            console.log((data));
+        }).catch(error => {
+            // console.log(error);
+        });
+
        
     }
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
             //this is   unhide-folder
             console.log("->  Unhide-folder"); 
+            send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + f_id, "./admin_gallery_first.php", "post").then((data) => {
+                console.log((data));
+            }).catch(error => {
+                // console.log(error);
+            });
        
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
         //this is edit folder 
         console.log("->  edit-folder"); 
+        
+        
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {
          //this is delete folder 
