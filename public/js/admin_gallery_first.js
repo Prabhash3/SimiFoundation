@@ -14,7 +14,19 @@ var select_img_but = document.getElementById("select_img_but");
 var display_up_img_name = document.getElementById("display_up_img_name"); 
 var upload_img_but = document.getElementById("upload_img_but"); 
 var prog_bar = document.getElementById("prog_bar"); 
+var modal_out_box = document.getElementById("modal_out_box"); 
 // var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+
 
 
 
@@ -133,22 +145,37 @@ console.log(temp.childElementCount);
 
 upload_img_but.addEventListener("click", (e) => {
     
+
    console.log(e.target.innerHTML); 
-     if(e.target.innerHTML =="Uploading..." || !(upload_file_data) || !(upload_file_data[0] )){
-         console.log("return upload");      
-         return; 
+     
+
+     let is_error= false; 
+     if (  !(upload_file_data) || !(upload_file_data[0] )){
+        console.log("file not present ");  
+        is_error = true;  
+
      }
+   
      else if(upload_file_data[0].size<=0 ){
          //to samll 
-         console.log("too small ");      
-         return; 
+         console.log("too small ");  
+        is_error = true;  
+
+ 
      }
      else if(upload_file_data[0].size>=40000000 ){
+
         //to samll 
-        console.log("too big  ");   
-        return; 
+        console.log("too big  ");  
+        is_error = true;  
+      
     }
      
+    if(is_error){
+        display_up_img.src = default_img_path; 
+        display_up_img_name.textContent ="No File Selected" ; 
+        return; 
+    }
      upload_img_but.innerHTML ="Uploading..."; 
     
      let xhttp = new XMLHttpRequest();
@@ -194,6 +221,8 @@ upload_img_but.addEventListener("click", (e) => {
             upload_file_data = null; 
             setTimeout( ()=>{
                 img_close_modal_but.click(); 
+                display_up_img.src = default_img_path; 
+                display_up_img_name.textContent ="No File Selected" ; 
             },500); 
         }
     }
@@ -221,6 +250,12 @@ input_file.addEventListener("change", (e) => {
 select_img_but.addEventListener("click", () => {
     input_file.click(); 
 });   
+modal_out_box.addEventListener("click", (e) => {
+    // console.log(e.target.className )
+    if (e.target.className == "modal-dialog") {
+    img_close_modal_but.click(); 
+    }
+});  
 
 
 
@@ -230,7 +265,7 @@ main_box.addEventListener("focusout", (e) => {
            
       
         let f_id_part  = e.target.id.split("-"); 
-        let f_id = f_id_part[0]; 
+        let f_temp_id = f_id_part[0]; 
         let f_id_name = f_id_part[1]; 
         let  type=  f_id_name=="new_fold"? "creat_fold" :"update_fold";; 
        
@@ -246,7 +281,7 @@ main_box.addEventListener("focusout", (e) => {
         // console.log("after repl = ",f_name)
       
 
-        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + f_id, "./create_folder.php", "post").then((data) => {
+        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id, "./api_file/create_folder.php", "post").then((data) => {
             console.log((data));
         }).catch(error => {
             // console.log(error);
