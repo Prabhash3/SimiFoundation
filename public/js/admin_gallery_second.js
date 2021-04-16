@@ -148,7 +148,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
         }
 
         xhttp.send(form_data);
-    }
+    }      
 
     
 

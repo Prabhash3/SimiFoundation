@@ -5,7 +5,29 @@ var main_box = document.getElementById("main_box");
 var first_fold = document.getElementById("first_fold");
 var img_close_modal_but = document.getElementById("img_close_modal_but"); 
 var body = document.getElementById("body"); 
+
+var  default_img_path = "public\\image\\default_upoad_img.svg"; 
+var upload_file_data ; 
+var input_file = document.getElementById("input_file"); 
+var display_up_img = document.getElementById("display_up_img"); 
+var select_img_but = document.getElementById("select_img_but"); 
+var display_up_img_name = document.getElementById("display_up_img_name"); 
+var upload_img_but = document.getElementById("upload_img_but"); 
+var prog_bar = document.getElementById("prog_bar"); 
+var modal_out_box = document.getElementById("modal_out_box"); 
 // var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+// var add_folder = document.getElementById("add_folder"); 
+
+
 
 
 var test = document.getElementById("test"); 
@@ -121,13 +143,129 @@ console.log(temp.childElementCount);
     // main_box.lastElementChild.lastElementChild
 }); 
 
+upload_img_but.addEventListener("click", (e) => {
+    
+
+   console.log(e.target.innerHTML); 
+     
+
+     let is_error= false; 
+     if (  !(upload_file_data) || !(upload_file_data[0] )){
+        console.log("file not present ");  
+        is_error = true;  
+
+     }
+   
+     else if(upload_file_data[0].size<=0 ){
+         //to samll 
+         console.log("too small ");  
+        is_error = true;  
+
+ 
+     }
+     else if(upload_file_data[0].size>=40000000 ){
+
+        //to samll 
+        console.log("too big  ");  
+        is_error = true;  
+      
+    }
+     
+    if(is_error){
+        display_up_img.src = default_img_path; 
+        display_up_img_name.textContent ="No File Selected" ; 
+        return; 
+    }
+     upload_img_but.innerHTML ="Uploading..."; 
+    
+     let xhttp = new XMLHttpRequest();
+    let url = `./api_file/upload_file.php`;
+
+    // console.log("url = ", url);
+    xhttp.open("POST", url, true);
+   
+
+
+    let form_data = new FormData();
+    form_data.append("upload_file", upload_file_data[0]);
+    prog_bar.style.display="block"; 
+
+    // xhttp.setRequestHeader("Content-type", "ap");\
+    xhttp.upload.onprogress = function (e) {
+        
+        
+            let frac = e.loaded / e.total;
+            console.log(e.loaded);
+
+            prog_bar.firstElementChild.style.width = Math.round(frac * 100) + "%"; 
+
+    }
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
+            // console.log("resrpn->", this.response);
+            let res_data = JSON.parse(this.response);
+            console.log("resrpn->",res_data );
+            
+            if (res_data.status == "ok") {
+            
+            }
+            else {
+                  console.log(res_data.error);
+            }
+
+            upload_img_but.innerHTML ="Upload"; 
+            prog_bar.firstElementChild.style.width =  "0%"; 
+            prog_bar.style.display="none"; 
+        
+            upload_file_data = null; 
+            setTimeout( ()=>{
+                img_close_modal_but.click(); 
+                display_up_img.src = default_img_path; 
+                display_up_img_name.textContent ="No File Selected" ; 
+            },500); 
+        }
+    }
+
+    xhttp.send(form_data);
+
+}); 
+
+input_file.addEventListener("change", (e) => {
+    // if (e.target.className == "folder_name") {
+       
+    // }
+    upload_file_data = e.target.files; 
+    console.log(upload_file_data); 
+   if(!(upload_file_data) || upload_file_data.length<1){
+      console.log("file not found");    
+      display_up_img.src = default_img_path; 
+      display_up_img_name.textContent ="No File Selected" ; 
+    return; 
+   }   
+   display_up_img.src =  URL.createObjectURL(upload_file_data[0]); 
+   display_up_img_name.textContent = upload_file_data[0].name ; 
+}); 
+
+select_img_but.addEventListener("click", () => {
+    input_file.click(); 
+});   
+modal_out_box.addEventListener("click", (e) => {
+    // console.log(e.target.className )
+    if (e.target.className == "modal-dialog") {
+    img_close_modal_but.click(); 
+    }
+});  
+
+
+
 main_box.addEventListener("focusout", (e) => {
     if (e.target.className == "folder_name") {
        
            
       
         let f_id_part  = e.target.id.split("-"); 
-        let f_id = f_id_part[0]; 
+        let f_temp_id = f_id_part[0]; 
         let f_id_name = f_id_part[1]; 
         let  type=  f_id_name=="new_fold"? "creat_fold" :"update_fold";; 
        
@@ -143,7 +281,7 @@ main_box.addEventListener("focusout", (e) => {
         // console.log("after repl = ",f_name)
       
 
-        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + f_id, "./create_folder.php", "post").then((data) => {
+        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id, "./api_file/create_folder.php", "post").then((data) => {
             console.log((data));
         }).catch(error => {
             // console.log(error);
@@ -218,7 +356,7 @@ main_box.addEventListener("click", (e) => {
     }
 
     // console.log(e.target.id.split("-"));
-    // console.log(e.target);
+    console.log(e.target.id);
 
 
 });

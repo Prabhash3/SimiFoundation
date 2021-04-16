@@ -1,6 +1,6 @@
 <?php
 
-// print_r($_REQUEST); 
+print_r($_REQUEST); 
 
 include("conn_detail.php");
 $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
@@ -26,14 +26,16 @@ if ($result->num_rows == 0) {
 
 }
 
-if (!isset($_REQUEST['f_id']) || !isset($_REQUEST['req_type']) || !isset($_REQUEST['f_name'])) {
-    echo "missing data";
+if (!isset($_REQUEST['f_temp_id']) || !isset($_REQUEST['req_type']) || !isset($_REQUEST['f_name'])) {
+    http_response_code(500);
+    echo json_encode(array("status"=>"error", "message"=>"missing data")) ; 
     exit();
 }
-$folder_id = trim($_REQUEST['f_id']);
+$folder_temp_id = trim($_REQUEST['f_temp_id']);
 $req_type = trim( $_REQUEST['req_type']);
 $f_name =  trim($_REQUEST['f_name']);
 $folder_new_name; 
+$folder_id; 
 //
 
 if(  $req_type =="creat_fold"){
@@ -51,8 +53,13 @@ if(  $req_type =="creat_fold"){
     //create new table  with table name = new_folder_name
      $sql = "CREATE TABLE folder_table_no_$folder_id( img_id INT  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150) ,visi TINYINT); ";
      $result = $mysqli->query($sql);
+     echo"ok"; 
+     print_r($result); 
 
 }
+echo"end"; 
+
+/*
 $sql = "SELECT * FROM folder_table WHERE folder_id=$folder_id ";
 $result = $mysqli->query($sql);
 print_r($result); 
@@ -60,7 +67,7 @@ print_r($result);
 if ($result->num_rows =="0") {
     //  insert row in folder_table
      $folder_new_name = bin2hex(random_bytes('10'));
-     $folder
+    //  $folder
     echo " creating and inserting ne wtable-";
     $sql = "CREATE TABLE folder_table_no_$folder_id( img_id INT  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150) ,visi TINYINT); ";
     $result = $mysqli->query($sql);
@@ -103,3 +110,6 @@ print_r($_REQUEST);
 // echo $f_name;
 echo "end";
 // echo $result->num_rows;
+
+
+*/
