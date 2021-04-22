@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="home.css">
 
   <!-- Bootstrap -->
+  <link href="carousel.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
@@ -41,25 +42,30 @@
   <!-- Home page slider -->
 
   <div id="Carouselcontrol" class="carousel slide " data-ride="carousel">
-    <ol class="carousel-indicators " style="margin-bottom:90px">
+    <!--<ol class="carousel-indicators " style="margin-bottom:90px">
       <li data-target="#Carouselcontrol" data-slide-to="0" class="active"></li>
       <li data-target="#Carouselcontrol" data-slide-to="1"></li>
       <li data-target="#Carouselcontrol" data-slide-to="2"></li>
       <li data-target="#Carouselcontrol" data-slide-to="3"></li>
-    </ol>
+    </ol>-->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#Carouselcontrol" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#Carouselcontrol" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#Carouselcontrol" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
     <div class="carousel-inner" role="listbox">
       <div class="carousel-item active">
+        <img class="d-block w-100" src="images/home/image1.jpg" id="homeimg1" alt="" width="100%" height="800px">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="images/home/image2.jpg" alt="" id="homeimg2" width="100%" height="800px">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="images/home/image3.jpg" alt="" id="homeimg3" width="100%" height="800px">
+      </div>
+      <!--  div class="carousel-item">
         <img class="d-block w-100" src="images/home/image1.jpg" alt="" width="100%" height="800px">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="images/home/image2.jpg" alt="" width="100%" height="800px">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="images/home/image3.jpg" alt="" width="100%" height="800px">
-      </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="images/home/image1.jpg" alt="" width="100%" height="800px">
-        <!-- <div class="carousel-caption d-none d-md-block" >
+        <div class="carousel-caption d-none d-md-block" >
           <h3 class="caption-text-firstHeading" data-aos="fade-up-right">eget magna fermentum iaculis eu non</h3>
           <h5 class="caption-text-secondHeading" data-aos="fade-up-right">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
           <div class="carousel-btn">
@@ -70,8 +76,8 @@
               <button class="read-btn">Read More</button>
             </a>
           </div>
-        </div> -->
-      </div>
+        </div> 
+      </div>-->
 
     </div>
     <a class="carousel-control-prev" href="#Carouselcontrol" role="button" data-slide="prev">
