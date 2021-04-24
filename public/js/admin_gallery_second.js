@@ -1,22 +1,29 @@
 
 "use strict";
-var upload_img_but = document.getElementById("upload_img_but");
+// var upload_img_but = document.getElementById("upload_img_but");
 var main_box = document.getElementById("main_box");
-var drop_zone = document.getElementById("drop_zone");
+// var drop_zone = document.getElementById("drop_zone");
 var browser_file_but = document.getElementById("browser_file_but"); 
 var upload_file_input = document.getElementById("upload_file_input"); 
 
 var disp_uploadable_file_box = document.getElementById("disp_uploadable_file_box"); 
 var disp_uploadable_file = document.getElementById("disp_uploadable_file"); 
-var upload_img_but = document.getElementById("upload_img_but"); 
+var back_button_img = document.getElementById("back_button_img"); 
 var cancel_upload_but = document.getElementById("cancel_upload_but"); 
 var cancel_upload_file_but = document.getElementById("cancel_upload_file_but"); 
 var upload_file_but = document.getElementById("upload_file_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
+var add_fold_img = document.getElementById("add_fold_img"); 
+ var launch_box = document.getElementById("launch_box"); 
+var top_close = document.getElementById("top_close"); 
 
 
+var display_up_img = document.getElementById("display_up_img"); 
+var display_up_img_name = document.getElementById("display_up_img_name"); 
+var prog_bar = document.getElementById("prog_bar"); 
+var img_close_modal_but = document.getElementById("img_close_modal_but"); 
+
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
 
 var not_upload_file_table = {}; 
 var not_upload_file_count = 0; 
@@ -79,7 +86,7 @@ function byte_to_unit(size) {
 
 
 function upload_file_to_server(i, total_file_count,curr_file_no ) {
-
+    try {
 
    // i => i'th no of file to be uploaded 
 
@@ -87,7 +94,8 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
     console.log( "------------------------------------"); 
     console.log( " i = "+ i +  " total file count   " + total_file_count + " curr file no " + curr_file_no); 
    
-
+    img_close_modal_but
+    prog_bar.style.display="block"; 
     // for (let i = 0; i < upload_file_data.length; i++) {
         //generate upload id 
 
@@ -108,18 +116,17 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
         xhttp.upload.onprogress = function (e) {
             
             
-                let frac = e.loaded / e.total;
-                console.log(e.loaded);
-                // element.children[0].innerText = Math.round(frac * 100) + "%";
-                // element.children[1].innerText = Math.round(e.loaded * 100 / size_detail.divi) / 100 + "/" + Math.round(e.total * 100 / size_detail.divi) / 100 + size_detail.unit;
-                // element.children[2].style.width = Math.round(frac * 100) + "%";
-                // element.children[3].style.width = Math.round(frac * 95) + "%";;
-       
+            let frac = e.loaded / e.total;
+            console.log(e.loaded);
+
+            prog_bar.firstElementChild.style.width = Math.round(frac * 100) + "%"; 
 
         }
 
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
+               
+          
                 // console.log("resrpn->", this.response);
                 let res_data = JSON.parse(this.response);
                 console.log("resrpn->",res_data );
@@ -130,6 +137,14 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                 else {
                       console.log(res_data.error);
                 }
+                // upload_img_but.innerHTML ="Upload"; 
+                
+                
+                // prog_bar.firstElementChild.style.width =  "0%"; 
+                prog_bar.style.display="none"; 
+                prog_bar.innerHTML = `<div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
+                aria-valuemin="0" aria-valuemax="100"></div>`;
+            
 
             // upload next valid file 
             i++
@@ -138,20 +153,31 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                     console.log( "---skippiing file no " + i  + "--"); 
                     i++; 
                 }else{
+
+                    display_up_img.src =  URL.createObjectURL(upload_file_data[i]); 
+                    display_up_img_name.textContent = upload_file_data[i].name ; 
                     console.log("uploading file no " + (curr_file_no+ 1 )); 
                     upload_file_to_server( i, total_file_count,curr_file_no+1); 
                     break; 
                 }
             }
+           if( i>=total_file_count){
+               //at end of last upload ""\
+                console.log("upload completed"); 
+           }
 
             }
         }
 
-        xhttp.send(form_data);
+     xhttp.send(form_data);
+    
     }      
 
-    
-
+ catch (error) {
+     console.log(error); 
+ }
+}
+     
    
 //upload button function 
 upload_file_but.addEventListener("click",    ()=>{
@@ -168,7 +194,15 @@ upload_file_but.addEventListener("click",    ()=>{
             console.log( "---skippiing file no " + i  + "--"); 
             i++; 
         }else{
+            top_close.click(); 
+            img_close_modal_but.click(); 
+            console.log("(((((((started"); 
+            prog_bar.innerHTML = `<div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
+            aria-valuemin="0" aria-valuemax="100"></div>`;
+            display_up_img.src =  URL.createObjectURL(upload_file_data[i]); 
+            display_up_img_name.textContent = upload_file_data[i].name ; 
             upload_file_to_server( i,upload_file_data.length,1); 
+            console.log("end(((((((("); 
             break; 
         }
     }
@@ -194,21 +228,25 @@ cancel_upload_file_but.addEventListener("click", () => {
 
 
 
-browser_file_but.addEventListener("click", () => {
+add_fold_img.addEventListener("click", () => {
 
     upload_file_input.click(); 
     
 }); 
+// ##
+// launch_box.click(); 
+
 
 upload_file_input.addEventListener("change", (e) => {
     upload_file_data = e.target.files; 
     console.log(upload_file_data); 
-    drop_zone.style.display="none"; 
+    // drop_zone.style.display="none"; 
      disp_uploadable_file_box.style.display="block"; 
    if(!(upload_file_data) || upload_file_data.length<1){
       console.log("file not found");    
     return; 
    }   
+   launch_box.click(); 
    disp_uploadable_file.innerHTML=""; 
    for(let i = 0; i<upload_file_data.length ; i++){
 
@@ -216,8 +254,11 @@ upload_file_input.addEventListener("change", (e) => {
                 temp.className = "upload_img_box"; 
                 
                 temp.innerHTML =  `<div title="folder" class="upload_img"> </div>
-                                        <div class="upload_img_name">${upload_file_data[i].name}</div>
+                                  ${ upload_file_data[i].size>=40000000 ?`<div class="upload-file-err"> This File is Too Large  </div>`:""}
+                                  ${ upload_file_data[i].size<=0 ?`<div class="upload-file-err"> This File is Too Small  </div>`:""}
+                                 <div class="upload_img_name">${upload_file_data[i].name}</div>
                                         <div class="rm_img_but" id="f_no-${i}">
+
                                             <img  id="f_img_no-${i}" class="rm_img_icon" src="public\\image\\remove_file_icon.svg" alt="">
                                     </div>`; 
           temp.firstElementChild.style.backgroundImage = "url('"+URL.createObjectURL(upload_file_data[i]) + "')";
@@ -227,15 +268,19 @@ upload_file_input.addEventListener("change", (e) => {
    }
 
     
-
+ 
     
 }); 
 
-upload_img_but.addEventListener("click", () => {
+// upload_img_but.addEventListener("click", () => {
 
-    drop_zone.style.display="block"; 
+//     drop_zone.style.display="block"; 
+// }); 
+back_button_img.addEventListener("click", () => {
+
+    window.location = "./admin_gallery_first.html";
+
 }); 
-
 disp_uploadable_file.addEventListener("click", (e) => {
 
     if( e.target.className=="rm_img_but" || e.target.className == "rm_img_icon"  ){

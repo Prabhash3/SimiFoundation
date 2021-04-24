@@ -142,7 +142,7 @@ console.log(temp.childElementCount);
 
     // main_box.lastElementChild.lastElementChild
 }); 
-
+ 
 upload_img_but.addEventListener("click", (e) => {
     
 
