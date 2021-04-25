@@ -36,12 +36,29 @@ $req_type = trim( $_REQUEST['req_type']);
 
 
 if( $req_type=="hide"){
-    $sql = "UPDATE folder_table SET folder_name='$f_name' WHERE folder_id=$folder_id ; ";
+    $sql = "UPDATE folder_table SET visi=0 WHERE folder_id='$folder_id' ; ";
     $result = $mysqli->query($sql);
-    echo $sql  ; 
-    echo $mysqli->error;
-    echo "updated fodler"; 
+    if($result=="1"){
+
+        echo json_encode(array("status" => "ok", "message" => "Folder is Now Hidden"));
+    }
+    // echo $sql  ; 
+    //  echo"result-"; 
+    //     print_r($result); 
+    //     echo "-result";
+    // echo $mysqli->error;
+    // echo "updated fodler"; 
 }
+else if( $req_type=="unhide"){
+    $sql = "UPDATE folder_table SET visi=1 WHERE folder_id='$folder_id' ; ";
+    $result = $mysqli->query($sql);
+    if($result=="1"){
+
+        echo json_encode(array("status" => "ok", "message" => "Folder is Now Visible"));
+    }
+    
+}
+
 else if( $req_type=="edit"){
 
 echo "edit"; 
@@ -151,7 +168,13 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
     
 
 }
-print_r($_FILES); 
+}
+else if($req_type=="delete")
+{
+
+}
+
+// print_r($_FILES); 
 // // print_r($result); 
 
 // $mysqli->connect_error;
@@ -216,7 +239,7 @@ print_r($_FILES);
 
 //         // echo $conn->error_get_last; 
 //     }
-}
+// }
 
 //
 
@@ -265,8 +288,8 @@ print_r($_FILES);
 
 
 
-print_r($_REQUEST);
+// print_r($_REQUEST);
 // print_r($result);
 // echo $f_name;
-echo "end";
+// echo "end";
 // echo $result->num_rows;

@@ -330,6 +330,8 @@ main_box.addEventListener("click", (e) => {
     let f_name ; 
     let f_id; 
     let url = "./api_file/admin_gallery_first.php";
+
+
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
       console.log( " id = " + folder_id ); 
@@ -338,7 +340,7 @@ main_box.addEventListener("click", (e) => {
         console.log("no id found ");  
         return; 
     }
-  
+    // console.log(( "tilte " + ));
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
     //this is folder image 
          window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
@@ -348,6 +350,16 @@ main_box.addEventListener("click", (e) => {
         console.log("->  hide-folder"); 
         send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
             console.log((data));
+
+            let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
+            if(temp_elem){
+                temp_elem.className = "unhide-folder"; 
+                temp_elem.setAttribute('title',"Unhide Folder"); 
+                temp_elem.firstElementChild.className="fas fa-eye-slash";
+
+            }
+
+
         }).catch(error => {
             // console.log(error);
         });
@@ -357,8 +369,17 @@ main_box.addEventListener("click", (e) => {
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
             //this is   unhide-folder
             console.log("->  Unhide-folder"); 
-            send_ajax("req_type=unhide&f_name="+folder_id+"&f_id=" + folder_id, url, "post").then((data) => {
-                // console.log((data));
+            send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
+                console.log((data));
+    
+                let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
+                if(temp_elem){
+                    temp_elem.className = "hide-folder"; 
+                    temp_elem.setAttribute('title',"Hide Folder"); 
+                    temp_elem.firstElementChild.className="fas fa-eye";
+    
+                }
+          
             }).catch(error => {
                 // console.log(error);
             });
