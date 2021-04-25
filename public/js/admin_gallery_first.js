@@ -27,6 +27,9 @@ var modal_out_box = document.getElementById("modal_out_box");
 // var add_folder = document.getElementById("add_folder"); 
 // var add_folder = document.getElementById("add_folder"); 
 
+//to check if the folder is new or already created folder 
+var is_create_folder=false; 
+
 
 
 
@@ -112,7 +115,7 @@ function scrollToBottom (id) {
  }
 
 add_folder.addEventListener("click", () => {
-
+    is_create_folder= true; 
     let curr_fold_no = main_box.childElementCount; 
     let temp = document.createElement("div");
     temp.className = "new_folder";
@@ -179,8 +182,8 @@ upload_img_but.addEventListener("click", (e) => {
      upload_img_but.innerHTML ="Uploading..."; 
     
      let xhttp = new XMLHttpRequest();
-    let url = `./api_file/upload_file.php`;
-
+     let f_id = img_close_modal_but.getAttribute("f_id"); 
+     let url = `./api_file/admin_gallery_first.php?f_id=${f_id}&req_type=edit`;
     // console.log("url = ", url);
     xhttp.open("POST", url, true);
    
@@ -203,16 +206,17 @@ upload_img_but.addEventListener("click", (e) => {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
-            // console.log("resrpn->", this.response);
-            let res_data = JSON.parse(this.response);
-            console.log("resrpn->",res_data );
+            console.log("resrpn->", this.response);
+            let res_data;
+            // let res_data = JSON.parse(this.response);
+            // console.log("resrpn->",res_data );
             
-            if (res_data.status == "ok") {
+            // if (res_data.status == "ok") {
             
-            }
-            else {
-                  console.log(res_data.error);
-            }
+            // }
+            // else {
+            //       console.log(res_data.error);
+            // }
 
             upload_img_but.innerHTML ="Upload"; 
             prog_bar.firstElementChild.style.width =  "0%"; 
@@ -260,15 +264,19 @@ modal_out_box.addEventListener("click", (e) => {
 
 
 main_box.addEventListener("focusout", (e) => {
+   console.log("kdfj"); 
+    console.log(e.target.className); 
     if (e.target.className == "folder_name") {
        
+
            
-      
+        let temp_f_id ; 
         let f_id_part  = e.target.id.split("-"); 
         let f_temp_id = f_id_part[0]; 
+        // let temp_name
         let f_id_name = f_id_part[1]; 
-        let  type=  f_id_name=="new_fold"? "creat_fold" :"update_fold";; 
-       
+        let  type=     is_create_folder== true ? "creat_fold" :"update_fold";; 
+    //    console.log(f_name[f_name.length-1]);
         let f_name  =  String( e.target.innerHTML) ;
         // console.log("before repl = ",f_name)
         f_name = f_name.replace(/&nbsp;/g,"") ;
@@ -276,13 +284,22 @@ main_box.addEventListener("focusout", (e) => {
         f_name = f_name.replace(/<\/div>/g,"") ;
         f_name = f_name.replace(/<br>/g,"") ;
         f_name = f_name.replace(/[!@#$%^&*]/g,"-") ;
+        temp_f_id = f_name; 
+        f_name = f_name.replace(/\"/g,"\'") ;
+        f_name = f_name.replace(/\'/g,"\\'") ;
+
         f_name= f_name.trim(); 
+        // f_name = encodeURIComponent(f_name); 
         e.target.innerHTML=f_name; 
         // console.log("after repl = ",f_name)
-      
-
-        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id, "./api_file/create_folder.php", "post").then((data) => {
+       
+        is_create_folder= false; 
+        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_folder.php", "post").then((data) => {
             console.log((data));
+
+            if(type=="creat_fold"){
+                    window.location ="./admin_gallery_first.php"; 
+            }
         }).catch(error => {
             // console.log(error);
         });
@@ -310,6 +327,9 @@ main_box.addEventListener("focusout", (e) => {
 main_box.addEventListener("click", (e) => {
     let class_name = e.target.className; 
     let folder_id ; 
+    let f_name ; 
+    let f_id; 
+    let url = "./api_file/admin_gallery_first.php";
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
       console.log( " id = " + folder_id ); 
@@ -318,7 +338,7 @@ main_box.addEventListener("click", (e) => {
         console.log("no id found ");  
         return; 
     }
-
+  
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
     //this is folder image 
          window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
@@ -326,19 +346,19 @@ main_box.addEventListener("click", (e) => {
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder
         console.log("->  hide-folder"); 
-        send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + f_id, "./admin_gallery_first.php", "post").then((data) => {
+        send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
             console.log((data));
         }).catch(error => {
             // console.log(error);
         });
-
+  
        
     }
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
             //this is   unhide-folder
             console.log("->  Unhide-folder"); 
-            send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + f_id, "./admin_gallery_first.php", "post").then((data) => {
-                console.log((data));
+            send_ajax("req_type=unhide&f_name="+folder_id+"&f_id=" + folder_id, url, "post").then((data) => {
+                // console.log((data));
             }).catch(error => {
                 // console.log(error);
             });
@@ -346,8 +366,17 @@ main_box.addEventListener("click", (e) => {
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
         //this is edit folder 
-        console.log("->  edit-folder"); 
-        
+        console.log("->  edit-foldsser"); 
+        // send_ajax("req_type=edit&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
+        //     console.log((data));
+        // }).catch(error => {
+        //     console.log(error);
+        // });
+        img_close_modal_but.setAttribute("f_id",folder_id); 
+        console.log(img_close_modal_but.getAttribute("f_id") ); 
+     
+        // console.log(img_close_modal_but.className); 
+        img_close_modal_but.click(); 
         
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {

@@ -167,8 +167,8 @@ position: sticky;
     top:10px;
     left:50px;
     max-height: 20px;
-    width:100%;
-     /* border-bottom: 1px solid rgba(0, 0, 0, 0.5); */
+  width: 52% !important;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.5);
      font-weight: 100;
      font-size: 12px;
      max-width: 70%;

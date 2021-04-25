@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Objective</title>
   <link rel="stylesheet" href="public/css/admin_gallery_first.css">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -96,11 +96,11 @@
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
   <div class="second-icon home-icon"> Home</div>
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, in! folder</div>
+  <div class="second-icon home-icon">Gallery</div>
     
 
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, in! folder</div>
+  <div class="second-icon home-icon"> Objective</div>
     
 
 
@@ -121,9 +121,73 @@
       <span title="Folder visibility" class="main-box-heading">Visibility </span>
       <span title="Edit Image" class="main-box-heading" id="test"> Edit</span>
       <span title="Delete Folder" class="main-box-heading">Delete</span>
+     </div>
+  <?php
+   
+   include("api_file/conn_detail.php");
+   $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
+   
+   
+   // Check connection
+   if ($mysqli->connect_errno) {
+       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+       exit();
+   }
+   
+   $sql = "SELECT * FROM folder_table ";
+   $result = $mysqli->query($sql);
+  //  print_r($result); 
+   
+  // echo"<pre>"; 
+  // echo"<br><br>s ds <br>"; 
+
+  if( $result)
+  while($row = $result->fetch_assoc()){
+    //  print_r($row); 
+    //  (
+    //   [folder_id] => f79d76
+    //   [folder_name] => Objective Title
+    //   [folder_new_name] => dc7905e583f7fdbfec92
+    //   [visi] => 1
+    // echo `dlfkjsdkl {$row['visi']} `; 
+  
+   
+$curr_fold_no = $row['folder_id'];    
+$visiblilty_html = $row['visi'] =="1"? 
+"<span title='Hide Folder' class='hide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"
+:
+"<span title='Unhide Folder' class='unhide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye-slash' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"; 
+
+// echo "<script>console.log(`$visiblilty_html`);</script> "; 
+// <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span>
 
 
-    </div>
+
+
+// let temp = document.createElement("div");
+//     temp.className = "new_folder";
+//     temp.id = "folder-box-no-" + (curr_fold_no );
+    echo"  
+    <div id='folder-box-no-$curr_fold_no' class='new_folder'>
+<span  title='Open Folder' class='new_folder_img' id='f_img_no-$curr_fold_no'  ><i class='fa fa-folder fa-fw' id='f_img_c_no-$curr_fold_no'  ></i></span>
+
+<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >".$row['folder_name']."</span>
+$visiblilty_html
+<span title='Change Image' class='edit-folder-img' id='f_edit_no-$curr_fold_no' > <i class='far fa-edit' id='f_edit_c_no-$curr_fold_no' ></i> </span>
+<span title='Delete Folder' class='delete-folder' id='f_name_no-$curr_fold_no' ><i class='fa fa-trash' aria-hidden='true' id='f_name_c_no-$curr_fold_no' ></i> </span>
+</div>
+";
+// echo $temp; 
+//      echo '<br"; 
+//  echo "yes it is "; 
+
+  }
+
+  // echo"</pre>"; 
+  // echo "{$dkfj}"; 
+
+?>
+  
 
    
  <!-- <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span> -->
