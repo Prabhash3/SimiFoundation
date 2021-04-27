@@ -28,19 +28,20 @@ if ($mysqli->connect_errno) {
 
 // }
 print_r($_REQUEST); 
-if (!isset($_REQUEST['f_id']) || !isset($_REQUEST['req_type']) ) {
+if (!isset($_REQUEST['f_id']) || !isset($_REQUEST['req_type']) ||!isset($_REQUEST['p_f_id']) ) {
     // echo "missing data";
     echo json_encode(array("status" => "error", "message" => "missing data"));
-      
     exit();
 }
+
+$p_f_id = trim($_REQUEST['p_f_id']);
 $folder_id = trim($_REQUEST['f_id']);
 $req_type = trim( $_REQUEST['req_type']);
 // $f_name =  trim($_REQUEST['f_name']);
 
 
 if( $req_type=="hide"){
-    $sql = "UPDATE folder_table SET visi=0 WHERE folder_id='$folder_id' ; ";
+    $sql = "UPDATE folder_table_no_$p_f_id SET visi=0 WHERE folder_id='$folder_id' ; ";
     $result = $mysqli->query($sql);
     if($result=="1"){
 
@@ -54,7 +55,7 @@ if( $req_type=="hide"){
     // echo "updated fodler"; 
 }
 else if( $req_type=="unhide"){
-    $sql = "UPDATE folder_table SET visi=1 WHERE folder_id='$folder_id' ; ";
+    $sql = "UPDATE folder_table_no_$p_f_id SET visi=1 WHERE folder_id='$folder_id' ; ";
     $result = $mysqli->query($sql);
     if($result=="1"){
 
@@ -99,7 +100,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
       else{
 
         //delete prev file 
-        $sql = "SELECT img_path FROM folder_table WHERE folder_id='$folder_id' ";
+        $sql = "SELECT img_path FROM folder_table_no_$p_f_id WHERE folder_id='$folder_id' ";
         $result = $mysqli->query($sql);
         if($result){
             $row = $result->fetch_assoc();
@@ -134,22 +135,24 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
         while (true) {
         $file_new_name = bin2hex(random_bytes('5'));
         // $folder_id  = bin2hex(random_bytes('3'));
-        $sql = "SELECT * FROM folder_table WHERE img_path='$file_new_name.$file_ext'";
+        $sql = "SELECT * FROM folder_table_no_$p_f_id WHERE img_path='$file_new_name.$file_ext'";
         // echo"inside"; 
-        // echo"$sql"; 
-        // return ;
+    
         $result = $mysqli->query($sql);
-        // echo"result-"; 
-        // print_r($result); 
-        // echo "-result"; 
+        // echo"$sql"; 
+     
+//         echo"result-"; 
+//         print_r($result); 
+//         echo "-result"; 
+//    return ;
         // basename(':\xampp\xampp\tmp\phpB2F9.tmp'); 
         if (!(isset($result)) || $result->num_rows =="0" ) {
-            $file_new_name  = "obj-$file_new_name"; 
+            $file_new_name  = "$p_f_id-$file_new_name"; 
             break;
         }
     }
 
-    $sql = "UPDATE folder_table SET img_path='$file_new_name.$file_ext' WHERE folder_id='$folder_id' ; ";
+    $sql = "UPDATE folder_table_no_$p_f_id SET img_path='$file_new_name.$file_ext' WHERE folder_id='$folder_id' ; ";
     $result = $mysqli->query($sql);
     
 
@@ -157,7 +160,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
     //  echo "result-";
     //  print_r($result);
     //  echo "-result";
-     
+    //  return; 
   if($result){
 
     if( move_uploaded_file($_FILES['upload_file']['tmp_name'], "./../upload/" .$file_new_name.".".$file_ext) ){

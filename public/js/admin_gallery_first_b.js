@@ -129,7 +129,7 @@ add_folder.addEventListener("click", () => {
 temp.innerHTML=` 
 <span  title="Open Folder" class="new_folder_img" id=${"f_img_no-" + (curr_fold_no )} ><i class="fa fa-folder fa-fw" id=${"f_img_c_no-" + (curr_fold_no )} ></i></span>
 
-<span title="Edit Objective name " class="folder_name"  contenteditable="true" id=${"folder_name_no-" + (curr_fold_no )}>Objective Title </span>
+<span title="Edit Event name " class="folder_name"  contenteditable="true" id=${"folder_name_no-" + (curr_fold_no )}>Event Title </span>
 <span title="Hide Folder" class="hide-folder" id=${"f_vis_no-" + (curr_fold_no )} ><i class="fas fa-eye" id=${"folder_vis_c_no-" + (curr_fold_no )}></i> </span>
 <span title="Change Image" class="edit-folder-img" id=${"f_edit_no-" + (curr_fold_no )}> <i class="far fa-edit" id=${"f_edit_c_no-" + (curr_fold_no )}></i> </span>
 <span title="Delete Folder" class="delete-folder" id=${"f_name_no-" + (curr_fold_no )}><i class="fa fa-trash" aria-hidden="true" id=${"f_name_c_no-" + (curr_fold_no )}></i> </span>
@@ -183,7 +183,7 @@ upload_img_but.addEventListener("click", (e) => {
     
      let xhttp = new XMLHttpRequest();
      let f_id = img_close_modal_but.getAttribute("f_id"); 
-     let url = `./api_file/admin_gallery_first.php?f_id=${f_id}&req_type=edit`;
+     let url = `./api_file/admin_gallery_first_b.php?f_id=${f_id}&req_type=edit&p_f_id=+${p_f_id}`;
     // console.log("url = ", url);
     xhttp.open("POST", url, true);
    
@@ -294,11 +294,12 @@ main_box.addEventListener("focusout", (e) => {
         // console.log("after repl = ",f_name)
        
         is_create_folder= false; 
-        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_obj_folder.php", "post").then((data) => {
+        send_ajax("req_type="+type+ "&f_name="+f_name+ "&p_f_id="+p_f_id+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_event_folder.php", "post").then((data) => {
             console.log((data));
 
             if(type=="creat_fold"){
-                    window.location ="./admin_gallery_first.php"; 
+                    window.location = window.location.pathname + window.location.search; 
+                
             }
         }).catch(error => {
             // console.log(error);
@@ -329,7 +330,7 @@ main_box.addEventListener("click", (e) => {
     let folder_id ; 
     let f_name ; 
     let f_id; 
-    let url = "./api_file/admin_gallery_first.php";
+    let url = "./api_file/admin_gallery_first_b.php";
 
 
     if(e.target.id ){
@@ -343,12 +344,12 @@ main_box.addEventListener("click", (e) => {
     // console.log(( "tilte " + ));
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
     //this is folder image 
-         window.location="./admin_gallery_first_b.php?f_id=" + ( folder_id); 
+         window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
     }
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder
         console.log("->  hide-folder"); 
-        send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
+        send_ajax("req_type=hide&f_name="+f_name+"&p_f_id="+p_f_id+"&f_id=" + folder_id, url, "post").then((data) => {
             console.log((data));
 
             let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
@@ -369,7 +370,7 @@ main_box.addEventListener("click", (e) => {
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
             //this is   unhide-folder
             console.log("->  Unhide-folder"); 
-            send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
+            send_ajax("req_type=unhide&f_name="+f_name+"&p_f_id="+p_f_id+"&f_id=" + folder_id, url, "post").then((data) => {
                 console.log((data));
     
                 let temp_elem = document.getElementById("f_vis_no-" + folder_id); 

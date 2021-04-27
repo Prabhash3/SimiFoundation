@@ -51,11 +51,16 @@ if ($req_type == "creat_fold") {
         // print_r($result); 
         // echo "-result"; 
         if ((!($result)) || $result->num_rows =="0" ) {
+            $folder_new_name = "obj".$folder_new_name; 
             break;
         }
     }
     //create new table  with table name = new_folder_name
-    $sql = "CREATE TABLE folder_table_no_$folder_id( img_id  VARCHAR(20)  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150)  ,img_path VARCHAR(150),visi TINYINT); ";
+
+
+    // $sql = "CREATE TABLE folder_table_no_$folder_id( img_id  VARCHAR(20)  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150)  ,img_path VARCHAR(150),visi TINYINT); ";
+    $sql = "CREATE TABLE folder_table_no_$folder_id(folder_id VARCHAR(20) ,folder_name VARCHAR(150), folder_new_name VARCHAR(30) ,img_path VARCHAR(25) , visi TINYINT); ";
+ 
     $result = $mysqli->query($sql);
 
     // echo "result-";
@@ -70,7 +75,13 @@ if ($req_type == "creat_fold") {
 //  print_r($result);
 //  echo "-result";
         if ($result == "1") {
-            $temp =  mkdir("./../upload/" . $folder_new_name);
+        
+            if(  mkdir("./../upload/" . $folder_new_name)){
+                echo json_encode(array("status" => "ok", "message" => "Objective Folder Created "));
+            }
+            else{
+                echo json_encode(array("status" => "error", "message" => "Not able to Create Folder"));
+            }
             //    echo "$sql<br>"; 
             // echo "temp$temp-<";
             // echo "result-";

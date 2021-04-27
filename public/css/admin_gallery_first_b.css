@@ -216,7 +216,9 @@ position: sticky;
 
       color: #333;
 }
-
+.home-icon{
+   
+}
 .slash{
     display: inline-block;
     /* font-weight: 900; */
@@ -307,7 +309,7 @@ position: sticky;
 
 #main_box_head{
     position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.392);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 #main_box_head span:nth-child(1){
     left: 9px;
