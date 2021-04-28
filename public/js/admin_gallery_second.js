@@ -101,7 +101,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
 
      
         let xhttp = new XMLHttpRequest();
-        let url = `./api_file/upload_file.php`;
+        let url = `./api_file/upload_file.php?p_f_id=${p_f_id}&p_p_f_id=${p_p_f_id}`;
 
         // console.log("url = ", url);
         xhttp.open("POST", url, true);
@@ -128,7 +128,8 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                
           
                 // console.log("resrpn->", this.response);
-                let res_data = JSON.parse(this.response);
+                // let res_data = JSON.parse(this.response);
+                let res_data = (this.response);
                 console.log("resrpn->",res_data );
                 
                 if (res_data.status == "ok") {
@@ -144,7 +145,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                 prog_bar.style.display="none"; 
                 prog_bar.innerHTML = `<div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
                 aria-valuemin="0" aria-valuemax="100"></div>`;
-            
+             
 
             // upload next valid file 
             i++

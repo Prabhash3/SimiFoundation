@@ -2,11 +2,12 @@ body{
     /* background-color: rgb(96, 96, 107); */
      margin:0px ;
      padding:0px; 
-     background-image: url('C:\\Users\\rohini\\Downloads\\pattern15.png');
+     /* background-image: url('C:\\Users\\rohini\\Downloads\\pattern15.png'); */
 }
 
 #main_box{
-    border:1px solid rgb(60, 255, 0);  
+    /* border:1px solid rgb(60, 255, 0);   */
+    margin-top:21px; 
    position: relative;
 
 }
@@ -222,7 +223,7 @@ z-index: 2;
 #cancel_upload_file_but{
     margin-left:15px; 
 }
-
+ 
 .modal-header {
     padding: 0px !important;
     /* border-bottom: 1px solid #e5e5e5; */
@@ -304,9 +305,10 @@ z-index: 2;
 }
 
 #modal_out_box{
+    /* width:100%;  */
     /* width:100vw; 
     height: 100vh; */
-    /* border:1px solid blanchedalmond;  */
+    /* border:1px solid rgb(223, 205, 255);  */
     /* top:-10px;
     right: 0px;  */
 }
@@ -316,4 +318,27 @@ z-index: 2;
     color:white;
     padding-left: 4px;
     margin: 5px 0px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    /* max-height: 100px */
+}
+
+
+.modal-body {
+
+    /* overflow: hidden; */
+    /* border:2px solid blue;  */
+    margin: 0px;
+    padding: 0px;
+    height:auto;
+    width: 100%;
+}
+
+#display_up_img{
+    max-height: 251px;
+    max-width: 100%;
+    
 }

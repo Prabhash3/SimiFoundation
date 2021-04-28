@@ -6,7 +6,7 @@ if(!isset($_REQUEST['f_id'])){
   header("location:./admin_gallery_first.php"); 
 }
 
-$f_id = trim($_REQUEST['f_id'])
+$f_id = trim($_REQUEST['f_id']);
 
 ?>
 
@@ -18,7 +18,7 @@ $f_id = trim($_REQUEST['f_id'])
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events</title>
-  <link rel="stylesheet" href="public/css/admin_gallery_first_b.css">
+  <link rel="stylesheet" href="public/css/admin_gallery_first_b.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
@@ -235,12 +235,13 @@ $visiblilty_html
   <i class="fas fa-wrench"></i>
   <i class="far fa-edit"></i>
   hidden , remove ,change image , folder name -->
-
-  <script src="public/js/admin_gallery_first_b.js"></script>
-  <script> 
+ <script> 
    var p_f_id = <?php echo "'$f_id'"; ?>;
+
  console.log(p_f_id); 
 </script>
+  <script src="public/js/admin_gallery_first_b.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
+ 
 
 </body>
 

@@ -344,7 +344,7 @@ main_box.addEventListener("click", (e) => {
     // console.log(( "tilte " + ));
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
     //this is folder image 
-         window.location="./admin_gallery_second.html?f_id=" + ( folder_id); 
+         window.location="./admin_gallery_second.php?f_id=" + ( folder_id)+"&p_f_id="+p_f_id; 
     }
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder

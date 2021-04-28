@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Objective</title>
-  <link rel="stylesheet" href="public/css/admin_gallery_first.css">
+  <link rel="stylesheet" href="public/css/admin_gallery_first.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
@@ -224,7 +224,7 @@ $visiblilty_html
   <i class="far fa-edit"></i>
   hidden , remove ,change image , folder name -->
 
-  <script src="public/js/admin_gallery_first.js"></script>
+  <script src="public/js/admin_gallery_first.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </body>
 
 </html>

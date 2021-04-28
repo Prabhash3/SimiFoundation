@@ -46,7 +46,7 @@ body{
 }
 .main-box{
     width:80%; 
-   /* box-shadow: 0px 0px 10px 0px rgba(26, 26, 26, 0.151); */
+   box-shadow: 0px 0px 10px 0px rgba(26, 26, 26, 0.151);
     margin:auto;
     text-align: center;
 
@@ -130,7 +130,7 @@ body{
 
 }
 .modal-body{
-    background-image:url('WhatsApp Image 2021-03-02 at 10.19.15 AM.jpeg');
+    /* background-image:url('WhatsApp Image 2021-03-02 at 10.19.15 AM.jpeg'); */
         background-repeat:no-repeat; 
         background-position:center ;
         background-size: contain;

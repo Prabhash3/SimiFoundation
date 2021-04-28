@@ -75,10 +75,10 @@ if ($req_type == "creat_fold") {
         }
     }
     //create new table  with table name = new_folder_name
-    $sql = "CREATE TABLE folder_event_table_no_$folder_id( img_id  VARCHAR(20)  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150)  ,img_path VARCHAR(150),visi TINYINT); ";
+    $sql = "CREATE TABLE folder_event_table_no_$folder_id( img_id  INT  primary key  AUTO_INCREMENT  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150)  ,img_path VARCHAR(150) ,img_title VARCHAR(150),img_path VARCHAR(500) ) ; ";
     $result = $mysqli->query($sql);
-
-    // echo "result-";
+    //  echo  $mysqli->error ;
+    // echo "result1-";
     // print_r($result);
     // echo "-result";
 
