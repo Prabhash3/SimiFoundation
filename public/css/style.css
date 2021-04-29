@@ -34,6 +34,7 @@ body{
 
 .obj-name{
   font-size: 23px;
+  padding-top: 10px;
   text-align: center;
   font-weight: 600;
   font-family: 'Times New Roman', Times, serif;
@@ -60,7 +61,7 @@ body{
     width:220px; 
     /* min-height: 250px; */
     box-shadow: 1px 1px 10px 1px   rgba(56, 54, 54, 0.2) ;
-
+  
     position: relative;
 }
 

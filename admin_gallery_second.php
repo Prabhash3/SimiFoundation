@@ -5,6 +5,45 @@ if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
 
 $f_id = trim($_REQUEST['f_id']);
 $p_p_f_id = trim($_REQUEST['p_f_id']);
+$p_p_f_name ;
+$f_id_name; 
+
+include("api_file/conn_detail.php");
+$mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
+
+
+// Check connection
+if ($mysqli->connect_errno) {
+    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    exit();
+}
+
+$sql = "SELECT folder_name FROM  folder_table WHERE folder_id='$p_p_f_id'; ";
+$result = $mysqli->query($sql);
+
+
+
+$sql2 = "SELECT  folder_name FROM  folder_table_no_$p_p_f_id WHERE folder_id='$f_id'; ";
+$result2 = $mysqli->query($sql2);
+
+//   echo"<pre>"; 
+//  print_r($result); 
+//  print_r($result2); 
+//  return; 
+    
+
+  // echo"<br><br>s ds <br>"; 
+if($result && $result2  )
+{
+  $p_p_f_name = ($result->fetch_assoc())['folder_name'] ;
+  $f_id_name =($result2->fetch_assoc())['folder_name']; 
+}
+else{
+  echo "not albe to fetch"; 
+  return; 
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +75,7 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
 
     <!-- Trigger the modal with a button -->
     <button type="button" id="img_close_modal_but" class="btn btn-info btn-lg"
-      data-toggle="modal" data-target="#myModal">Open Modal</button>
+      data-toggle="modal" data-target="#myModal"   style="display:none; ">Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -94,6 +133,17 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
     <div id="upload_img_but"><img id="add_fold_img" src="public\image\upload_folder.svg" alt="add_folder"
         draggable="false">
     </div>
+
+    <div id="select_img_but" title="Select Images"><img id="select_fold_img" src="public\image\selection.svg" alt="add_folder"
+        draggable="false">
+    </div>
+
+
+    <div id="delete_img_but" title="Select Images">
+    <img id="delete_img_icon"  src="public\image\folder-delete.png" alt="add_folder"
+        draggable="false">
+    </div>
+    
   </div>
 
 
@@ -112,11 +162,12 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
         
     
       <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-      <div class="second-icon home-icon"> Objective</div>
+      <div class="second-icon home-icon"> <?php echo $p_p_f_name ; ?>
+ </div>
         
        
       <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-      <div class="second-icon home-icon"> Events</div>
+      <div class="second-icon home-icon"> <?php echo $f_id_name; ?></div>
 
 
     </div>
@@ -126,7 +177,7 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
 
 
 
-  <div class="main-box" id="main_box">
+  <div class="main-box" >
 
     <div id="" style="display:none">
       <div id="drop_body">
@@ -229,11 +280,90 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
 
   <div class="main-box" id="main_box">
 
-<div class="obj-name"> Object 1 </div>
-<hr class="obj-hr">
 
 
+  <div class="img-box" id="">
+  <input type="checkbox" class="img-select-box" name="" id="">
+  <div class="img-body"></div>
   
+  <div class="img-detail"> 
+    <p class="img-title" contenteditable="true" > this is title</p>
+    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
+  </div>
+</div>
+
+
+
+  <?php
+   
+  
+
+   echo "<div class='obj-name'> $f_id_name</div>
+   <hr class='obj-hr'>";
+   
+   echo '<div id="img_box_img_part">';
+   
+
+
+   $sql = "SELECT * FROM  folder_event_table_no_$f_id; ";
+   $result = $mysqli->query($sql);
+  //  print_r($result); 
+   
+  // echo"<pre>"; 
+  // echo"<br><br>s ds <br>"; 
+
+  if( $result)
+  while($row = $result->fetch_assoc()){
+    // echo"<pre style='text-align:left;'>";  
+    // print_r($row); 
+    //  echo"</pre>"; 
+
+    // $img_path =  "background-image:url('./upload/". $row['img_path'] ."');";
+    $img_path =  'background-image:url("'.'./upload/'.$row['img_path'].'");';
+    $img_id = $row['img_id'];
+    
+    // echo "$img_path"; 
+     echo "<div class='img-box' id='img_box_id-$img_id' >
+     <input type='checkbox' class='img-select-box' name='' id='img_c_b_id-$img_id'>
+     <div class='img-body' style='".$img_path."' ></div>
+     <div class='img-detail'> 
+       <p class='img-title' contenteditable='true' id='img_t_id-$img_id'>  title   ".$row['img_title']."</p>
+       <p class='img-desc' contenteditable='true' id='img_desc_id-$img_id'> descijklfd  lroem dksjf ldj dsj fkds jfdsj llsd jfdsfjldf jeoijf aoidsl kvj kj  ".$row['img_dicp']."</p>
+     </div>
+   </div>";
+     
+    //  (
+    //   [folder_id] => f79d76
+    //   [folder_name] => Objective Title
+    //   [folder_new_name] => dc7905e583f7fdbfec92
+    //   [visi] => 1
+    // echo `dlfkjsdkl {$row['visi']} `; 
+  
+
+  }
+
+  // echo"</pre>"; 
+  // echo "{$dkfj}"; 
+
+?>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--   
 <div class="img-box">
   <div class="img-body" ></div>
   <div class="img-detail"> 
@@ -241,185 +371,13 @@ $p_p_f_id = trim($_REQUEST['p_f_id']);
     <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
   </div>
 </div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
-
-
-
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
+ -->
 
 
 
 
 
-<div class="img-box">
-  <div class="img-body"></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
+
 
 
 

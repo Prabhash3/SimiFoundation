@@ -9,6 +9,7 @@ var upload_file_input = document.getElementById("upload_file_input");
 var disp_uploadable_file_box = document.getElementById("disp_uploadable_file_box"); 
 var disp_uploadable_file = document.getElementById("disp_uploadable_file"); 
 var back_button_img = document.getElementById("back_button_img"); 
+
 var cancel_upload_but = document.getElementById("cancel_upload_but"); 
 var cancel_upload_file_but = document.getElementById("cancel_upload_file_but"); 
 var upload_file_but = document.getElementById("upload_file_but"); 
@@ -21,10 +22,17 @@ var display_up_img = document.getElementById("display_up_img");
 var display_up_img_name = document.getElementById("display_up_img_name"); 
 var prog_bar = document.getElementById("prog_bar"); 
 var img_close_modal_but = document.getElementById("img_close_modal_but"); 
-
+var delete_img_icon = document.getElementById("delete_img_icon"); 
+var img_box_img_part = document.getElementById("img_box_img_part"); 
+var select_fold_img = document.getElementById("select_fold_img"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
+// var upload_img_but = document.getElementById("upload_img_but"); 
 // var upload_img_but = document.getElementById("upload_img_but"); 
 // var upload_img_but = document.getElementById("upload_img_but"); 
 
+var img_id_to_del_table = {}; 
 var not_upload_file_table = {}; 
 var not_upload_file_count = 0; 
 var upload_file_data ; 
@@ -282,6 +290,40 @@ back_button_img.addEventListener("click", () => {
     window.location = "./admin_gallery_first.html";
 
 }); 
+
+
+select_fold_img.addEventListener("click", (e) => {
+      
+    let elem_arr = img_box_img_part.children; 
+    let prop,bord ; 
+    if( elem_arr && elem_arr[0].firstElementChild.style.display== "inline-block"){
+        prop = "none"; 
+        bord = "none" ; 
+    }else{
+        prop = "inline-block"; 
+        bord = "1px solid #00000070"
+    } ; 
+    for(let i=0 ; i<elem_arr.length; i++){
+        elem_arr[i].firstElementChild.style.display=prop; 
+        elem_arr[i].style.border=bord; 
+    }
+
+    
+    console.log(img_box_img_part.children[0]); 
+    // window.location = "./admin_gallery_first.html";
+
+}); 
+
+
+delete_img_icon.addEventListener("click", (e) => {
+ 
+     
+    console.log(main_box.children); 
+    // window.location = "./admin_gallery_first.html";
+
+}); 
+
+
 disp_uploadable_file.addEventListener("click", (e) => {
 
     if( e.target.className=="rm_img_but" || e.target.className == "rm_img_icon"  ){
@@ -327,11 +369,34 @@ main_box.addEventListener("focusout", (e) => {
 
 
 
-main_box.addEventListener("dblclick", (e) => {
-    if (e.target.className == "new_folder_img") {
+// main_box.addEventListener("change", (e) => {
+//     console.log("checke"); 
+//     if (e.target.className == "img-select-box") {
        
-     window.location="./admin_gallery_second.html?f_id=" + ( e.target.id.split("-")[1])
+//      img_id_to_del_table 
 
+//     }
+//     // console.log(e.target.id.split("-"));
+
+// });
+
+main_box.addEventListener("click", (e) => {
+    if (e.target.className == "img-select-box") {
+        let img_id= e.target.id.split("-")[1]; 
+        console.log(e.target.value ,img_id); 
+
+        if(e.target.value=="on" ){
+               img_id_to_del_table[img_id] = true; 
+               e.target.value="off"; 
+        }
+        else{
+            img_id_to_del_table[img_id] = false; 
+            e.target.value="on"; 
+        }
+        console.log(img_id_to_del_table );
+            
+        
+      
 
     }
     // console.log(e.target.id.split("-"));
