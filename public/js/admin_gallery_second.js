@@ -53,6 +53,7 @@ function send_ajax(param, url, method = "post", set_header = true) {
 
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         }
+        
 
         xhttp.onreadystatechange = () => {
             // console.log(xhttp.readyState);
@@ -173,6 +174,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
            if( i>=total_file_count){
                //at end of last upload ""\
                 console.log("upload completed"); 
+                window.location = window.location.pathname + window.location.search;
            }
 
             }
@@ -287,39 +289,45 @@ upload_file_input.addEventListener("change", (e) => {
 // }); 
 back_button_img.addEventListener("click", () => {
 
-    window.location = "./admin_gallery_first.html";
+    window.location = "./admin_gallery_first.php";
 
 }); 
 
-
-select_fold_img.addEventListener("click", (e) => {
-      
-    let elem_arr = img_box_img_part.children; 
-    let prop,bord ; 
-    if( elem_arr && elem_arr[0].firstElementChild.style.display== "inline-block"){
-        prop = "none"; 
-        bord = "none" ; 
-    }else{
-        prop = "inline-block"; 
-        bord = "1px solid #00000070"
-    } ; 
-    for(let i=0 ; i<elem_arr.length; i++){
-        elem_arr[i].firstElementChild.style.display=prop; 
-        elem_arr[i].style.border=bord; 
-    }
-
-    
-    console.log(img_box_img_part.children[0]); 
-    // window.location = "./admin_gallery_first.html";
-
-}); 
 
 
 delete_img_icon.addEventListener("click", (e) => {
  
      
-    console.log(main_box.children); 
+    // console.log(img_box_img_part.firstElementChild.firstElementChild.style.display); 
+    // console.log(main_box.children); 
     // window.location = "./admin_gallery_first.html";
+    let s_data =  Object.keys(img_id_to_del_table); 
+    if( s_data.length==0){
+        console.log("no data"); 
+        return ; 
+    }
+    if( img_box_img_part.firstElementChild && img_box_img_part.firstElementChild.firstElementChild.style.display != "inline-block" ){
+        console.log( "no file selected ");  
+        return; 
+    }
+
+    if (confirm("Are you sure you want to delete " +  s_data.length + (s_data.length>1? " Files" : " File"))) {
+
+
+ 
+    var param = "s_data="+ JSON.stringify(s_data)+"&f_id="+p_f_id +"&req_type=delete";
+    console.log(param); 
+
+
+
+    send_ajax(param,"./api_file/admin_gallery_second.php")
+     .then((data) => {
+        // console.log((data));
+        window.location = window.location.pathname + window.location.search;
+    }).catch(error => {
+        console.log(error);
+    });
+}
 
 }); 
 
@@ -340,8 +348,10 @@ disp_uploadable_file.addEventListener("click", (e) => {
 }); 
 
 main_box.addEventListener("focusout", (e) => {
-    if (e.target.className == "folder_name") {
-        let type="cr_fd" ; 
+    console.log( "out "); 
+ let type="" ; 
+    if (e.target.className == "img-title"  && (type ="title") ||  e.target.className == "img-desc"  && (type ="desc")) {
+        
         let f_id  = e.target.id.split("-")[1]; 
         let f_name  =  String( e.target.innerHTML) ;
         // console.log("before repl = ",f_name)
@@ -354,8 +364,10 @@ main_box.addEventListener("focusout", (e) => {
         e.target.innerHTML=f_name; 
         // console.log("after repl = ",f_name)
       
-
-        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + f_id, "./create_folder.php", "post").then((data) => {
+        // console.log("tyep + ",type); 
+        let url = './api_file/admin_gallery_second.php'; 
+        send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + p_f_id+ "&img_id="+f_id, url, "post")
+        .then((data) => {
             console.log((data));
         }).catch(error => {
             console.log(error);
@@ -363,7 +375,8 @@ main_box.addEventListener("focusout", (e) => {
 
 
     }
-    console.log(e.target.innerHTML);
+    console.log(e.target.className);
+    console.log(e.target.id);
 
 });
 
@@ -379,6 +392,35 @@ main_box.addEventListener("focusout", (e) => {
 //     // console.log(e.target.id.split("-"));
 
 // });
+// var txt; 
+// if (confirm("Press a button!")) {
+//     txt = "You pressed OK!";
+//   } else {
+//     txt = "You pressed Cancel!";
+//   }
+//   console.log(txt)
+select_fold_img.addEventListener("click", (e) => {
+      
+    let elem_arr = img_box_img_part.children; 
+    let prop,bord ; 
+    if( elem_arr && elem_arr[0] && elem_arr[0].firstElementChild.style.display== "inline-block"){
+        prop = "none"; 
+        bord = "none" ; 
+    }else{
+        prop = "inline-block"; 
+        bord = "1px solid #00000070"
+    } ; 
+    for(let i=0 ; i<elem_arr.length; i++){
+        elem_arr[i].firstElementChild.style.display=prop; 
+        elem_arr[i].style.border=bord; 
+    }
+
+    
+    console.log(img_box_img_part.children[0]); 
+    // window.location = "./admin_gallery_first.html";
+
+}); 
+
 
 main_box.addEventListener("click", (e) => {
     if (e.target.className == "img-select-box") {
@@ -390,7 +432,7 @@ main_box.addEventListener("click", (e) => {
                e.target.value="off"; 
         }
         else{
-            img_id_to_del_table[img_id] = false; 
+            delete img_id_to_del_table[img_id] ; 
             e.target.value="on"; 
         }
         console.log(img_id_to_del_table );

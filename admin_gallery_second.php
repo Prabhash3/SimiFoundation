@@ -127,19 +127,19 @@ else{
 
 
   <div class="header">
-    <div id="back_button"><img id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
+    <div id="back_button"><img title="Back" id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
     </div>
 
-    <div id="upload_img_but"><img id="add_fold_img" src="public\image\upload_folder.svg" alt="add_folder"
+    <div id="upload_img_but"><img   title="Upload Files" id="add_fold_img" src="public\image\upload_folder.svg" alt="add_folder"
         draggable="false">
     </div>
 
-    <div id="select_img_but" title="Select Images"><img id="select_fold_img" src="public\image\selection.svg" alt="add_folder"
+    <div id="select_img_but" title="Select Files"><img id="select_fold_img" src="public\image\selection.svg" alt="add_folder"
         draggable="false">
     </div>
 
 
-    <div id="delete_img_but" title="Select Images">
+    <div id="delete_img_but" title="Delete Files">
     <img id="delete_img_icon"  src="public\image\folder-delete.png" alt="add_folder"
         draggable="false">
     </div>
@@ -177,7 +177,7 @@ else{
 
 
 
-  <div class="main-box" >
+  <div class="main-box" style="display:none" >
 
     <div id="" style="display:none">
       <div id="drop_body">
@@ -281,7 +281,7 @@ else{
   <div class="main-box" id="main_box">
 
 
-
+<!-- 
   <div class="img-box" id="">
   <input type="checkbox" class="img-select-box" name="" id="">
   <div class="img-body"></div>
@@ -290,7 +290,7 @@ else{
     <p class="img-title" contenteditable="true" > this is title</p>
     <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
   </div>
-</div>
+</div> -->
 
 
 
@@ -321,14 +321,15 @@ else{
     // $img_path =  "background-image:url('./upload/". $row['img_path'] ."');";
     $img_path =  'background-image:url("'.'./upload/'.$row['img_path'].'");';
     $img_id = $row['img_id'];
-    
+    $img_title = $row['img_title'] && strlen($row['img_title'])>0?  $row['img_title'] : "Title here..."; 
+    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0?  $row['img_dicp'] : "Write Image Description here....";
     // echo "$img_path"; 
      echo "<div class='img-box' id='img_box_id-$img_id' >
      <input type='checkbox' class='img-select-box' name='' id='img_c_b_id-$img_id'>
      <div class='img-body' style='".$img_path."' ></div>
      <div class='img-detail'> 
-       <p class='img-title' contenteditable='true' id='img_t_id-$img_id'>  title   ".$row['img_title']."</p>
-       <p class='img-desc' contenteditable='true' id='img_desc_id-$img_id'> descijklfd  lroem dksjf ldj dsj fkds jfdsj llsd jfdsfjldf jeoijf aoidsl kvj kj  ".$row['img_dicp']."</p>
+       <p class='img-title' contenteditable='true' id='img_t_id-$img_id'>     ".$img_title."</p>
+       <p class='img-desc' contenteditable='true' id='img_desc_id-$img_id'>   ".$img_dicp."</p>
      </div>
    </div>";
      
