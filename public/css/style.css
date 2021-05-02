@@ -103,6 +103,7 @@ body{
 }
 .img-detail{
  text-align: center;
+ height: 85px;
 }
 .img-title{
     padding:0px ; 
@@ -117,6 +118,8 @@ body{
     margin:0px; 
     font-size: 10px;
     color: rgba(3, 6, 7, 0.596); 
+    height: 55px;
+    overflow: hidden;
     
 }
 

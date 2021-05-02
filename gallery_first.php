@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="public/css/gallery_first.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
 </head>
    
+<style>
+  .obj-hr {
+    text-align: center;
+    /* width: 90%; */
+    height: 0.1px;
+    /* background-color: #0000ff45 ; */
+    border-top:none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+</style>
+
 <body>
   
 <div class="header">
@@ -23,8 +34,8 @@
 
 <div class="main-box" id="main_box">
 
-<!-- <div class="obj-name"> Object 1 </div>
-<hr class="obj-hr"> -->
+<div class="obj-name"> Object 1 </div>
+<hr class="obj-hr">
 
 
 
