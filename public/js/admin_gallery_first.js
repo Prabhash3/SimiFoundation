@@ -114,6 +114,15 @@ function scrollToBottom (id) {
     div.scrollTop = div.scrollHeight - div.clientHeight;
  }
 
+
+
+
+
+
+
+
+
+ 
 add_folder.addEventListener("click", () => {
     is_create_folder= true; 
     let curr_fold_no = main_box.childElementCount; 

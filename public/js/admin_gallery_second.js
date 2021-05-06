@@ -289,7 +289,7 @@ upload_file_input.addEventListener("change", (e) => {
 // }); 
 back_button_img.addEventListener("click", () => {
 
-    window.location = "./admin_gallery_first.php";
+    window.location = "./admin_gallery_first_b.php?f_id="+ p_p_f_id ;
 
 }); 
 

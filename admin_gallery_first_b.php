@@ -36,7 +36,7 @@ $f_id = trim($_REQUEST['f_id']);
 
     <!-- Trigger the modal with a button -->
     <button type="button" id="img_close_modal_but" class="btn btn-info btn-lg"
-      data-toggle="modal" data-target="#myModal">Open Modal</button>
+      data-toggle="modal" data-target="#myModal"  style="display:none;"  >Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -102,6 +102,41 @@ $f_id = trim($_REQUEST['f_id']);
   <div class="second-head">
 
 
+  <?php
+
+
+include("api_file/conn_detail.php");
+   $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
+   
+   
+   // Check connection
+   if ($mysqli->connect_errno) {
+       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+       exit();
+   }
+   
+
+   
+   $sql = "SELECT folder_name  FROM  folder_table WHERE folder_id='$f_id'; ";
+   $result = $mysqli->query($sql);
+   $curr_folder_name; 
+   
+   if($result && $result->num_rows>0 )
+   { 
+     $curr_folder_name = ($result->fetch_assoc() )['folder_name'];
+      
+   }
+   else{ 
+     echo "something went wrong "; 
+     return; 
+   }
+
+
+
+
+
+?>
+
 
     <div class="path-detail">
       <div class="second-icon home-icon"><i class="fa fa-home fa-fw" style="font-size:14px;position:relative;top:-1px;  color: rgb(74 68 71 /90%);;;"></i></div>
@@ -109,11 +144,10 @@ $f_id = trim($_REQUEST['f_id']);
   <div class="second-icon home-icon"> Home</div>
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
   <div class="second-icon home-icon">Gallery</div>
+ 
     
-
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"> Objective</div>
-    
+  <div class="second-icon home-icon"><?php echo  $curr_folder_name ;?>         </div>
 
 
 
@@ -136,15 +170,15 @@ $f_id = trim($_REQUEST['f_id']);
      </div>
   <?php
    
-   include("api_file/conn_detail.php");
-   $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
+  //  include("api_file/conn_detail.php");
+  //  $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
    
    
-   // Check connection
-   if ($mysqli->connect_errno) {
-       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-       exit();
-   }
+  //  // Check connection
+  //  if ($mysqli->connect_errno) {
+  //      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+  //      exit();
+  //  }
    
    $sql = "SELECT * FROM  folder_table_no_$f_id ";
    $result = $mysqli->query($sql);

@@ -1,6 +1,8 @@
 <?php 
 if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
-  // header("location:./gallery_second.php"); 
+  
+  
+   header("location:./gallery_first.php"); 
 }
 
 $f_id = trim($_REQUEST['f_id']);
@@ -18,18 +20,18 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-$sql = "SELECT folder_name FROM  folder_table WHERE folder_id='$p_p_f_id'; ";
+$sql = "SELECT folder_name, visi FROM  folder_table WHERE folder_id='$p_p_f_id'; ";
 $result = $mysqli->query($sql);
 
 
 
-$sql2 = "SELECT  * FROM  folder_table_no_$p_p_f_id WHERE folder_id='$f_id'; ";
+$sql2 = "SELECT folder_name, visi FROM  folder_table_no_$p_p_f_id WHERE folder_id='$f_id'; ";
 $result2 = $mysqli->query($sql2);
 
 //   echo"<pre>"; 
 //   echo " $f_id , $p_p_f_id "; 
-// //  print_r($result); 
-// //  echo "<br>----------- $sql2"; 
+//  print_r($result); 
+//  echo "<br>----------- $sql2"; 
 //  echo $mysqli->error; 
 //  print_r($result2); 
 //  return; 
@@ -37,9 +39,20 @@ $result2 = $mysqli->query($sql2);
 
   // echo"<br><br>s ds <br>"; 
 if($result && $result2  )
-{
-  $p_p_f_name = ($result->fetch_assoc())['folder_name'] ;
-  $f_id_name =($result2->fetch_assoc())['folder_name']; 
+{ 
+  $first_res = $result->fetch_assoc();
+  $second_res = $result2->fetch_assoc(); 
+  // echo " $first_res , $second_res'"; 
+//  print_r( $first_res);
+//  print_r(  $second_res);
+
+ if(  $first_res['visi'] =="0" || $second_res['visi'] =="0" ){
+  header("location:./gallery_first.php"); 
+ }
+
+
+  $p_p_f_name = $first_res['folder_name'] ;
+  $f_id_name = $second_res['folder_name']; 
 }
 else{
   echo "not albe to fetch"; 
@@ -63,7 +76,7 @@ else{
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <title>Document</title>
+  <title>Gallery</title>
 
   <link rel="stylesheet" href="public/css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
 </head>
@@ -103,9 +116,8 @@ color:rgb(0, 0, 0) !important;
 color:rgb(110, 110, 110) !important;
 } */
 
-.img-body{
-  background-image: url('.\\public\\image\\test2.jpg');
-}
+
+
 .img-title{
       /* border:1px dashed rgb(41, 72, 117)  !important;  */
       text-align: center;
@@ -119,6 +131,11 @@ color:rgb(110, 110, 110) !important;
 .img-detail {
   text-align: center;
 
+}
+#img_full_screen:hover{
+  
+  /* cursor: zoom-in; */
+  cursor: zoom-out;
 }
 
 
@@ -168,8 +185,8 @@ color:rgb(110, 110, 110) !important;
              
    
       
-        <div class="img-body " style="width:98% ;display: block;margin:auto;padding:0px;position: relative;" >    <button id="close_but" type="button" class="close" data-dismiss="modal">&times;</button>
-          <img   id="img_full_screen" style="width:100% ;display: block;margin:0px;margin:auto;margin-top:8px;" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
+        <div class="" style="width:98% ;display: block;margin:auto;padding:0px;position: relative;" >    <button id="close_but" type="button" class="close" data-dismiss="modal">&times;</button>
+          <img   id="img_full_screen" style="width:100%; display: block;margin:0px;margin:auto;margin-top:5px;" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
          <div class="img-detail" style="background-color: rgb(255, 255, 255);width:100%;margin:auto;  ">
           <p id="img_title" class="img-title"    style="padding:7px;margin:0px"> this is title</p>
          <hr  style="padding:0px;margin:0px">
@@ -298,7 +315,7 @@ color:rgb(110, 110, 110) !important;
     var img_full_screen = document.getElementById("img_full_screen"); 
     var img_title = document.getElementById("img_title"); 
     var img_desc = document.getElementById("img_desc"); 
-    // var drag_it = document.getElementById("drag_it"); 
+    // var drag_it = document.getElementById("drag_it");
     // var drag_it = document.getElementById("drag_it"); 
 
 
@@ -324,6 +341,39 @@ color:rgb(110, 110, 110) !important;
 
     }
     console.log(e.target.id );
+
+});
+
+
+
+
+
+
+
+
+img_full_screen.addEventListener("click", (e) => {
+
+let class_name =   e.target.className ; 
+if (img_full_screen.style.cursor=="zoom-in") { 
+
+  img_full_screen.style.cursor="zoom-out";
+  img_full_screen.style.width="100%";
+  img_full_screen.style.height="auto";
+  
+  
+}else{
+  console.log("else ");
+  img_full_screen.style.cursor="zoom-in";
+  img_full_screen.style.width="auto";
+  img_full_screen.style.height="100vh";
+}
+
+// cursor: zoom-in;
+//   cursor: zoom-out;
+// img_full_screen.style.cursor="zoom-out";
+console.log(e.target.id );
+console.log(img_full_screen.style.cursor );
+
 
 });
   </script>

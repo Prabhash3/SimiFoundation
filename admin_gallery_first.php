@@ -24,7 +24,7 @@
 
     <!-- Trigger the modal with a button -->
     <button type="button" id="img_close_modal_but" class="btn btn-info btn-lg"
-      data-toggle="modal" data-target="#myModal">Open Modal</button>
+      data-toggle="modal" data-target="#myModal" style="display:none;" >Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -98,9 +98,7 @@
   <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
   <div class="second-icon home-icon">Gallery</div>
     
-
-  <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"> Objective</div>
+<!-- 9 -->
     
 
 

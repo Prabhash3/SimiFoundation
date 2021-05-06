@@ -15,7 +15,7 @@ var display_up_img_name = document.getElementById("display_up_img_name");
 var upload_img_but = document.getElementById("upload_img_but"); 
 var prog_bar = document.getElementById("prog_bar"); 
 var modal_out_box = document.getElementById("modal_out_box"); 
-// var add_folder = document.getElementById("add_folder"); 
+var back_button_img = document.getElementById("back_button_img"); 
 // var add_folder = document.getElementById("add_folder"); 
 // var add_folder = document.getElementById("add_folder"); 
 // var add_folder = document.getElementById("add_folder"); 
@@ -113,6 +113,20 @@ function scrollToBottom (id) {
     var div = document.getElementById(id);
     div.scrollTop = div.scrollHeight - div.clientHeight;
  }
+
+
+
+ back_button_img.addEventListener("click", () => {
+
+    window.location = "./admin_gallery_first.php";
+
+}); 
+
+
+
+
+
+
 
 add_folder.addEventListener("click", () => {
     is_create_folder= true; 

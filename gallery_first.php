@@ -12,13 +12,17 @@
 </head>
    
 <style>
-  .obj-hr {
+.obj-hr {
     text-align: center;
     /* width: 90%; */
     height: 0.1px;
-    /* background-color: #0000ff45 ; */
-    border-top:none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    /* background-color: #0000ff45; */
+    border-top: none;
+    border-bottom: 1px solid rgb(0 0 0 / 12%);
+}
+
+#main_box{
+  text-align: center;
 }
 </style>
 
@@ -34,7 +38,7 @@
 
 <div class="main-box" id="main_box">
 
-<div class="obj-name"> Object 1 </div>
+<div class="obj-name"> Gallery </div>
 <hr class="obj-hr">
 
 

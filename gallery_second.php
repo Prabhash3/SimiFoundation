@@ -36,6 +36,19 @@ $f_id = trim($_REQUEST['f_id']);
     border-top:none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
+#main_box{
+  text-align: center;
+
+}
+
+.obj-hr {
+    text-align: center;
+    /* width: 90%; */
+    height: 0.1px;
+    /* background-color: #0000ff45; */
+    border-top: none;
+    border-bottom: 1px solid rgb(0 0 0 / 12%);
+}
 </style>
 
 <body>
@@ -78,6 +91,26 @@ $f_id = trim($_REQUEST['f_id']);
       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
       exit();
     }
+
+
+    $sql = "SELECT folder_name, visi FROM  folder_table WHERE folder_id='$f_id'; ";
+    $result = $mysqli->query($sql);
+    
+    
+    if($result )
+    { 
+      $first_res = $result->fetch_assoc();
+
+    
+     if(  $first_res['visi'] =="0" ){
+      header("location:./gallery_first.php"); 
+     }
+
+
+    }
+
+
+
 
     $sql = "SELECT * FROM  folder_table_no_$f_id WHERE visi=1 ";
     $result = $mysqli->query($sql);
