@@ -1,0 +1,18 @@
+/* Team members */
+.team
+{
+  background: white;
+  border: 1px solid lighten(black,98%);
+  -webkit-box-shadow: 0px 3px 66px -24px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 3px 66px -24px rgba(0,0,0,0.2);
+  box-shadow: 0px 3px 66px -24px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+  
+.team .img
+{
+    display: block;
+    height: 240px;
+    border-radius:50%;
+}
+  

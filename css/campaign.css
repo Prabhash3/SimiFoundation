@@ -1,0 +1,54 @@
+
+h2
+{
+    color:orangered;
+    font-size:3rem;
+    margin-left:7%;
+    margin-top:5%;
+    margin-bottom:5%;
+    font-family:capitalize;
+}
+h3{
+    color:black;
+    font-size:2rem;
+    
+    font-family:capitalize;
+}
+p{
+    font-size:1.2rem;
+    margin-top:3%;
+    margin-bottom:30px;
+    margin-left:17%;
+}
+ul li{
+    margin-left:0%;
+}
+#demo
+{
+    width:100%;
+    height:20%;
+    font-size:2rem;
+    margin-bottom:40px;
+    margin-left:37%;
+    color:red;
+}
+
+  #email{
+      background-color:white;
+      width:30%;
+      height:12% !important;
+      padding:5px;
+      border:1px solid blue;
+       font-size:1.1rem;
+       margin-right:8%;
+       margin-left:20%;
+  }
+  button{
+      height: 12%;
+      width:30%;
+      background-color: blue;
+      color:white;
+      padding:5px;
+      border:1px solid blue;
+      font-size:1.1rem;
+  }
