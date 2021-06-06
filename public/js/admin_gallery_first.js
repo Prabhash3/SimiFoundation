@@ -215,7 +215,9 @@ upload_img_but.addEventListener("click", (e) => {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
-            console.log("resrpn->", this.response);
+
+            display_mess(JSON.parse(this.response),3000 )
+            // console.log("resrpn->", this.response);
             let res_data;
             // let res_data = JSON.parse(this.response);
             // console.log("resrpn->",res_data );
@@ -304,13 +306,14 @@ main_box.addEventListener("focusout", (e) => {
        
         is_create_folder= false; 
         send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_obj_folder.php", "post").then((data) => {
-            console.log((data));
-
+            // console.log((data));
+            display_mess(JSON.parse(data),3000 )
             if(type=="creat_fold"){
                     window.location ="./admin_gallery_first.php"; 
             }
         }).catch(error => {
             // console.log(error);
+            display_mess(JSON.parse(error),3000 )
         });
 
 
@@ -343,8 +346,8 @@ main_box.addEventListener("click", (e) => {
 
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
-      console.log( " id = " + folder_id ); 
-      console.log( " class = '" + class_name+ "'" ); 
+    //   console.log( " id = " + folder_id ); 
+    //   console.log( " class = '" + class_name+ "'" ); 
     }else{
         console.log("no id found ");  
         return; 
@@ -358,8 +361,8 @@ main_box.addEventListener("click", (e) => {
         //this is   hide-folder
         console.log("->  hide-folder"); 
         send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
-            console.log((data));
-
+            // console.log((data));
+            display_mess(JSON.parse(data),3000 )
             let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
             if(temp_elem){
                 temp_elem.className = "unhide-folder"; 
@@ -370,6 +373,7 @@ main_box.addEventListener("click", (e) => {
 
 
         }).catch(error => {
+            display_mess(JSON.parse(error),3000 )
             // console.log(error);
         });
   
@@ -380,7 +384,7 @@ main_box.addEventListener("click", (e) => {
             console.log("->  Unhide-folder"); 
             send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
                 console.log((data));
-    
+                display_mess(JSON.parse(data),3000 )
                 let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
                 if(temp_elem){
                     temp_elem.className = "hide-folder"; 
@@ -390,7 +394,9 @@ main_box.addEventListener("click", (e) => {
                 }
           
             }).catch(error => {
-                // console.log(error);
+                // console.log();
+                display_mess(JSON.parse(error),3000 )
+              
             });
        
     }

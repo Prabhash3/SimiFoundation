@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Objective</title>
+  <link rel="stylesheet" href="public/css/message.css">
   <link rel="stylesheet" href="public/css/admin_gallery_first.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -15,6 +16,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
 
 </head>
 
@@ -212,16 +217,50 @@ $visiblilty_html
   
 <input type="file" id="input_file" style="display: none;">  
 
-  <!-- <br><br><br><br><br><br><br><br><br>
-  <i class="fa fa-trash" aria-hidden="true"></i>
-  <i class="fa fa-trash-o" aria-hidden="true"></i>
-  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-  <span class="st">
-    <i class="fas fa-camera"></i>
-  </span>
-  <i class="fas fa-wrench"></i>
-  <i class="far fa-edit"></i>
-  hidden , remove ,change image , folder name -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="mess_box"> <div id="mess_content" class="">  some message    </div></div>
+
+<!-- mess-success -->
+<script>
+ var mess_time_id; 
+ mess_box.className = "show";
+ 
+  var mess_content = document.getElementById("mess_content");
+  
+function display_mess( data ,time=3000) {
+
+ var mess_box = document.getElementById("mess_box");
+  mess_box.className = "show";
+
+  mess_content.textContent = data.message; 
+  if(data.status=="error" ){ 
+    mess_content.className = 'mess-error';   
+  }else { 
+    mess_content.className = "mess-success" ; 
+  }
+
+     clearTimeout(mess_time_id); 
+   mess_time_id =  setTimeout(function(){ mess_box.className = mess_box.className.replace("show", ""); }, time);
+}
+
+// display_mess(" test mes s",2000 ); 
+
+
+</script>
+
 
   <script src="public/js/admin_gallery_first.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </body>
