@@ -16,7 +16,7 @@ $f_id = trim($_REQUEST['f_id']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery</title>
-
+  <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
   <link rel="stylesheet" href="public/css/style.css">
   <link rel="stylesheet" href="public/css/gallery_first.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
 </head>
@@ -52,14 +52,15 @@ $f_id = trim($_REQUEST['f_id']);
 </style>
 
 <body>
-
+<!-- 
   <div class="header">
     <span class="head-title">object1</span>
     <span class="head-title">object2</span>
     <span class="head-title">object3</span>
     <span class="head-title">object4</span>
-  </div>
-  <br>
+  </div> -->
+   <?php include "header.php" ?>
+  <!-- <br> -->
 
   <div class="main-box" id="main_box">
 

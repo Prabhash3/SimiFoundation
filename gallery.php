@@ -1,4 +1,9 @@
 <?php 
+
+
+
+
+
 if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
   
   
@@ -73,6 +78,7 @@ else{
     integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
     crossorigin="anonymous" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -140,9 +146,55 @@ color:rgb(110, 110, 110) !important;
 
 
 
-  /* .img-desc{
-    text-align: justify;
-  } */
+.img-control-box{ 
+
+position: absolute;
+width:100%; 
+/* border:1px solid blue;  */
+z-index:100;
+top:34vh;  
+
+}
+
+
+
+.img-control-icon { 
+  /* border: 1px solid blue; */
+    color:#04040482; 
+    background-color: #ffffff6b;
+    font-size: 40px;
+    width: 45px;
+    line-height: 40px;
+    /* padding: 0px 11px 5px 11px; */
+    padding-left: 10px;
+    border-radius: 40px;
+    position: absolute;
+    cursor: pointer;
+    box-shadow:1px 1px 7px 2px #fdf9f9d6; 
+}
+
+.img-control-icon:hover { 
+background-color:white; 
+color: #040404;
+}
+
+#img_cont_icon_right{ 
+  right:10px;; 
+}
+
+
+#img_cont_icon_left{ 
+  left:10px;; 
+}
+.noselect {
+  -webkit-user-select: none;    /* Safari */
+  -webkit-touch-callout: none;  /* iOS Safari */
+  -khtml-user-select: none;     /* Konqueror HTML */
+  -ms-user-select: none;        /* Internet Explorer/Edge */
+  -moz-user-select: none;       /* Old versions of Firefox */
+   user-select: none;           /* Non-prefixed version*/
+}
+
 </style>
 
 <body>
@@ -154,15 +206,23 @@ color:rgb(110, 110, 110) !important;
   <i class="fas fa-camera"></i>
   <i class="far fa-medal"></i>
  -->
+ <!-- -->
 
-
-
+<!-- 
   <div class="header">
     <span class="head-title">object1</span>
     <span class="head-title">object2</span>
     <span class="head-title">object3</span>
     <span class="head-title">object4</span>
+  </div> -->
+
+  <div class="header" style="background-color:#212529!important; height:45px;text-align:left;">
+  <a class="" href="https://simmifoundation.org "  style="position:absolute;left:33px;">
+      <img src="public\image\simmilogo.png" alt=""  height="35" class="">
+       &ensp;  SIMMI FOUNDATION
+    </a>
   </div>
+ 
   <br>
 
   <div class="container" style="padding:0px;margin:0px;">
@@ -174,19 +234,29 @@ color:rgb(110, 110, 110) !important;
     <!-- Modal -->
 
 
-    
-    
+
    
     <div class="modal fade" id="myModal" role="dialog"  style="padding:0px;margin:0px;">
 
  
-
       <div class="img-box not-up" style="width:100% ;display: block;padding:0px;margin:0px;">
              
    
       
         <div class="" style="width:98% ;display: block;margin:auto;padding:0px;position: relative;" >    <button id="close_but" type="button" class="close" data-dismiss="modal">&times;</button>
-          <img   id="img_full_screen" style="width:100%; display: block;margin:0px;margin:auto;margin-top:5px;" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
+
+        <div class="img-control-box">
+ <span class="img-control-icon" id="img_cont_icon_left">
+  <i class="fas fa-angle-left"></i>
+</span>
+
+<span class="img-control-icon" id="img_cont_icon_right">
+<i class="fas fa-angle-right"></i>
+</span>
+    
+ </div>
+
+          <img class="noselect"  id="img_full_screen" style="width:100%; display: block;margin:0px;margin:auto;margin-top:5px;" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
          <div class="img-detail" style="background-color: rgb(255, 255, 255);width:100%;margin:auto;  ">
           <p id="img_title" class="img-title"    style="padding:7px;margin:0px"> this is title</p>
          <hr  style="padding:0px;margin:0px">
@@ -315,10 +385,31 @@ color:rgb(110, 110, 110) !important;
     var img_full_screen = document.getElementById("img_full_screen"); 
     var img_title = document.getElementById("img_title"); 
     var img_desc = document.getElementById("img_desc"); 
-    // var drag_it = document.getElementById("drag_it");
-    // var drag_it = document.getElementById("drag_it"); 
+    var img_cont_icon_right = document.getElementById("img_cont_icon_right");
+    var img_cont_icon_left = document.getElementById("img_cont_icon_left"); 
 
 
+ var curr_img_id_no ; 
+ var curr_child_no ; 
+// to find the current image postion 
+function find_element_position( img_id_no ) { 
+  // img_box_id-3
+  let total_child_count = img_box_img_part.children.length; 
+  for(let i=0; i<total_child_count ; i++){ 
+        //  console.log(`img_box_id-${img_id_no}` ); 
+      if( img_box_img_part.children[i].id ==  `img_box_id-${img_id_no}`){ 
+        // console.log( "id found at " , i) ; 
+        return i ; 
+      }
+  }
+}
+
+
+
+
+
+
+// var total_img = 
     main_box.addEventListener("click", (e) => {
 
      let class_name =   e.target.className ; 
@@ -328,9 +419,13 @@ color:rgb(110, 110, 110) !important;
      if ( !(id)) { return; }
 
     id =  id.split("-")[1]; 
+   //store the current img id no 
+    curr_img_id_no = id; 
+
+
+
     // img_body_id-$img_id
     let   curr_img_box = document.getElementById("img_box_id-" + id); 
-
     console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
     img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
      img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
@@ -338,9 +433,12 @@ color:rgb(110, 110, 110) !important;
       img_close_modal_but.click() ; 
        
       
-
+     curr_child_no   = find_element_position( id); 
+     img_cont_icon_right.style.visibility = img_cont_icon_left.style.visibility="visible" ;
     }
     console.log(e.target.id );
+
+
 
 });
 
@@ -376,6 +474,83 @@ console.log(img_full_screen.style.cursor );
 
 
 });
+
+
+
+
+img_cont_icon_right.addEventListener("click", (e) => {
+
+if(curr_child_no>=img_box_img_part.children.length ){ 
+  img_cont_icon_right.style.visibility="hidden"; 
+  return; 
+
+}
+if(img_cont_icon_left.style.visibility=="hidden"  ){ 
+  img_cont_icon_left.style.visibility="visible" ; 
+}
+curr_child_no +=1; 
+// console.log( img_box_img_part.children[curr_child_no] );
+
+    // id =  id.split("-")[1]; 
+    // img_body_id-$img_id
+    let   curr_img_box = img_box_img_part.children[curr_child_no] ; 
+
+    console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
+    img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
+     img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
+     img_desc.textContent = curr_img_box.lastElementChild.lastElementChild.textContent; 
+      // img_close_modal_but.click() ; 
+       
+      
+
+
+
+});
+
+
+
+
+img_cont_icon_left.addEventListener("click", (e) => {
+
+if(curr_child_no<=0 ){ 
+  img_cont_icon_left.style.visibility="hidden"; 
+  return; 
+
+}
+if(img_cont_icon_right.style.visibility=="hidden"  ){ 
+  img_cont_icon_right.style.visibility="visible" ; 
+}
+curr_child_no -=1; 
+// console.log( img_box_img_part.children[curr_child_no] );
+
+    // id =  id.split("-")[1]; 
+    // img_body_id-$img_id
+    let   curr_img_box = img_box_img_part.children[curr_child_no] ; 
+
+    console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
+    img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
+     img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
+     img_desc.textContent = curr_img_box.lastElementChild.lastElementChild.textContent; 
+      // img_close_modal_but.click() ; 
+       
+      
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
 
 
