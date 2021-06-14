@@ -34,8 +34,8 @@ if (!isset($_REQUEST['f_id']) || !isset($_REQUEST['req_type']) ) {
       
     exit();
 }
-$folder_id = trim($_REQUEST['f_id']);
-$req_type = trim( $_REQUEST['req_type']);
+$folder_id =  trim( mysqli_real_escape_string($mysqli,$_REQUEST['f_id'])    );
+$req_type =  trim( mysqli_real_escape_string($mysqli, $_REQUEST['req_type'])    );
 // $f_name =  trim($_REQUEST['f_name']);
 
 
@@ -80,7 +80,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
 
     $file_new_name =""; 
     $temp = 2; 
-    $file_ext = explode('.',rtrim( basename($_FILES['upload_file']['name']))); 
+    $file_ext = explode('.',rtrim(  mysqli_real_escape_string($mysqli,basename($_FILES['upload_file']['name'])))); 
     $len  = count($file_ext)-1 ; 
     $file_ext = $file_ext[$len]; 
     // print_r($file_ext) ; 

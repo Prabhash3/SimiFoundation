@@ -6,6 +6,43 @@ if (!isset($_REQUEST['f_id'])) {
 
 $f_id = trim($_REQUEST['f_id']);
 
+
+
+include("api_file/conn_detail.php");
+$mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
+
+
+// Check connection
+if ($mysqli->connect_errno) {
+  echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+  exit();
+}
+
+
+$sql = "SELECT folder_name, visi FROM  folder_table WHERE folder_id='$f_id'; ";
+$result = $mysqli->query($sql);
+
+
+if($result )
+{ 
+  $first_res = $result->fetch_assoc();
+
+
+ if(  $first_res['visi'] =="0" ){
+  header("location:./gallery_first.php"); 
+  return; 
+ }
+
+
+}
+
+
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -105,6 +142,7 @@ $f_id = trim($_REQUEST['f_id']);
     
      if(  $first_res['visi'] =="0" ){
       header("location:./gallery_first.php"); 
+      return; 
      }
 
 
@@ -182,7 +220,7 @@ $f_id = trim($_REQUEST['f_id']);
   <!-- <div id="drag_it" contenteditable="true"> enter your name </div> -->
 
 
-  <script src="script.js"></script>
+  <!-- <script src="script.js"></script> -->
 
   <script>
 

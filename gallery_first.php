@@ -135,7 +135,7 @@
 <!-- <div id="drag_it" contenteditable="true"> enter your name </div> -->
 
 
-<script src="script.js"></script>
+<!-- <script src="script.js"></script> -->
 
 <script>
 

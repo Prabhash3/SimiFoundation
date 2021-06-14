@@ -23,12 +23,12 @@ if ($mysqli->connect_errno) {
 }
 
 if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FILES["upload_file"])   && $_FILES["upload_file"]['size'] > 0) {
-  sleep(1);
+  // sleep(1);
 
 
-  $p_f_id = trim(($_REQUEST["p_f_id"]));
-  $p_p_f_id = trim(($_REQUEST["p_p_f_id"]));
-  $file_org_name = $_FILES["upload_file"]['name'];
+  $p_f_id = trim( mysqli_real_escape_string($mysqli, (($_REQUEST["p_f_id"]))));
+  $p_p_f_id = trim( mysqli_real_escape_string($mysqli, (($_REQUEST["p_p_f_id"]))));
+  $file_org_name =trim( mysqli_real_escape_string($mysqli,  $_FILES["upload_file"]['name']));
   $p_folder;
   $event_folder;
 
@@ -52,7 +52,7 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
 
     $file_new_name = "";
     $temp = 2;
-    $file_ext = explode('.', rtrim(basename($_FILES['upload_file']['name'])));
+    $file_ext = explode('.', trim( mysqli_real_escape_string($mysqli, (basename($_FILES['upload_file']['name'])))));
     $len  = count($file_ext) - 1;
     $file_ext = $file_ext[$len];
     // print_r($file_ext) ; 
@@ -98,7 +98,7 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
       }
 
       $img_path = "$obj_folder/$event_folder/$file_new_name" ;
-      echo "path ->$img_path<-"; 
+      // echo "path ->$img_path<-"; 
       $sql = "INSERT INTO  folder_event_table_no_$p_f_id (img_org_name,img_new_name,img_path) VALUES( '$file_org_name','$file_new_name','$img_path' ) ; ";
       $result = $mysqli->query($sql);
 
@@ -112,11 +112,11 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
           echo json_encode(array("status" => "error", "message" => "Not able to Upload Image"));
         }
       }else{
-        echo"$sql"; 
+        // echo"$sql"; 
         //  echo "\n $mysqli->error_get_last";
-                echo"result-"; 
-                print_r($result); 
-                echo "-result"; 
+                // echo"result-"; 
+                // print_r($result); 
+                // echo "-result"; 
            return ;
       }
 
@@ -161,7 +161,7 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
   //   echo json_encode(array("status"=>"ok", "message"=>"file received" )) ; 
 
 } else {
-  sleep(1);
+  // sleep(1);
   http_response_code(500);
   echo json_encode(array("status" => "error", "message" => "missing required information"));
 }

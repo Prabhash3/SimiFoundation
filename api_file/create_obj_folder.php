@@ -32,12 +32,12 @@ if (!isset($_REQUEST['f_temp_id']) || !isset($_REQUEST['req_type']) || !isset($_
     echo json_encode(array("status" => "error", "message" => "missing data"));
     exit();
 }
-$folder_temp_id = trim($_REQUEST['f_temp_id']);
-$req_type = trim($_REQUEST['req_type']);
-$f_name = htmlentities( trim($_REQUEST['f_name']));
+$folder_temp_id = trim( mysqli_real_escape_string($mysqli, ($_REQUEST['f_temp_id'])));
+$req_type = trim( mysqli_real_escape_string($mysqli, ($_REQUEST['req_type'])));
+$f_name = htmlentities( trim( mysqli_real_escape_string($mysqli, ($_REQUEST['f_name']))));
 $folder_new_name;
 $folder_id;
-$f_id_name =  htmlentities( trim($_REQUEST['f_id_name']));
+$f_id_name =  htmlentities( trim( mysqli_real_escape_string($mysqli, ($_REQUEST['f_id_name']))));
 //
 // echo " fnae = $f_name";
 if ($req_type == "creat_fold") {

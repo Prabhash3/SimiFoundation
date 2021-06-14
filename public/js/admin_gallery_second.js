@@ -95,13 +95,14 @@ function byte_to_unit(size) {
 
 
 function upload_file_to_server(i, total_file_count,curr_file_no ) {
+
     try {
 
    // i => i'th no of file to be uploaded 
 
     // console.log("files aare ", upload_file_data);
-    console.log( "------------------------------------"); 
-    console.log( " i = "+ i +  " total file count   " + total_file_count + " curr file no " + curr_file_no); 
+    // console.log( "------------------------------------"); 
+    // console.log( " i = "+ i +  " total file count   " + total_file_count + " curr file no " + curr_file_no); 
    
     img_close_modal_but
     prog_bar.style.display="block"; 
@@ -126,29 +127,30 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
             
             
             let frac = e.loaded / e.total;
-            console.log(e.loaded);
+            // console.log(e.loaded);
 
             prog_bar.firstElementChild.style.width = Math.round(frac * 100) + "%"; 
 
         }
 
         xhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
+            if (this.readyState == 4 ) {
                
-          
+                // display_mess(JSON.parse(this.response),3000 )
                 // console.log("resrpn->", this.response);
                 // let res_data = JSON.parse(this.response);
                 let res_data = (this.response);
-                console.log("resrpn->",res_data );
+                // console.log("resrpn->",res_data );
                 
-                if (res_data.status == "ok") {
+                if (this.status >= 200 && this.status < 300) {
                 
                 }
                 else {
-                      console.log(res_data.error);
+                    //   console.log(res_data.error);
+                 display_mess(JSON.parse(this.response),3000 )
                 }
                 // upload_img_but.innerHTML ="Upload"; 
-                
+                    // display_mess(JSON.parse(this.response),3000 )
                 
                 // prog_bar.firstElementChild.style.width =  "0%"; 
                 prog_bar.style.display="none"; 
@@ -160,19 +162,20 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
             i++
             while ( i<total_file_count ){
                 if( not_upload_file_table[i]==true ||  upload_file_data[i].size < 1   ){
-                    console.log( "---skippiing file no " + i  + "--"); 
+                    // console.log( "---skippiing file no " + i  + "--"); 
                     i++; 
                 }else{
 
                     display_up_img.src =  URL.createObjectURL(upload_file_data[i]); 
                     display_up_img_name.textContent = upload_file_data[i].name ; 
-                    console.log("uploading file no " + (curr_file_no+ 1 )); 
+                    // console.log("uploading file no " + (curr_file_no+ 1 )); 
                     upload_file_to_server( i, total_file_count,curr_file_no+1); 
                     break; 
                 }
             }
            if( i>=total_file_count){
                //at end of last upload ""\
+                //  display_mess(JSON.parse(this.response),3000 )
                 console.log("upload completed"); 
                 window.location = window.location.pathname + window.location.search;
            }
@@ -197,23 +200,25 @@ upload_file_but.addEventListener("click",    ()=>{
         // total_file_count = upload_file_data.length  - Object.keys(not_upload_file_table).length;
     }else {
         console.log("no filees found upload function "); 
+            display_mess(  "no filees found upload function " ,3000 )
         return  ; 
     }
     let i =0; 
     while ( i<upload_file_data.length ){
         if( not_upload_file_table[i]==true  ||  upload_file_data[i].size < 1){
-            console.log( "---skippiing file no " + i  + "--"); 
+            
+            // console.log( "---skippiing file no " + i  + "--"); 
             i++; 
         }else{
             top_close.click(); 
             img_close_modal_but.click(); 
-            console.log("(((((((started"); 
+            // console.log("(((((((started"); 
             prog_bar.innerHTML = `<div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
             aria-valuemin="0" aria-valuemax="100"></div>`;
             display_up_img.src =  URL.createObjectURL(upload_file_data[i]); 
             display_up_img_name.textContent = upload_file_data[i].name ; 
             upload_file_to_server( i,upload_file_data.length,1); 
-            console.log("end(((((((("); 
+            // console.log("end(((((((("); 
             break; 
         }
     }
@@ -223,14 +228,14 @@ upload_file_but.addEventListener("click",    ()=>{
 
 
 cancel_upload_but.addEventListener("click", () => {
-    console.log("remove d files "); 
+    // console.log("remove d files "); 
     upload_file_data=null; 
     disp_uploadable_file.innerHTML=""; 
     // drop_zone.style.display="none"; 
 }); 
 
 cancel_upload_file_but.addEventListener("click", () => {
-    console.log("canceling uploading ... files "); 
+    // console.log("canceling uploading ... files "); 
     upload_file_data=null; 
     disp_uploadable_file.innerHTML=""; 
     disp_uploadable_file_box.style.display="none"; 
@@ -250,11 +255,11 @@ add_fold_img.addEventListener("click", () => {
 
 upload_file_input.addEventListener("change", (e) => {
     upload_file_data = e.target.files; 
-    console.log(upload_file_data); 
+    // console.log(upload_file_data); 
     // drop_zone.style.display="none"; 
      disp_uploadable_file_box.style.display="block"; 
    if(!(upload_file_data) || upload_file_data.length<1){
-      console.log("file not found");    
+    //   console.log("file not found");    
     return; 
    }   
    launch_box.click(); 
@@ -274,7 +279,7 @@ upload_file_input.addEventListener("change", (e) => {
                                     </div>`; 
           temp.firstElementChild.style.backgroundImage = "url('"+URL.createObjectURL(upload_file_data[i]) + "')";
 // temp.children[2].firstElementChild.src  = URL.createObjectURL(upload_file_data[i]); 
-            console.log(); 
+            // console.log(); 
              disp_uploadable_file.appendChild(temp); 
    }
 
@@ -303,11 +308,11 @@ delete_img_icon.addEventListener("click", (e) => {
     // window.location = "./admin_gallery_first.html";
     let s_data =  Object.keys(img_id_to_del_table); 
     if( s_data.length==0){
-        console.log("no data"); 
+        // console.log("no data"); 
         return ; 
     }
     if( img_box_img_part.firstElementChild && img_box_img_part.firstElementChild.firstElementChild.style.display != "inline-block" ){
-        console.log( "no file selected ");  
+        // console.log( "no file selected ");  
         return; 
     }
 
@@ -315,17 +320,19 @@ delete_img_icon.addEventListener("click", (e) => {
 
 
  
-    var param = "s_data="+ JSON.stringify(s_data)+"&f_id="+p_f_id +"&req_type=delete";
-    console.log(param); 
+    var param = "s_data="+ JSON.stringify(s_data)+"&f_id="+p_f_id + "&p_p_f_id="+p_p_f_id +"&req_type=delete";
+    // console.log(param); 
 
 
 
     send_ajax(param,"./api_file/admin_gallery_second.php")
      .then((data) => {
-        // console.log((data));
-        window.location = window.location.pathname + window.location.search;
+        display_mess(  (data ) ,3000 )
+        console.log((data));
+        // window.location = window.location.pathname + window.location.search;
     }).catch(error => {
-        console.log(error);
+        display_mess((error  ) ,3000 )
+        // console.log(error);
     });
 }
 
@@ -336,11 +343,11 @@ disp_uploadable_file.addEventListener("click", (e) => {
 
     if( e.target.className=="rm_img_but" || e.target.className == "rm_img_icon"  ){
 
-          console.log(e.target.className); 
+        //   console.log(e.target.className); 
     let file_id = e.target.id.split("-")[1] ; 
-    console.log(file_id); 
+    // console.log(file_id); 
     not_upload_file_table[file_id]=true; 
-    console.log(not_upload_file_table);
+    // console.log(not_upload_file_table);
     document.getElementById("f_no-"+file_id).parentElement.remove(); 
     }
     // document.getElementById("f_no-1").parentElement.remove(); 
@@ -348,7 +355,7 @@ disp_uploadable_file.addEventListener("click", (e) => {
 }); 
 
 main_box.addEventListener("focusout", (e) => {
-    console.log( "out "); 
+    // console.log( "out "); 
  let type="" ; 
     if (e.target.className == "img-title"  && (type ="title") ||  e.target.className == "img-desc"  && (type ="desc")) {
         
@@ -368,9 +375,11 @@ main_box.addEventListener("focusout", (e) => {
         let url = './api_file/admin_gallery_second.php'; 
         send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + p_f_id+ "&img_id="+f_id, url, "post")
         .then((data) => {
-            console.log((data));
+            display_mess(  JSON.parse(data ) ,3000 )
+            // console.log((data));
         }).catch(error => {
-            console.log(error);
+            display_mess(  JSON.parse(error ) ,3000 )
+            // console.log(error);
         });
 
 
@@ -416,7 +425,7 @@ select_fold_img.addEventListener("click", (e) => {
     }
 
     
-    console.log(img_box_img_part.children[0]); 
+    // console.log(img_box_img_part.children[0]); 
     // window.location = "./admin_gallery_first.html";
 
 }); 
@@ -425,7 +434,7 @@ select_fold_img.addEventListener("click", (e) => {
 main_box.addEventListener("click", (e) => {
     if (e.target.className == "img-select-box") {
         let img_id= e.target.id.split("-")[1]; 
-        console.log(e.target.value ,img_id); 
+        // console.log(e.target.value ,img_id); 
 
         if(e.target.value=="on" ){
                img_id_to_del_table[img_id] = true; 

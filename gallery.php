@@ -170,11 +170,11 @@ top:34vh;
     border-radius: 40px;
     position: absolute;
     cursor: pointer;
-    box-shadow:1px 1px 7px 2px #fdf9f9d6; 
+    /* box-shadow:1px 1px 7px 2px #fdf9f9d6;  */
 }
 
 .img-control-icon:hover { 
-background-color:white; 
+background-color: #ffffff96; 
 color: #040404;
 }
 
@@ -256,7 +256,7 @@ color: #040404;
     
  </div>
 
-          <img class="noselect"  id="img_full_screen" style="width:100%; display: block;margin:0px;margin:auto;margin-top:5px;" src="G:\xampp\xampp\htdocs\simmi\public\image\test2.jpg" alt="">
+          <img class="noselect"  id="img_full_screen" style="width:100%; display: block;margin:0px;margin:auto;margin-top:5px;" src=".\public\image\test2.jpg" alt="">
          <div class="img-detail" style="background-color: rgb(255, 255, 255);width:100%;margin:auto;  ">
           <p id="img_title" class="img-title"    style="padding:7px;margin:0px"> this is title</p>
          <hr  style="padding:0px;margin:0px">
@@ -375,7 +375,7 @@ color: #040404;
   </div>
 
 
-  <script src="script.js"></script>
+  <!-- <script src="script.js"></script> -->
 
   <script>
 
@@ -426,7 +426,7 @@ function find_element_position( img_id_no ) {
 
     // img_body_id-$img_id
     let   curr_img_box = document.getElementById("img_box_id-" + id); 
-    console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
+    // console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
     img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
      img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
      img_desc.textContent = curr_img_box.lastElementChild.lastElementChild.textContent; 
@@ -436,7 +436,7 @@ function find_element_position( img_id_no ) {
      curr_child_no   = find_element_position( id); 
      img_cont_icon_right.style.visibility = img_cont_icon_left.style.visibility="visible" ;
     }
-    console.log(e.target.id );
+    // console.log(e.target.id );
 
 
 
@@ -460,7 +460,7 @@ if (img_full_screen.style.cursor=="zoom-in") {
   
   
 }else{
-  console.log("else ");
+  // console.log("else ");
   img_full_screen.style.cursor="zoom-in";
   img_full_screen.style.width="auto";
   img_full_screen.style.height="100vh";
@@ -469,8 +469,8 @@ if (img_full_screen.style.cursor=="zoom-in") {
 // cursor: zoom-in;
 //   cursor: zoom-out;
 // img_full_screen.style.cursor="zoom-out";
-console.log(e.target.id );
-console.log(img_full_screen.style.cursor );
+// console.log(e.target.id );
+// console.log(img_full_screen.style.cursor );
 
 
 });
@@ -480,7 +480,7 @@ console.log(img_full_screen.style.cursor );
 
 img_cont_icon_right.addEventListener("click", (e) => {
 
-if(curr_child_no>=img_box_img_part.children.length ){ 
+if(curr_child_no>=img_box_img_part.children.length-1 ){ 
   img_cont_icon_right.style.visibility="hidden"; 
   return; 
 
@@ -495,7 +495,7 @@ curr_child_no +=1;
     // img_body_id-$img_id
     let   curr_img_box = img_box_img_part.children[curr_child_no] ; 
 
-    console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
+    // console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
     img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
      img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
      img_desc.textContent = curr_img_box.lastElementChild.lastElementChild.textContent; 
@@ -527,7 +527,7 @@ curr_child_no -=1;
     // img_body_id-$img_id
     let   curr_img_box = img_box_img_part.children[curr_child_no] ; 
 
-    console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
+    // console.log(curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]); 
     img_full_screen.src = curr_img_box.firstElementChild.style.backgroundImage.split('"')[1]
      img_title.textContent = curr_img_box.lastElementChild.firstElementChild.textContent; 
      img_desc.textContent = curr_img_box.lastElementChild.lastElementChild.textContent; 

@@ -1,9 +1,7 @@
+<?php
 
-
-<?php 
-
-if(!isset($_REQUEST['f_id'])){
-  header("location:./admin_gallery_first.php"); 
+if (!isset($_REQUEST['f_id'])) {
+  header("location:./admin_gallery_first.php");
 }
 
 $f_id = trim($_REQUEST['f_id']);
@@ -18,12 +16,11 @@ $f_id = trim($_REQUEST['f_id']);
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events</title>
-  <link rel="stylesheet" href="public/css/admin_gallery_first_b.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
+  <link rel="stylesheet" href="public/css/message.css">
+  <link rel="stylesheet" href="public/css/admin_gallery_first_b.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-    crossorigin="anonymous" />
-    <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+  <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -33,18 +30,17 @@ $f_id = trim($_REQUEST['f_id']);
 <body id="body">
 
   <!-- image upload modal  -->
-  <div class="container" >
+  <div class="container">
 
     <!-- Trigger the modal with a button -->
-    <button type="button" id="img_close_modal_but" class="btn btn-info btn-lg"
-      data-toggle="modal" data-target="#myModal"  style="display:none;"  >Open Modal</button>
+    <button type="button" id="img_close_modal_but" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="display:none;">Open Modal</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
-      <div id="modal_out_box" class="modal-dialog"  >
+      <div id="modal_out_box" class="modal-dialog">
 
         <!-- Modal content-->
-        <div class="modal-content" style="width: 80% ;display: block; margin:auto; border:1px solid black; " >
+        <div class="modal-content" style="width: 80% ;display: block; margin:auto; border:1px solid black; ">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Edit Image</h4>
@@ -52,25 +48,23 @@ $f_id = trim($_REQUEST['f_id']);
           <div class="modal-body">
             <div class="card" style="width: 100%;">
 
-              <img style="width: 100%; ;" id="display_up_img" class="card-img-top"  src="public\image\default_upoad_img.svg"
-                alt="Uploadable File">
+              <img style="width: 100%; ;" id="display_up_img" class="card-img-top" src="public\image\default_upoad_img.svg" alt="Uploadable File">
 
-              <div  class="card-body">
-                 <br>
+              <div class="card-body">
+                <br>
                 <p id="display_up_img_name" class="card-text">No Files Selected </p>
               </div>
             </div>
-            <div  id="prog_bar" class="progress" style="height: 7px; display: none;">
-              <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25"
-                aria-valuemin="0" aria-valuemax="100"></div>
+            <div id="prog_bar" class="progress" style="height: 7px; display: none;">
+              <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-           
+
           </div>
 
           <div class="modal-footer">
 
             <button id="select_img_but" type="button" class="btn btn-primary">Select Image</button>
-            <button  id="upload_img_but" type="button" class="btn btn-primary">Upload</button>
+            <button id="upload_img_but" type="button" class="btn btn-primary">Upload</button>
 
             <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
           </div>
@@ -103,52 +97,49 @@ $f_id = trim($_REQUEST['f_id']);
   <div class="second-head">
 
 
-  <?php
+    <?php
 
 
-include("api_file/conn_detail.php");
-   $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
-   
-   
-   // Check connection
-   if ($mysqli->connect_errno) {
-       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-       exit();
-   }
-   
+    include("api_file/conn_detail.php");
+    $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
 
-   
-   $sql = "SELECT folder_name  FROM  folder_table WHERE folder_id='$f_id'; ";
-   $result = $mysqli->query($sql);
-   $curr_folder_name; 
-   
-   if($result && $result->num_rows>0 )
-   { 
-     $curr_folder_name = ($result->fetch_assoc() )['folder_name'];
-      
-   }
-   else{ 
-     echo "something went wrong "; 
-     return; 
-   }
+
+    // Check connection
+    if ($mysqli->connect_errno) {
+      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+      exit();
+    }
+
+
+
+    $sql = "SELECT folder_name  FROM  folder_table WHERE folder_id='$f_id'; ";
+    $result = $mysqli->query($sql);
+    $curr_folder_name;
+
+    if ($result && $result->num_rows > 0) {
+      $curr_folder_name = ($result->fetch_assoc())['folder_name'];
+    } else {
+      echo "something went wrong ";
+      return;
+    }
 
 
 
 
 
-?>
+    ?>
 
 
     <div class="path-detail">
       <div class="second-icon home-icon"><i class="fa fa-home fa-fw" style="font-size:14px;position:relative;top:-1px;  color: rgb(74 68 71 /90%);;;"></i></div>
-  <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"> Home</div>
-  <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon">Gallery</div>
- 
-    
-  <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-  <div class="second-icon home-icon"><?php echo  $curr_folder_name ;?>         </div>
+      <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
+      <div class="second-icon home-icon"> Home</div>
+      <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
+      <div class="second-icon home-icon">Gallery</div>
+
+
+      <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
+      <div class="second-icon home-icon"><?php echo  $curr_folder_name; ?> </div>
 
 
 
@@ -168,76 +159,76 @@ include("api_file/conn_detail.php");
       <span title="Folder visibility" class="main-box-heading">Visibility </span>
       <span title="Edit Image" class="main-box-heading" id="test"> Edit</span>
       <span title="Delete Folder" class="main-box-heading">Delete</span>
-     </div>
-  <?php
-   
-  //  include("api_file/conn_detail.php");
-  //  $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
-   
-   
-  //  // Check connection
-  //  if ($mysqli->connect_errno) {
-  //      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-  //      exit();
-  //  }
-   
-   $sql = "SELECT * FROM  folder_table_no_$f_id ";
-   $result = $mysqli->query($sql);
-  //  print_r($result); 
-   
-  // echo"<pre>"; 
-  // echo"<br><br>s ds <br>"; 
+    </div>
+    <?php
 
-  if( $result)
-  while($row = $result->fetch_assoc()){
-    //  print_r($row); 
-    //  (
-    //   [folder_id] => f79d76
-    //   [folder_name] => Objective Title
-    //   [folder_new_name] => dc7905e583f7fdbfec92
-    //   [visi] => 1
-    // echo `dlfkjsdkl {$row['visi']} `; 
-  
-   
-$curr_fold_no = $row['folder_id'];    
-$visiblilty_html = $row['visi'] =="1"? 
-"<span title='Hide Folder' class='hide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"
-:
-"<span title='Unhide Folder' class='unhide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye-slash' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"; 
-
-// echo "<script>console.log(`$visiblilty_html`);</script> "; 
-// <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span>
+    //  include("api_file/conn_detail.php");
+    //  $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
 
 
+    //  // Check connection
+    //  if ($mysqli->connect_errno) {
+    //      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    //      exit();
+    //  }
+
+    $sql = "SELECT * FROM  folder_table_no_$f_id ";
+    $result = $mysqli->query($sql);
+    //  print_r($result); 
+
+    // echo"<pre>"; 
+    // echo"<br><br>s ds <br>"; 
+
+    if ($result)
+      while ($row = $result->fetch_assoc()) {
+        //  print_r($row); 
+        //  (
+        //   [folder_id] => f79d76
+        //   [folder_name] => Objective Title
+        //   [folder_new_name] => dc7905e583f7fdbfec92
+        //   [visi] => 1
+        // echo `dlfkjsdkl {$row['visi']} `; 
 
 
-// let temp = document.createElement("div");
-//     temp.className = "new_folder";
-//     temp.id = "folder-box-no-" + (curr_fold_no );
-    echo"  
+        $curr_fold_no = $row['folder_id'];
+        $visiblilty_html = $row['visi'] == "1" ?
+          "<span title='Hide Folder' class='hide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"
+          :
+          "<span title='Unhide Folder' class='unhide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye-slash' id='folder_vis_c_no-$curr_fold_no' ></i> </span>";
+
+        // echo "<script>console.log(`$visiblilty_html`);</script> "; 
+        // <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span>
+
+
+
+
+        // let temp = document.createElement("div");
+        //     temp.className = "new_folder";
+        //     temp.id = "folder-box-no-" + (curr_fold_no );
+        echo "  
     <div id='folder-box-no-$curr_fold_no' class='new_folder'>
 <span  title='Open Folder' class='new_folder_img' id='f_img_no-$curr_fold_no'  ><i class='fa fa-folder fa-fw' id='f_img_c_no-$curr_fold_no'  ></i></span>
 
-<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >".$row['folder_name']."</span>
+<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >" . $row['folder_name'] . "</span>
 $visiblilty_html
 <span title='Change Image' class='edit-folder-img' id='f_edit_no-$curr_fold_no' > <i class='far fa-edit' id='f_edit_c_no-$curr_fold_no' ></i> </span>
 <span title='Delete Folder' class='delete-folder' id='f_name_no-$curr_fold_no' ><i class='fa fa-trash' aria-hidden='true' id='f_name_c_no-$curr_fold_no' ></i> </span>
 </div>
 ";
-// echo $temp; 
-//      echo '<br"; 
-//  echo "yes it is "; 
+        // echo $temp; 
+        //      echo '<br"; 
+        //  echo "yes it is "; 
 
-  }
+      }
 
-  // echo"</pre>"; 
-  // echo "{$dkfj}"; 
+    // echo"</pre>"; 
+    // echo "{$dkfj}"; 
 
-?>
-  
+    ?>
 
-   
- <!-- <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span> -->
+
+
+    <!-- <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span> -->
 
 
     <!-- <div class="new_folder">
@@ -250,7 +241,7 @@ $visiblilty_html
       <span title="Delete Folder" class="delete-folder"><i class="fa fa-trash" aria-hidden="true"></i> </span>
     </div> -->
 
- 
+
 
 
 
@@ -258,25 +249,54 @@ $visiblilty_html
 
   </div>
 
-<input type="file" id="input_file" style="display: none;">  
+  <input type="file" id="input_file" style="display: none;">
 
-  <!-- <br><br><br><br><br><br><br><br><br>
-  <i class="fa fa-trash" aria-hidden="true"></i>
-  <i class="fa fa-trash-o" aria-hidden="true"></i>
-  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-  <span class="st">
-    <i class="fas fa-camera"></i>
-  </span>
-  <i class="fas fa-wrench"></i>
-  <i class="far fa-edit"></i>
-  hidden , remove ,change image , folder name -->
- <script> 
-   var p_f_id = <?php echo "'$f_id'"; ?>;
 
- console.log(p_f_id); 
-</script>
-  <script src="public/js/admin_gallery_first_b.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
- 
+
+
+  <div id="mess_box">
+
+    <div id="mess_content" class="">  </div>
+  </div>
+
+  <!-- mess-success -->
+  <script>
+
+    var mess_time_id;
+    mess_box.className = "show";
+    var mess_content = document.getElementById("mess_content");
+
+    function display_mess(data, time = 3000) {
+
+      var mess_box = document.getElementById("mess_box");
+      mess_box.className = "show";
+
+      mess_content.textContent = data.message;
+      if (data.status == "error") {
+        mess_content.className = 'mess-error';
+      } else {
+        mess_content.className = "mess-success";
+      }
+
+      clearTimeout(mess_time_id);
+      mess_time_id = setTimeout(function() {
+        mess_box.className = mess_box.className.replace("show", "");
+      }, time);
+    }
+
+    // display_mess(" test mes s",2000 ); 
+  </script>
+
+
+
+
+  <script>
+    var p_f_id = <?php echo "'$f_id'"; ?>;
+
+    console.log(p_f_id);
+  </script>
+  <script src="public/js/admin_gallery_first_b.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+
 
 </body>
 

@@ -36,8 +36,8 @@ var is_create_folder=false;
 var test = document.getElementById("test"); 
     test.addEventListener("click",    (e)=>{
         
-        console.log("Df");
-          console.log(e.target.className)
+        // console.log("Df");
+        //   console.log(e.target.className)
     }); 
 
 
@@ -158,19 +158,21 @@ console.log(temp.childElementCount);
 upload_img_but.addEventListener("click", (e) => {
     
 
-   console.log(e.target.innerHTML); 
+//    console.log(e.target.innerHTML); 
      
 
      let is_error= false; 
      if (  !(upload_file_data) || !(upload_file_data[0] )){
-        console.log("file not present ");  
+        display_mess("file not present ",3000 ); 
+        // console.log("file not present ");  
         is_error = true;  
 
      }
    
      else if(upload_file_data[0].size<=0 ){
          //to samll 
-         console.log("too small ");  
+        //  console.log(" too small ");  
+        display_mess("too small file to upload  ",3000 ); 
         is_error = true;  
 
  
@@ -179,6 +181,7 @@ upload_img_but.addEventListener("click", (e) => {
 
         //to samll 
         console.log("too big  ");  
+        display_mess("too big file to upload  ",3000 ); 
         is_error = true;  
       
     }
@@ -402,14 +405,14 @@ main_box.addEventListener("click", (e) => {
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
         //this is edit folder 
-        console.log("->  edit-foldsser"); 
+        // console.log("->  edit-foldsser"); 
         // send_ajax("req_type=edit&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
         //     console.log((data));
         // }).catch(error => {
         //     console.log(error);
         // });
         img_close_modal_but.setAttribute("f_id",folder_id); 
-        console.log(img_close_modal_but.getAttribute("f_id") ); 
+        // console.log(img_close_modal_but.getAttribute("f_id") ); 
      
         // console.log(img_close_modal_but.className); 
         img_close_modal_but.click(); 
@@ -417,7 +420,7 @@ main_box.addEventListener("click", (e) => {
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {
          //this is delete folder 
-         console.log("->  delete-folder"); 
+        //  console.log("->  delete-folder"); 
     }
 
     // console.log(e.target.id.split("-"));

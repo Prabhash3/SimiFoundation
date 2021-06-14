@@ -14,7 +14,7 @@ $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
 
 // Check connection
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    echo "Failed to connect to Database: " ;
     exit();
 }
 
@@ -390,14 +390,46 @@ else{
 
 
 
+<div id="mess_box">
+    <div id="mess_content" class="">  </div>
+  </div>
+
+  <!-- mess-success -->
+  <script>
+    var mess_time_id;
+
+    var mess_content = document.getElementById("mess_content");
+
+    function display_mess(data, time = 3000) {
+
+      var mess_box = document.getElementById("mess_box");
+      mess_box.className = "show";
+
+      mess_content.textContent = data.message;
+      if (data.status == "error") {
+        mess_content.className = 'mess-error';
+      } else {
+        mess_content.className = "mess-success";
+      }
+
+      clearTimeout(mess_time_id);
+      mess_time_id = setTimeout(function() {
+        mess_box.className = mess_box.className.replace("show", "");
+      }, time);
+    }
+
+    // display_mess(" test mes s",2000 ); 
+  </script>
+
+
 
 
 
 <script> 
    var p_f_id = <?php echo "'$f_id'"; ?>;
    var p_p_f_id = <?php echo "'$p_p_f_id'"; ?>;
- console.log(p_f_id); 
- console.log(p_p_f_id); 
+//  console.log(p_f_id); 
+//  console.log(p_p_f_id); 
 </script>
   <script src="public/js/admin_gallery_second.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
 </body>

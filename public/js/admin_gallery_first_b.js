@@ -36,8 +36,8 @@ var is_create_folder=false;
 var test = document.getElementById("test"); 
     test.addEventListener("click",    (e)=>{
         
-        console.log("Df");
-          console.log(e.target.className)
+        // console.log("Df");
+        //   console.log(e.target.className)
     }); 
 
 
@@ -168,14 +168,17 @@ upload_img_but.addEventListener("click", (e) => {
 
      let is_error= false; 
      if (  !(upload_file_data) || !(upload_file_data[0] )){
-        console.log("file not present ");  
+        display_mess( "file not present ",2000 ); 
+
+        // console.log("file not present ",);  
         is_error = true;  
 
      }
    
      else if(upload_file_data[0].size<=0 ){
          //to samll 
-         console.log("too small ");  
+        //  console.log("too small ");
+         display_mess( "too small file",2000 );   
         is_error = true;  
 
  
@@ -183,7 +186,8 @@ upload_img_but.addEventListener("click", (e) => {
      else if(upload_file_data[0].size>=40000000 ){
 
         //to samll 
-        console.log("too big  ");  
+        // console.log("too big  ");  
+        display_mess( "too big file. file must be smaller than 40 MB",2000 );   
         is_error = true;  
       
     }
@@ -212,16 +216,25 @@ upload_img_but.addEventListener("click", (e) => {
         
         
             let frac = e.loaded / e.total;
-            console.log(e.loaded);
+            // console.log(e.loaded);
 
             prog_bar.firstElementChild.style.width = Math.round(frac * 100) + "%"; 
 
     }
 
     xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status >= 200 && this.status < 300) {
-            console.log("resrpn->", this.response);
-            let res_data;
+        if (this.readyState == 4 ) {
+
+        //  if( this.status >= 200 && this.status < 300) { 
+
+        //  }
+        //  else { 
+             
+        //  }
+        //  console.log("resrpn->", this.response);
+         display_mess( JSON.parse( this.response),2000 ); 
+
+            // let res_data;
             // let res_data = JSON.parse(this.response);
             // console.log("resrpn->",res_data );
             
@@ -254,9 +267,10 @@ input_file.addEventListener("change", (e) => {
        
     // }
     upload_file_data = e.target.files; 
-    console.log(upload_file_data); 
+    // console.log(upload_file_data); 
    if(!(upload_file_data) || upload_file_data.length<1){
-      console.log("file not found");    
+    //   console.log("file not found");    
+      display_mess("file not found"  ,2000 ); 
       display_up_img.src = default_img_path; 
       display_up_img_name.textContent ="No File Selected" ; 
     return; 
@@ -278,8 +292,8 @@ modal_out_box.addEventListener("click", (e) => {
 
 
 main_box.addEventListener("focusout", (e) => {
-   console.log("kdfj"); 
-    console.log(e.target.className); 
+//    console.log("kdfj"); 
+    // console.log(e.target.className); 
     if (e.target.className == "folder_name") {
        
 
@@ -309,34 +323,23 @@ main_box.addEventListener("focusout", (e) => {
        
         is_create_folder= false; 
         send_ajax("req_type="+type+ "&f_name="+f_name+ "&p_f_id="+p_f_id+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_event_folder.php", "post").then((data) => {
-            console.log((data));
-
+            // console.log((data));
+            display_mess(  JSON.parse(data ),2000 ); 
             if(type=="creat_fold"){
                     window.location = window.location.pathname + window.location.search; 
                 
             }
         }).catch(error => {
-            // console.log(error);
+            // console.log();
+            display_mess(  JSON.parse( error ),2000 ); 
         });
 
 
     }
-    console.log(e.target.innerHTML);
+    // console.log(e.target.innerHTML);
 
 });
 
-
-
-// main_box.addEventListener("dblclick", (e) => {
-//     if (e.target.className == "new_folder_img" || e.target.className ==  "fa fa-folder fa-fw") {
-       
-//      window.location="./admin_gallery_second.html?f_id=" + ( e.target.id.split("-")[1])
-
-
-//     }
-//     // console.log(e.target.id.split("-"));
-
-// });
 
 
 main_box.addEventListener("click", (e) => {
@@ -349,10 +352,11 @@ main_box.addEventListener("click", (e) => {
 
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
-      console.log( " id = " + folder_id ); 
-      console.log( " class = '" + class_name+ "'" ); 
+    //   console.log( " id = " + folder_id ); 
+    //   console.log( " class = '" + class_name+ "'" ); 
     }else{
-        console.log("no id found ");  
+        // console.log("no id found "); 
+        display_mess( "no id found ",2000 );  
         return; 
     }
     // console.log(( "tilte " + ));
@@ -362,10 +366,10 @@ main_box.addEventListener("click", (e) => {
     }
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder
-        console.log("->  hide-folder"); 
+        // console.log("->  hide-folder"); 
         send_ajax("req_type=hide&f_name="+f_name+"&p_f_id="+p_f_id+"&f_id=" + folder_id, url, "post").then((data) => {
-            console.log((data));
-
+            // console.log((data));
+            display_mess(  JSON.parse(data ),2000 ); 
             let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
             if(temp_elem){
                 temp_elem.className = "unhide-folder"; 
@@ -376,16 +380,18 @@ main_box.addEventListener("click", (e) => {
 
 
         }).catch(error => {
-            // console.log(error);
+            // console.log();
+            display_mess(  JSON.parse(  error),2000 ); 
         });
   
        
     }
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
             //this is   unhide-folder
-            console.log("->  Unhide-folder"); 
+            // console.log("->  Unhide-folder"); 
             send_ajax("req_type=unhide&f_name="+f_name+"&p_f_id="+p_f_id+"&f_id=" + folder_id, url, "post").then((data) => {
-                console.log((data));
+                // console.log((data));
+                display_mess(  JSON.parse(data ),2000 ); 
     
                 let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
                 if(temp_elem){
@@ -396,20 +402,22 @@ main_box.addEventListener("click", (e) => {
                 }
           
             }).catch(error => {
-                // console.log(error);
+                // console.log();
+            display_mess(  JSON.parse( error ),2000 ); 
+
             });
        
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
         //this is edit folder 
-        console.log("->  edit-foldsser"); 
+        // console.log("->  edit-foldsser"); 
         // send_ajax("req_type=edit&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
         //     console.log((data));
         // }).catch(error => {
         //     console.log(error);
         // });
         img_close_modal_but.setAttribute("f_id",folder_id); 
-        console.log(img_close_modal_but.getAttribute("f_id") ); 
+        // console.log(img_close_modal_but.getAttribute("f_id") ); 
      
         // console.log(img_close_modal_but.className); 
         img_close_modal_but.click(); 
@@ -417,11 +425,11 @@ main_box.addEventListener("click", (e) => {
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {
          //this is delete folder 
-         console.log("->  delete-folder"); 
+        //  console.log("->  delete-folder"); 
     }
 
     // console.log(e.target.id.split("-"));
-    console.log(e.target.id);
+    // console.log(e.target.id);
 
 
 });
