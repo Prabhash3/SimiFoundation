@@ -146,7 +146,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                 
                 }
                 else {
-                    //   console.log(res_data.error);
+                      console.log(res_data.error);
                  display_mess(JSON.parse(this.response),3000 )
                 }
                 // upload_img_but.innerHTML ="Upload"; 
@@ -329,7 +329,7 @@ delete_img_icon.addEventListener("click", (e) => {
      .then((data) => {
         display_mess(  (data ) ,3000 )
         console.log((data));
-        // window.location = window.location.pathname + window.location.search;
+        window.location = window.location.pathname + window.location.search;
     }).catch(error => {
         display_mess((error  ) ,3000 )
         // console.log(error);

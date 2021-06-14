@@ -1,3 +1,5 @@
+<?php include "validate.php";  ?>
+
 <?php
 
 // print_r($_REQUEST);
@@ -78,6 +80,10 @@ if ($req_type == "creat_fold") {
         if ($result == "1") {
         
             if(  mkdir("./../upload/" . $folder_new_name)){
+
+                include "write_htaccess_to_folder.php"; 
+                write_htaccess_for_folder( "./../upload/$folder_new_name/"); 
+
                 echo json_encode(array("status" => "ok", "message" => "Objective Folder Created "));
             }
             else{

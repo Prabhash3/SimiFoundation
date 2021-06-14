@@ -1,3 +1,4 @@
+<?php include "./api_file/validate.php";  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -76,7 +77,7 @@
 
 
   <div class="header">
-    <div id="back_button"><img id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
+    <div   id="back_button"><img id="back_button_img" src="public\image\back_icon.png" alt="add_folder" draggable="false">
     </div>
 
     <div id="add_folder"><img id="add_fold_img" src="public\image\add_folder.svg" alt="add_folder" draggable="false">
@@ -235,6 +236,27 @@ $visiblilty_html
     var mess_time_id;
 
     var mess_content = document.getElementById("mess_content");
+    var mess_content = document.getElementById("mess_content");
+    var back_button_img= document.getElementById("back_button_img");
+
+// alert("this 0")
+
+    back_button_img.addEventListener("click",()=>{ 
+      console.log("click" );
+      window.location="../admin//main/index.php"
+     }); 
+
+    
+
+
+
+
+
+
+
+
+
+
 
     function display_mess(data, time = 3000) {
 

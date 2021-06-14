@@ -1,3 +1,4 @@
+<?php include "./api_file/validate.php";  ?>
 <?php 
 if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
   header("location:./admin_gallery_first_b.php"); 
@@ -29,11 +30,11 @@ $result2 = $mysqli->query($sql2);
 //   echo"<pre>"; 
 //  print_r($result); 
 //  print_r($result2); 
+//  echo $result1->num_row;
 //  return; 
-    
 
   // echo"<br><br>s ds <br>"; 
-if($result && $result2  )
+if($result && $result2 && $result->num_rows >0 && $result2->num_rows>0 )
 {
   $p_p_f_name = ($result->fetch_assoc())['folder_name'] ;
   $f_id_name =($result2->fetch_assoc())['folder_name']; 

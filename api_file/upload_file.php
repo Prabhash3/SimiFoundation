@@ -1,3 +1,5 @@
+<?php include "validate.php";  ?>
+
 <?php
 
 

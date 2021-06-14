@@ -1,6 +1,9 @@
+<?php include "validate.php";  ?>
+
 <?php
 
 // print_r($_REQUEST);
+
 
 
 // DELETE FROM `table` WHERE id IN (264, 265)
@@ -46,11 +49,14 @@ if ($req_type == "delete") {
     }
 
     $par_folder_id = trim( mysqli_real_escape_string($mysqli, ($_REQUEST['p_p_f_id'])));
-    $r_data =   (  json_decode( trim( mysqli_real_escape_string($mysqli, $_REQUEST['s_data']))));
-
+    $r_data =   (  json_decode( ( ( $_REQUEST['s_data']))));
+//  print_r(  $r_data);
+//     return; 
     $len = count($r_data);
     // $r_data = 10;  
     // echo "$len ";
+    
+   
     if (!is_array($r_data)  || !($par_folder_id)) {
         http_response_code(521);
         echo json_encode(array("status" => "error", "message" => "unacceptable data"));
@@ -74,7 +80,7 @@ if ($req_type == "delete") {
     $str_id = "(";
     for ($i = 0; $i < $len; $i++) {
 
-        $str_id .= "" . $r_data[$i]  . ($i < $len - 1 ? "," : "");
+        $str_id .= "" . (  mysqli_real_escape_string($mysqli, $r_data[$i])  )  . ($i < $len - 1 ? "," : "");
     }
     $str_id .= ")";
     // echo "strdat = $str_id";

@@ -1,3 +1,5 @@
+<?php include "./api_file/validate.php";  ?>
+
 <?php
 
 if (!isset($_REQUEST['f_id'])) {

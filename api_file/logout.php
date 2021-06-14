@@ -19,6 +19,6 @@
 //   return; 
 
 
-    header("Location:../admin/index.php");
+    header("Location:../../admin/index.php");
     // Redirecting To Home Page
 ?>

@@ -1,3 +1,5 @@
+<?php include "validate.php";  ?>
+
 <?php
 
 // print_r($_REQUEST);
@@ -94,6 +96,9 @@ if ($req_type == "creat_fold") {
           
 
             if(  mkdir("./../upload/$parent_folder/" . $folder_new_name)){
+                include "write_htaccess_to_folder.php"; 
+                write_htaccess_for_folder( "./../upload/$parent_folder/$folder_new_name/"); 
+
                 echo json_encode(array("status" => "ok", "message" => "Event Folder Created "));
             }
             else{
