@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Objective</title>
   <link rel="stylesheet" href="public/css/message.css">
-  <link rel="stylesheet" href="public/css/admin_gallery_first.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
+  <link rel="stylesheet" href="public/css/admin_gallery_first.css">
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
   <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
@@ -130,7 +130,7 @@
 
     // Check connection
     if ($mysqli->connect_errno) {
-      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+      echo "Failed to connect to database" ;
       exit();
     }
 
@@ -152,7 +152,7 @@
         // echo `dlfkjsdkl {$row['visi']} `; 
 
 
-        $curr_fold_no = $row['folder_id'];
+        $curr_fold_no = htmlentities($row['folder_id']);
         $visiblilty_html = $row['visi'] == "1" ?
           "<span title='Hide Folder' class='hide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"
           :
@@ -171,38 +171,14 @@
     <div id='folder-box-no-$curr_fold_no' class='new_folder'>
 <span  title='Open Folder' class='new_folder_img' id='f_img_no-$curr_fold_no'  ><i class='fa fa-folder fa-fw' id='f_img_c_no-$curr_fold_no'  ></i></span>
 
-<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >" . $row['folder_name'] . "</span>
+<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >" . (htmlentities($row['folder_name'])) . "</span>
 $visiblilty_html
 <span title='Change Image' class='edit-folder-img' id='f_edit_no-$curr_fold_no' > <i class='far fa-edit' id='f_edit_c_no-$curr_fold_no' ></i> </span>
 <span title='Delete Folder' class='delete-folder' id='f_name_no-$curr_fold_no' ><i class='fa fa-trash' aria-hidden='true' id='f_name_c_no-$curr_fold_no' ></i> </span>
 </div>
 ";
-        // echo $temp; 
-        //      echo '<br"; 
-        //  echo "yes it is "; 
-
       }
-
-    // echo"</pre>"; 
-    // echo "{$dkfj}"; 
-
     ?>
-
-
-
-    <!-- <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span> -->
-
-
-    <!-- <div class="new_folder">
-      <span class="new_folder_img"><i class="fa fa-folder fa-fw n"></i></span>
-
-      <span title="Edit Folder name " class="folder_name" id="first_fold" contenteditable="true">this is </span>
-     
-      <span title="Hide Folder" class="hide-folder"><i class="fas fa-eye"></i> </span>
-     <span title="Edit Image" class="edit-folder-img" id="test"> <i class="far fa-edit"></i> </span>
-      <span title="Delete Folder" class="delete-folder"><i class="fa fa-trash" aria-hidden="true"></i> </span>
-    </div> -->
-
 
 
 
@@ -225,7 +201,7 @@ $visiblilty_html
 
 
 
-
+-
 
   <div id="mess_box">
     <div id="mess_content" class=""> some message </div>
@@ -280,7 +256,7 @@ $visiblilty_html
   </script>
 
 
-  <script src="public/js/admin_gallery_first.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
+  <script src="public/js/admin_gallery_first.js"></script>
 </body>
 
 </html>

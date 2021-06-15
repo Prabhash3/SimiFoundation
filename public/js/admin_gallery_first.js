@@ -309,14 +309,17 @@ main_box.addEventListener("focusout", (e) => {
        
         is_create_folder= false; 
         send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_obj_folder.php", "post").then((data) => {
-            // console.log((data));
-            display_mess(JSON.parse(data),3000 )
+            console.log((data));
             if(type=="creat_fold"){
-                    window.location ="./admin_gallery_first.php"; 
+                window.location ="./admin_gallery_first.php"; 
+            }
+            else{ 
+                display_mess(JSON.parse(data),3000 )
+
             }
         }).catch(error => {
-            // console.log(error);
-            display_mess(JSON.parse(error),3000 )
+            console.log(error);
+            // display_mess(JSON.parse(error),3000 )
         });
 
 

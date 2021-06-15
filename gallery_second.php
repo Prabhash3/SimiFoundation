@@ -4,7 +4,7 @@ if (!isset($_REQUEST['f_id'])) {
   header("location:./gallery_first.php");
 }
 
-$f_id = trim($_REQUEST['f_id']);
+$f_id = htmlentities(($_REQUEST['f_id']));
 
 
 
@@ -14,7 +14,7 @@ $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
 
 // Check connection
 if ($mysqli->connect_errno) {
-  echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+  echo "Failed to connect to database " ;
   exit();
 }
 
@@ -126,7 +126,7 @@ if($result )
 
     // Check connection
     if ($mysqli->connect_errno) {
-      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+      echo "Failed to connect to database " ;
       exit();
     }
 
@@ -171,9 +171,9 @@ if($result )
         // echo `dlfkjsdkl {$row['visi']} `; 
 
 
-        $folder_id =  $row['folder_id'];
-        $folder_name = $row['folder_name'];
-        $img_path =    $row['img_path'] ? "./upload/" . $row['img_path'] : "./public/image/test2.jpg";
+        $folder_id =  htmlentities($row['folder_id']);
+        $folder_name = htmlentities($row['folder_name']);
+        $img_path =    $row['img_path'] ? "./upload/" . htmlentities($row['img_path']) : "./public/image/test2.jpg";
         $img_path = 'background-image:url("' . $img_path . '");';
         echo "<a href='gallery.php?f_id=$folder_id&p_f_id=$f_id'>";
         echo " <div class='img-box' id='img_box_id-$folder_id']>
@@ -187,22 +187,7 @@ if($result )
     } else if ($result) {
       echo "No Event Found";
     }
-    // echo"</pre>"; 
-    // echo "{$dkfj}"; 
-
-    // printf($result); 
-
-    // $folder_id =  $row['folder_id']; 
-    // $folder_name = $row['folder_name']; 
-    //   echo " <div class='img-box' id='img_box_id-$folder_id']>
-    //   <div class='img-body'  id='img_body_id-$folder_id'></div>
-    //   <div class='img-detail' id='img_detail_id-$folder_id'> 
-    //     <p class='img-title' contenteditable='true' >  $folder_name</p>
-    //      </div>
-    // </div>
-
-
-    //   "; 
+   
     ?>
 
 
@@ -217,10 +202,6 @@ if($result )
 
   </div>
 
-  <!-- <div id="drag_it" contenteditable="true"> enter your name </div> -->
-
-
-  <!-- <script src="script.js"></script> -->
 
   <script>
 

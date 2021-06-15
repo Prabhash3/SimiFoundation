@@ -6,7 +6,7 @@ if (!isset($_REQUEST['f_id'])) {
   header("location:./admin_gallery_first.php");
 }
 
-$f_id = trim($_REQUEST['f_id']);
+$f_id = htmlentities(($_REQUEST['f_id']));
 
 ?>
 
@@ -108,7 +108,7 @@ $f_id = trim($_REQUEST['f_id']);
 
     // Check connection
     if ($mysqli->connect_errno) {
-      echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+      echo "Failed to connect to MySQL: " ;
       exit();
     }
 
@@ -119,7 +119,7 @@ $f_id = trim($_REQUEST['f_id']);
     $curr_folder_name;
 
     if ($result && $result->num_rows > 0) {
-      $curr_folder_name = ($result->fetch_assoc())['folder_name'];
+      $curr_folder_name = htmlentities(($result->fetch_assoc())['folder_name']);
     } else {
       echo "something went wrong ";
       return;
@@ -141,7 +141,7 @@ $f_id = trim($_REQUEST['f_id']);
 
 
       <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-      <div class="second-icon home-icon"><?php echo  $curr_folder_name; ?> </div>
+      <div class="second-icon home-icon"><?php echo  htmlentities($curr_folder_name); ?> </div>
 
 
 
@@ -192,11 +192,11 @@ $f_id = trim($_REQUEST['f_id']);
         // echo `dlfkjsdkl {$row['visi']} `; 
 
 
-        $curr_fold_no = $row['folder_id'];
-        $visiblilty_html = $row['visi'] == "1" ?
+        $curr_fold_no = htmlentities($row['folder_id']);
+        $visiblilty_html = ($row['visi'] == "1" ?
           "<span title='Hide Folder' class='hide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye' id='folder_vis_c_no-$curr_fold_no' ></i> </span>"
           :
-          "<span title='Unhide Folder' class='unhide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye-slash' id='folder_vis_c_no-$curr_fold_no' ></i> </span>";
+          "<span title='Unhide Folder' class='unhide-folder' id='f_vis_no-$curr_fold_no'  ><i class='fas fa-eye-slash' id='folder_vis_c_no-$curr_fold_no' ></i> </span>");
 
         // echo "<script>console.log(`$visiblilty_html`);</script> "; 
         // <span title="Unhide Folder" class="unhide-folder"><i class="fas fa-eye-slash"></i> </span>
@@ -211,7 +211,7 @@ $f_id = trim($_REQUEST['f_id']);
     <div id='folder-box-no-$curr_fold_no' class='new_folder'>
 <span  title='Open Folder' class='new_folder_img' id='f_img_no-$curr_fold_no'  ><i class='fa fa-folder fa-fw' id='f_img_c_no-$curr_fold_no'  ></i></span>
 
-<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >" . $row['folder_name'] . "</span>
+<span title='Edit Objective name ' class='folder_name'  contenteditable='true' id='folder_name_no-$curr_fold_no' >" . htmlentities($row['folder_name']) . "</span>
 $visiblilty_html
 <span title='Change Image' class='edit-folder-img' id='f_edit_no-$curr_fold_no' > <i class='far fa-edit' id='f_edit_c_no-$curr_fold_no' ></i> </span>
 <span title='Delete Folder' class='delete-folder' id='f_name_no-$curr_fold_no' ><i class='fa fa-trash' aria-hidden='true' id='f_name_c_no-$curr_fold_no' ></i> </span>
@@ -261,11 +261,24 @@ $visiblilty_html
     <div id="mess_content" class="">  </div>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!-- mess-success -->
   <script>
 
     var mess_time_id;
-    mess_box.className = "show";
+    // mess_box.className = "show";
     var mess_content = document.getElementById("mess_content");
 
     function display_mess(data, time = 3000) {

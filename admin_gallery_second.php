@@ -4,8 +4,8 @@ if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
   header("location:./admin_gallery_first_b.php"); 
 }
 
-$f_id = trim($_REQUEST['f_id']);
-$p_p_f_id = trim($_REQUEST['p_f_id']);
+$f_id = htmlentities(($_REQUEST['f_id']));
+$p_p_f_id = htmlentities(($_REQUEST['p_f_id']));
 $p_p_f_name ;
 $f_id_name; 
 
@@ -36,8 +36,8 @@ $result2 = $mysqli->query($sql2);
   // echo"<br><br>s ds <br>"; 
 if($result && $result2 && $result->num_rows >0 && $result2->num_rows>0 )
 {
-  $p_p_f_name = ($result->fetch_assoc())['folder_name'] ;
-  $f_id_name =($result2->fetch_assoc())['folder_name']; 
+  $p_p_f_name =htmlentities( ($result->fetch_assoc())['folder_name'] );
+  $f_id_name =htmlentities(($result2->fetch_assoc())['folder_name']); 
 }
 else{
   echo "not albe to fetch"; 
@@ -55,8 +55,10 @@ else{
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events</title>
-  <link rel="stylesheet" href="public/css/style.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
-  <link rel="stylesheet" href="public/css/admin_gallery_second.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>"  >
+  <link rel="stylesheet" href="public/css/style.css">
+  <link rel="stylesheet" href="public/css/message.css">
+
+  <link rel="stylesheet" href="public/css/admin_gallery_second.css"  >
   <!-- <link rel="stylesheet" href="public/css/admin_gallery_first.css"> -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -167,12 +169,12 @@ else{
         
     
       <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-      <div class="second-icon home-icon"> <?php echo $p_p_f_name ; ?>
+      <div class="second-icon home-icon"> <?php echo ($p_p_f_name ); ?>
  </div>
         
        
       <div class="slash"><i class="fa fa-caret-right" style="font-size:14px;"></i></div>
-      <div class="second-icon home-icon"> <?php echo $f_id_name; ?></div>
+      <div class="second-icon home-icon"> <?php echo ($f_id_name); ?></div>
 
 
     </div>
@@ -285,20 +287,6 @@ else{
 
   <div class="main-box" id="main_box">
 
-
-<!-- 
-  <div class="img-box" id="">
-  <input type="checkbox" class="img-select-box" name="" id="">
-  <div class="img-body"></div>
-  
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true" > this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div> -->
-
-
-
   <?php
    
   
@@ -324,10 +312,10 @@ else{
     //  echo"</pre>"; 
 
     // $img_path =  "background-image:url('./upload/". $row['img_path'] ."');";
-    $img_path =  'background-image:url("'.'./upload/'.$row['img_path'].'");';
-    $img_id = $row['img_id'];
-    $img_title = $row['img_title'] && strlen($row['img_title'])>0?  $row['img_title'] : "Title here..."; 
-    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0?  $row['img_dicp'] : "Write Image Description here....";
+    $img_path =  'background-image:url("'.'./upload/'.(htmlentities($row['img_path'])).'");';
+    $img_id = htmlentities($row['img_id']);
+    $img_title = htmlentities($row['img_title'] && strlen($row['img_title'])>0?  $row['img_title'] : "Title here..."); 
+    $img_dicp = htmlentities($row['img_dicp'] && strlen($row['img_dicp'])>0?  $row['img_dicp'] : "Write Image Description here....");
     // echo "$img_path"; 
      echo "<div class='img-box' id='img_box_id-$img_id' >
      <input type='checkbox' class='img-select-box' name='' id='img_c_b_id-$img_id'>
@@ -338,50 +326,13 @@ else{
      </div>
    </div>";
      
-    //  (
-    //   [folder_id] => f79d76
-    //   [folder_name] => Objective Title
-    //   [folder_new_name] => dc7905e583f7fdbfec92
-    //   [visi] => 1
-    // echo `dlfkjsdkl {$row['visi']} `; 
-  
+
 
   }
-
-  // echo"</pre>"; 
-  // echo "{$dkfj}"; 
 
 ?>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--   
-<div class="img-box">
-  <div class="img-body" ></div>
-  <div class="img-detail"> 
-    <p class="img-title" contenteditable="true"  id="thisisid"> this is title</p>
-    <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsa.</p>
-  </div>
-</div>
- -->
-
-
-
-
 
 
 
@@ -432,7 +383,7 @@ else{
 //  console.log(p_f_id); 
 //  console.log(p_p_f_id); 
 </script>
-  <script src="public/js/admin_gallery_second.js?<?php  echo date('l jS \of F Y h:i:s A'); ?>"></script>
+  <script src="public/js/admin_gallery_second.js"></script>
 </body>
 
 </html>

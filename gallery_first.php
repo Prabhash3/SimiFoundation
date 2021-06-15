@@ -8,7 +8,7 @@
     <title>Gallery</title>
     <link rel="shortcut icon" type="image/x-icon" href="public\image\simmilogo.png">
     <link rel="stylesheet" href="public/css/style.css">
-    <link rel="stylesheet" href="public/css/gallery_first.css?<?php  echo date('l jS \of F Y h:i:s A'); ?>">
+    <link rel="stylesheet" href="public/css/gallery_first.css">
 </head>
    
 <style>
@@ -65,7 +65,7 @@
    
    // Check connection
    if ($mysqli->connect_errno) {
-       echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+       echo "Failed to connect to database" ;
        exit();
    }
    
@@ -88,9 +88,9 @@
     // echo `dlfkjsdkl {$row['visi']} `; 
  
 
-    $folder_id =  $row['folder_id']; 
-  $folder_name = $row['folder_name']; 
-  $img_path=    $row['img_path'] ? "./upload/".$row['img_path']: "./public/image/test2.jpg";
+    $folder_id =  htmlentities($row['folder_id']); 
+  $folder_name = (htmlentities($row['folder_name'])); 
+  $img_path=    $row['img_path'] ? "./upload/".(htmlentities($row['img_path'])): "./public/image/test2.jpg";
   $img_path = 'background-image:url("'.$img_path.'");';
     echo "<a href='gallery_second.php?f_id=$folder_id' title=' $folder_name'>"; 
     echo " <div class='img-box' id='img_box_id-$folder_id']>
@@ -103,21 +103,7 @@
 
   }
 
-  // echo"</pre>"; 
-  // echo "{$dkfj}"; 
 
-
-  // $folder_id =  $row['folder_id']; 
-  // $folder_name = $row['folder_name']; 
-  //   echo " <div class='img-box' id='img_box_id-$folder_id']>
-  //   <div class='img-body'  id='img_body_id-$folder_id'></div>
-  //   <div class='img-detail' id='img_detail_id-$folder_id'> 
-  //     <p class='img-title' contenteditable='true' >  $folder_name</p>
-  //      </div>
-  // </div>
-    
-    
-  //   "; 
 ?>
 
 

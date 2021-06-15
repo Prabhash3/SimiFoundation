@@ -129,10 +129,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
         return; 
     }
 
-    // $file_ext = pathinfo("mohan.txt"); 
 
-//  file_ex
-    // echo "fle exten $file_ext"; 
   
         while (true) {
         $file_new_name = bin2hex(random_bytes('5'));
@@ -141,13 +138,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
         // echo"inside"; 
     
         $result = $mysqli->query($sql);
-        // echo"$sql"; 
-     
-//         echo"result-"; 
-//         print_r($result); 
-//         echo "-result"; 
-//    return ;
-        // basename(':\xampp\xampp\tmp\phpB2F9.tmp'); 
+
         if (!(isset($result)) || $result->num_rows =="0" ) {
             $file_new_name  = "$p_f_id-$file_new_name"; 
             break;
@@ -158,11 +149,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
     $result = $mysqli->query($sql);
     
 
-    // echo "$sql<br>"; 
-    //  echo "result-";
-    //  print_r($result);
-    //  echo "-result";
-    //  return; 
+
   if($result){
 
     if( move_uploaded_file($_FILES['upload_file']['tmp_name'], "./../upload/" .$file_new_name.".".$file_ext) ){

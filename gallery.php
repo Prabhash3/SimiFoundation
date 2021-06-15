@@ -10,8 +10,8 @@ if(!isset($_REQUEST['f_id']) || !isset($_REQUEST['p_f_id'])){
    header("location:./gallery_first.php"); 
 }
 
-$f_id = trim($_REQUEST['f_id']);
-$p_p_f_id = trim($_REQUEST['p_f_id']);
+$f_id = htmlentities(($_REQUEST['f_id']));
+$p_p_f_id = htmlentities(($_REQUEST['p_f_id']));
 $p_p_f_name ;
 $f_id_name; 
 
@@ -21,7 +21,7 @@ $mysqli = new mysqli($_hostname, $_user, $_password, $_db_name);
 
 // Check connection
 if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+    echo "Failed to connect to database " ;
     exit();
 }
 
@@ -56,8 +56,8 @@ if($result && $result2  )
  }
 
 
-  $p_p_f_name = $first_res['folder_name'] ;
-  $f_id_name = $second_res['folder_name']; 
+  $p_p_f_name = htmlentities($first_res['folder_name'] );
+  $f_id_name = htmlentities($second_res['folder_name']); 
 }
 else{
   echo "not albe to fetch"; 
@@ -84,7 +84,7 @@ else{
 
   <title>Gallery</title>
 
-  <link rel="stylesheet" href="public/css/style.css?<?php echo date('l jS \of F Y h:i:s A'); ?>">
+  <link rel="stylesheet" href="public/css/style.css">
 </head>
 
 
@@ -320,10 +320,10 @@ color: #040404;
     //  echo"</pre>"; 
 
     // $img_path =  "background-image:url('./upload/". $row['img_path'] ."');";
-    $img_path =  'background-image:url("'.'./upload/'.$row['img_path'].'");';
-    $img_id = $row['img_id'];
-    $img_title = $row['img_title'] && strlen($row['img_title'])>0?  $row['img_title'] : "Title here..."; 
-    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0?  $row['img_dicp'] : "Write Image Description here....";
+    $img_path =  'background-image:url("'.'./upload/'.htmlentities($row['img_path']).'");';
+    $img_id = htmlentities($row['img_id']);
+    $img_title = $row['img_title'] && strlen($row['img_title'])>0?  htmlentities($row['img_title']) : "Title here..."; 
+    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0? htmlentities( $row['img_dicp']) : "Write Image Description here....";
     // echo "$img_path"; 
      echo "<div class='img-box' id='img_box_id-$img_id' >
     
@@ -353,20 +353,6 @@ color: #040404;
 
 
 
-
-    <!-- <div class="obj-name"> Object 1 </div>
-    <hr class="obj-hr">
-
-
-
-    <div class="img-box">
-      <div class="img-body"></div>
-      <div class="img-detail">
-        <p class="img-title" contenteditable="true" id="thisisid"> this is title</p>
-        <p class="img-desc" contenteditable="true"> this Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Repudiandae, ipsa.</p>
-      </div>
-    </div> -->
 
 
     

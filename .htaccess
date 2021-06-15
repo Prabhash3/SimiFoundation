@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteRule ^/?$  gallery_first.php [L,NC]
+ErrorDocument 404  " <p style='text-align:center;padding-top:30px; font-size:30px; ' >Sorry, Page not found.  <a href='\'  > Go  Home </a></p>"
