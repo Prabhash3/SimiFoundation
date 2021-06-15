@@ -15,30 +15,11 @@ var display_up_img_name = document.getElementById("display_up_img_name");
 var upload_img_but = document.getElementById("upload_img_but"); 
 var prog_bar = document.getElementById("prog_bar"); 
 var modal_out_box = document.getElementById("modal_out_box"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
 
-//to check if the folder is new or already created folder 
 var is_create_folder=false; 
 
 
 
-
-var test = document.getElementById("test"); 
-    test.addEventListener("click",    (e)=>{
-        
-        // console.log("Df");
-        //   console.log(e.target.className)
-    }); 
 
 
 function send_ajax(param, url, method = "post", set_header = true) {
@@ -72,24 +53,6 @@ function send_ajax(param, url, method = "post", set_header = true) {
     });
 
 }
-
-// send_ajax("name=mohan&age=33","./create_folder.php?name=get&age=33","post").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-
-// send_ajax("2","https://jsonplaceholder.typicode.com/posts/2","get").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-// fetch('https://jsonplaceholder.typicode.com/posts')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-
 
 
 //stackoverflow function  to select  text of souce id
@@ -129,11 +92,7 @@ add_folder.addEventListener("click", () => {
     let temp = document.createElement("div");
     temp.className = "new_folder";
     temp.id = "folder-box-no-" + (curr_fold_no );
-//     temp.innerHTML = `
-//       <img class="new_folder_img" id=${"folder_img_no-" + (curr_fold_no + 1)}  src="public\\image\\new_folder.png" alt="new_folder_img" draggable="false">
-//       <i class="fa fa-folder fa-fw"  style="color:rgb(37, 196, 37)"></i>
-//       <div class="folder_name" id=${"folder_name_no-" + (curr_fold_no + 1)} contenteditable="">New folder</div>
-//    `;
+
 
 temp.innerHTML=` 
 <span  title="Open Folder" class="new_folder_img" id=${"f_img_no-" + (curr_fold_no )} ><i class="fa fa-folder fa-fw" id=${"f_img_c_no-" + (curr_fold_no )} ></i></span>
@@ -145,7 +104,7 @@ temp.innerHTML=`
 
 `;
 
-console.log(temp.childElementCount); 
+// console.log(temp.childElementCount); 
     main_box.appendChild(temp);
     selectElementText(main_box.lastElementChild.children[1]);
    
@@ -180,7 +139,7 @@ upload_img_but.addEventListener("click", (e) => {
      else if(upload_file_data[0].size>=40000000 ){
 
         //to samll 
-        console.log("too big  ");  
+        // console.log("too big  ");  
         display_mess("too big file to upload  ",3000 ); 
         is_error = true;  
       
@@ -210,7 +169,7 @@ upload_img_but.addEventListener("click", (e) => {
         
         
             let frac = e.loaded / e.total;
-            console.log(e.loaded);
+            // console.log(e.loaded);
 
             prog_bar.firstElementChild.style.width = Math.round(frac * 100) + "%"; 
 
@@ -222,16 +181,7 @@ upload_img_but.addEventListener("click", (e) => {
             display_mess(JSON.parse(this.response),3000 )
             // console.log("resrpn->", this.response);
             let res_data;
-            // let res_data = JSON.parse(this.response);
-            // console.log("resrpn->",res_data );
-            
-            // if (res_data.status == "ok") {
-            
-            // }
-            // else {
-            //       console.log(res_data.error);
-            // }
-
+   
             upload_img_but.innerHTML ="Upload"; 
             prog_bar.firstElementChild.style.width =  "0%"; 
             prog_bar.style.display="none"; 
@@ -254,9 +204,9 @@ input_file.addEventListener("change", (e) => {
        
     // }
     upload_file_data = e.target.files; 
-    console.log(upload_file_data); 
+    // console.log(upload_file_data); 
    if(!(upload_file_data) || upload_file_data.length<1){
-      console.log("file not found");    
+    //   console.log("file not found");    
       display_up_img.src = default_img_path; 
       display_up_img_name.textContent ="No File Selected" ; 
     return; 
@@ -278,8 +228,8 @@ modal_out_box.addEventListener("click", (e) => {
 
 
 main_box.addEventListener("focusout", (e) => {
-   console.log("kdfj"); 
-    console.log(e.target.className); 
+//    console.log("kdfj"); 
+//     console.log(e.target.className); 
     if (e.target.className == "folder_name") {
        
 
@@ -300,7 +250,7 @@ main_box.addEventListener("focusout", (e) => {
         f_name = f_name.replace(/[!@#$%^&*]/g,"-") ;
         temp_f_id = f_name; 
         f_name = f_name.replace(/\"/g,"\'") ;
-        f_name = f_name.replace(/\'/g,"\\'") ;
+        // f_name = f_name.replace(/\'/g,"\\'") ;
 
         f_name= f_name.trim(); 
         // f_name = encodeURIComponent(f_name); 
@@ -309,7 +259,7 @@ main_box.addEventListener("focusout", (e) => {
        
         is_create_folder= false; 
         send_ajax("req_type="+type+ "&f_name="+f_name+"&f_temp_id=" + f_temp_id +"&f_id_name=" + f_id_name , "./api_file/create_obj_folder.php", "post").then((data) => {
-            console.log((data));
+            // console.log((data));
             if(type=="creat_fold"){
                 window.location ="./admin_gallery_first.php"; 
             }
@@ -318,28 +268,18 @@ main_box.addEventListener("focusout", (e) => {
 
             }
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
             // display_mess(JSON.parse(error),3000 )
         });
 
 
     }
-    console.log(e.target.innerHTML);
+    // console.log(e.target.innerHTML);
 
 });
 
 
 
-// main_box.addEventListener("dblclick", (e) => {
-//     if (e.target.className == "new_folder_img" || e.target.className ==  "fa fa-folder fa-fw") {
-       
-//      window.location="./admin_gallery_second.html?f_id=" + ( e.target.id.split("-")[1])
-
-
-//     }
-//     // console.log(e.target.id.split("-"));
-
-// });
 
 
 main_box.addEventListener("click", (e) => {
@@ -352,20 +292,19 @@ main_box.addEventListener("click", (e) => {
 
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
-    //   console.log( " id = " + folder_id ); 
-    //   console.log( " class = '" + class_name+ "'" ); 
+
     }else{
-        console.log("no id found ");  
+        // console.log("no id found ");  
         return; 
     }
-    // console.log(( "tilte " + ));
+ 
     if (  class_name == "new_folder_img" ||  class_name == "fa fa-folder fa-fw") {
-    //this is folder image 
+
          window.location="./admin_gallery_first_b.php?f_id=" + ( folder_id); 
     }
     else  if (  class_name == "hide-folder" ||  class_name == "fas fa-eye") {
         //this is   hide-folder
-        console.log("->  hide-folder"); 
+        // console.log("->  hide-folder"); 
         send_ajax("req_type=hide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
             // console.log((data));
             display_mess(JSON.parse(data),3000 )
@@ -386,10 +325,10 @@ main_box.addEventListener("click", (e) => {
        
     }
     else  if (  class_name == "unhide-folder" ||  class_name == "fas fa-eye-slash") {
-            //this is   unhide-folder
-            console.log("->  Unhide-folder"); 
+
+            // console.log("->  Unhide-folder"); 
             send_ajax("req_type=unhide&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
-                console.log((data));
+                // console.log((data));
                 display_mess(JSON.parse(data),3000 )
                 let temp_elem = document.getElementById("f_vis_no-" + folder_id); 
                 if(temp_elem){
@@ -407,35 +346,17 @@ main_box.addEventListener("click", (e) => {
        
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
-        //this is edit folder 
-        // console.log("->  edit-foldsser"); 
-        // send_ajax("req_type=edit&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
-        //     console.log((data));
-        // }).catch(error => {
-        //     console.log(error);
-        // });
+
         img_close_modal_but.setAttribute("f_id",folder_id); 
-        // console.log(img_close_modal_but.getAttribute("f_id") ); 
-     
-        // console.log(img_close_modal_but.className); 
+
         img_close_modal_but.click(); 
         
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {
-         //this is delete folder 
-        //  console.log("->  delete-folder"); 
+
     }
 
-    // console.log(e.target.id.split("-"));
-    console.log(e.target.id);
+    // console.log(e.target.id);
 
 
 });
-
-// main_box.addEventListener("focusin", (e)=>{
-//     if(e.target.className=="folder_name"){
-
-//     }
-//     console.log(e.target.className + "foucs in "); 
-
-// }); 

@@ -15,6 +15,7 @@
       .rolling-text{
         text-align: middle;
         padding-top: 6px;
+        background-color: white;
       }
 
       nav ul li:hover a{
@@ -28,10 +29,11 @@
   </head>
   <body>
 
+<div class="fixed-top" style="height: 10px!important;">
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark shift">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shift" >
     <a class="navbar-brand px-3" href="#">
-      <img src="public\image\simmilogo.png" alt="" width="35" height="35" class="d-inline-block align-top">
+      <img src="../home/images/logo.png" alt="" width="35" height="35" class="d-inline-block align-top">
        &ensp;  SIMMI FOUNDATION
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,28 +42,31 @@
     <div class="collapse navbar-collapse text-center " id="navbarNav">
       <ul class="navbar-nav ms-auto ">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="../">Home</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">About</a>
+          <a class="nav-link" href="../about.php">About</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Donate</a>
+          <a class="nav-link" href="../donate.php">Donate</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Blog</a>
+          <a class="nav-link" href="../blogs/">Blog</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link active" href="#">Gallery</a>
+          <a class="nav-link" href="../gallery/">Gallery</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Volunteer</a>
+          <a class="nav-link" href="../volunteer.php">Volunteer</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Events</a>
+          <a class="nav-link" href="../event.php">Events</a>
         </li>
         <li class="nav-item px-3">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" href="../career/">Careers</a>
+        </li>
+        <li class="nav-item px-3">
+          <a class="nav-link" href="../contact.php">Contact</a>
         </li>
       </ul>
     </div>
@@ -71,6 +76,7 @@
   Smart India Multi Management Institute! &ensp;  स्मार्ट इंडिया बहुद्देश्यीय प्रबन्धन संस्थान! &ensp; Registration number : 085953/2020  &ensp; Niti Aayog (Govt. Of India ) Unique Id : HR/2020/0258148
 </marquee> -->
 
+</div>
 
   </body>
 </html>

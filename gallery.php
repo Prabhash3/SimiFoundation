@@ -195,6 +195,16 @@ color: #040404;
    user-select: none;           /* Non-prefixed version*/
 }
 
+.hd-an-tag{ 
+  color:white; 
+}
+.hd-an-tag:hover{ 
+  text-decoration: none;
+  color:white; 
+  
+}
+
+
 </style>
 
 <body>
@@ -217,12 +227,13 @@ color: #040404;
   </div> -->
 
   <div class="header" style="background-color:#212529!important; height:45px;text-align:left;">
-  <a class="" href="https://simmifoundation.org "  style="position:absolute;left:33px;">
+  <a class="hd-an-tag" href="https://simmifoundation.org "  style="position:absolute;left:33px;">
       <img src="public\image\simmilogo.png" alt=""  height="35" class="">
        &ensp;  SIMMI FOUNDATION
     </a>
-  </div>
- 
+
+     </div>
+  
   <br>
 
   <div class="container" style="padding:0px;margin:0px;">

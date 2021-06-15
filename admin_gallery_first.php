@@ -218,7 +218,7 @@ $visiblilty_html
 // alert("this 0")
 
     back_button_img.addEventListener("click",()=>{ 
-      console.log("click" );
+      // console.log("click" );
       window.location="../admin//main/index.php"
      }); 
 

@@ -16,20 +16,7 @@ if ($mysqli->connect_errno) {
     exit();
 }
 
-//check and create table if  'folder table' not exist 
-// $sql = "SHOW TABLES LIKE 'folder_table'; ";
 
-// $result = $mysqli->query($sql);
-// $row = $result->fetch_assoc();
-// if ($result->num_rows == 0) {
-//     $sql = "CREATE TABLE folder_table(folder_id INT ,folder_name VARCHAR(150), folder_new_name VARCHAR(150) ); ";
-//     $result = $mysqli->query($sql);
-
-
-//     //  echo"created table";
-
-// }
-// print_r($_REQUEST); 
 if (!isset($_REQUEST['f_id']) || !isset($_REQUEST['req_type']) ) {
     // echo "missing data";
     echo json_encode(array("status" => "error", "message" => "missing data"));
@@ -48,12 +35,7 @@ if( $req_type=="hide"){
 
         echo json_encode(array("status" => "ok", "message" => "Folder is Now Hidden"));
     }
-    // echo $sql  ; 
-    //  echo"result-"; 
-    //     print_r($result); 
-    //     echo "-result";
-    // echo $mysqli->error;
-    // echo "updated fodler"; 
+
 }
 else if( $req_type=="unhide"){
     $sql = "UPDATE folder_table SET visi=1 WHERE folder_id='$folder_id' ; ";
@@ -137,14 +119,9 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
         $file_new_name = bin2hex(random_bytes('5'));
         // $folder_id  = bin2hex(random_bytes('3'));
         $sql = "SELECT * FROM folder_table WHERE img_path='$file_new_name.$file_ext'";
-        // echo"inside"; 
-        // echo"$sql"; 
-        // return ;
+
         $result = $mysqli->query($sql);
-        // echo"result-"; 
-        // print_r($result); 
-        // echo "-result"; 
-        // basename(':\xampp\xampp\tmp\phpB2F9.tmp'); 
+
         if (!(isset($result)) || $result->num_rows =="0" ) {
             $file_new_name  = "obj-$file_new_name"; 
             break;
@@ -155,11 +132,6 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
     $result = $mysqli->query($sql);
     
 
-    // echo "$sql<br>"; 
-    //  echo "result-";
-    //  print_r($result);
-    //  echo "-result";
-     
   if($result){
 
     if( move_uploaded_file($_FILES['upload_file']['tmp_name'], "./../upload/" .$file_new_name.".".$file_ext) ){
@@ -171,8 +143,7 @@ if(isset($_FILES['upload_file'] ) &&  $_FILES['upload_file']['size']>0 &&$_FILES
     }
   }
 
-    
-    
+
 
 }
 }

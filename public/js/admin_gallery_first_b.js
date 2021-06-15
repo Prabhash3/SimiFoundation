@@ -16,16 +16,7 @@ var upload_img_but = document.getElementById("upload_img_but");
 var prog_bar = document.getElementById("prog_bar"); 
 var modal_out_box = document.getElementById("modal_out_box"); 
 var back_button_img = document.getElementById("back_button_img"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
-// var add_folder = document.getElementById("add_folder"); 
+
 
 //to check if the folder is new or already created folder 
 var is_create_folder=false; 
@@ -33,12 +24,11 @@ var is_create_folder=false;
 
 
 
-var test = document.getElementById("test"); 
-    test.addEventListener("click",    (e)=>{
+// var test = document.getElementById("test"); 
+//     test.addEventListener("click",    (e)=>{
         
-        // console.log("Df");
-        //   console.log(e.target.className)
-    }); 
+
+//     }); 
 
 
 function send_ajax(param, url, method = "post", set_header = true) {
@@ -56,8 +46,7 @@ function send_ajax(param, url, method = "post", set_header = true) {
             // console.log(xhttp.readyState);
 
             if (xhttp.readyState == 4) {
-                // console.log(xhttp.responseText);
-                // console.log("founded"); 
+ 
                 if (xhttp.status >= 200 && xhttp.status < 300) {
 
                     resolve(xhttp.response);
@@ -72,23 +61,6 @@ function send_ajax(param, url, method = "post", set_header = true) {
     });
 
 }
-
-// send_ajax("name=mohan&age=33","./create_folder.php?name=get&age=33","post").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-
-// send_ajax("2","https://jsonplaceholder.typicode.com/posts/2","get").then((data)=>{
-//     console.log((data));
-// }).catch(error=>{
-//     console.log(error); 
-// })
-
-// fetch('https://jsonplaceholder.typicode.com/posts')
-//   .then(response => response.json())
-//   .then(data => console.log(data));
 
 
 
@@ -134,11 +106,6 @@ add_folder.addEventListener("click", () => {
     let temp = document.createElement("div");
     temp.className = "new_folder";
     temp.id = "folder-box-no-" + (curr_fold_no );
-//     temp.innerHTML = `
-//       <img class="new_folder_img" id=${"folder_img_no-" + (curr_fold_no + 1)}  src="public\\image\\new_folder.png" alt="new_folder_img" draggable="false">
-//       <i class="fa fa-folder fa-fw"  style="color:rgb(37, 196, 37)"></i>
-//       <div class="folder_name" id=${"folder_name_no-" + (curr_fold_no + 1)} contenteditable="">New folder</div>
-//    `;
 
 temp.innerHTML=` 
 <span  title="Open Folder" class="new_folder_img" id=${"f_img_no-" + (curr_fold_no )} ><i class="fa fa-folder fa-fw" id=${"f_img_c_no-" + (curr_fold_no )} ></i></span>
@@ -150,20 +117,18 @@ temp.innerHTML=`
 
 `;
 
-console.log(temp.childElementCount); 
+// console.log(temp.childElementCount); 
     main_box.appendChild(temp);
     selectElementText(main_box.lastElementChild.children[1]);
    
     window.scrollTo(0,document.body.scrollHeight);
-    // main_box.lastElementChild.lastElementChild.focus();
 
-    // main_box.lastElementChild.lastElementChild
 }); 
  
 upload_img_but.addEventListener("click", (e) => {
     
 
-   console.log(e.target.innerHTML); 
+//    console.log(e.target.innerHTML); 
      
 
      let is_error= false; 
@@ -225,25 +190,9 @@ upload_img_but.addEventListener("click", (e) => {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 ) {
 
-        //  if( this.status >= 200 && this.status < 300) { 
 
-        //  }
-        //  else { 
-             
-        //  }
-        //  console.log("resrpn->", this.response);
          display_mess( JSON.parse( this.response),2000 ); 
 
-            // let res_data;
-            // let res_data = JSON.parse(this.response);
-            // console.log("resrpn->",res_data );
-            
-            // if (res_data.status == "ok") {
-            
-            // }
-            // else {
-            //       console.log(res_data.error);
-            // }
 
             upload_img_but.innerHTML ="Upload"; 
             prog_bar.firstElementChild.style.width =  "0%"; 
@@ -314,9 +263,10 @@ main_box.addEventListener("focusout", (e) => {
         f_name = f_name.replace(/[!@#$%^&*]/g,"-") ;
         temp_f_id = f_name; 
         f_name = f_name.replace(/\"/g,"\'") ;
-        f_name = f_name.replace(/\'/g,"\\'") ;
+        // f_name = f_name.replace(/\'/g,"\\'") ;
 
         f_name= f_name.trim(); 
+        f_name = f_name.replace(/\"/g,"\'") ;
         // f_name = encodeURIComponent(f_name); 
         e.target.innerHTML=f_name; 
         // console.log("after repl = ",f_name)
@@ -354,8 +304,7 @@ main_box.addEventListener("click", (e) => {
 
     if(e.target.id ){
       folder_id =  e.target.id.split("-")[1]; 
-    //   console.log( " id = " + folder_id ); 
-    //   console.log( " class = '" + class_name+ "'" ); 
+
     }else{
         // console.log("no id found "); 
         display_mess( "no id found ",2000 );  
@@ -411,35 +360,17 @@ main_box.addEventListener("click", (e) => {
        
     }
     else  if (  class_name == "edit-folder-img" ||  class_name == "far fa-edit") {
-        //this is edit folder 
-        // console.log("->  edit-foldsser"); 
-        // send_ajax("req_type=edit&f_name="+f_name+"&f_id=" + folder_id, url, "post").then((data) => {
-        //     console.log((data));
-        // }).catch(error => {
-        //     console.log(error);
-        // });
+
         img_close_modal_but.setAttribute("f_id",folder_id); 
-        // console.log(img_close_modal_but.getAttribute("f_id") ); 
-     
-        // console.log(img_close_modal_but.className); 
+
         img_close_modal_but.click(); 
         
      }
     else  if (  class_name == "delete-folder" ||  class_name == "fa fa-trash") {
-         //this is delete folder 
-        //  console.log("->  delete-folder"); 
+
     }
 
-    // console.log(e.target.id.split("-"));
-    // console.log(e.target.id);
 
 
 });
 
-// main_box.addEventListener("focusin", (e)=>{
-//     if(e.target.className=="folder_name"){
-
-//     }
-//     console.log(e.target.className + "foucs in "); 
-
-// }); 

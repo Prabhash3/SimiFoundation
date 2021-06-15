@@ -3,13 +3,6 @@
 <?php
 
 
-// echo" start "; 
-// http_response_code(500);
-// $age = array("Peter"=>35, "Ben"=>37, "Joe"=>43);
-
-// print_r( $_FILES); 
-// print_r( $_GET); 
-// print_r( $_REQUEST); 
 
 
 include("conn_detail.php");
@@ -37,9 +30,8 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
   //get objective folder 
   $sql = "SELECT folder_new_name FROM folder_table_no_$p_p_f_id WHERE folder_id='$p_f_id'";
   $result = $mysqli->query($sql);
-  //  echo"result-"; 
-  //  print_r($result); 
-  //  echo "-result"; 
+  
+  
 
   $sql2 = "SELECT folder_new_name FROM folder_table WHERE folder_id='$p_p_f_id'";
   $result2 = $mysqli->query($sql2);
@@ -77,13 +69,8 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
         // echo"inside"; 
 
         $result = $mysqli->query($sql);
-        // echo"$sql"; 
-        //  echo "\n $mysqli->connect_error";
-        //         echo"result-"; 
-        //         print_r($result); 
-        //         echo "-result"; 
-          //  return ;
-        // basename(':\xampp\xampp\tmp\phpB2F9.tmp'); 
+
+        
         if (  $result=="" || $result->num_rows == "0") {
           $file_new_name  = $file_new_name . "." . $file_ext;
           // echo "breaing ";
@@ -114,11 +101,8 @@ if (isset($_REQUEST["p_f_id"])   && isset($_REQUEST["p_p_f_id"])   && isset($_FI
           echo json_encode(array("status" => "error", "message" => "Not able to Upload Image"));
         }
       }else{
-        // echo"$sql"; 
-        //  echo "\n $mysqli->error_get_last";
-                // echo"result-"; 
-                // print_r($result); 
-                // echo "-result"; 
+
+        
            return ;
       }
 

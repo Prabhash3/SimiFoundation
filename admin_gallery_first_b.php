@@ -308,7 +308,7 @@ $visiblilty_html
   <script>
     var p_f_id = <?php echo "'$f_id'"; ?>;
 
-    console.log(p_f_id);
+    // console.log(p_f_id);
   </script>
   <script src="public/js/admin_gallery_first_b.js?<?php echo date('l jS \of F Y h:i:s A'); ?>"></script>
 

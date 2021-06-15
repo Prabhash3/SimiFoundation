@@ -48,17 +48,9 @@ if ($req_type == "creat_fold") {
     $result = $mysqli->query($sql);
    
 
-    // echo "\n$sql \n"; 
-    //   echo"result-"; 
-    //     print_r($result->fetch_assoc()); 
-    //     echo "-result"; 
-    //    echo $mysqli->connect_errno; 
 
 
        $parent_folder = ($result->fetch_assoc())['folder_new_name']; 
-
-    //    echo "->".$parent_folder; 
-
 
 
 
@@ -69,9 +61,7 @@ if ($req_type == "creat_fold") {
         $folder_id  = bin2hex(random_bytes('3'));
         $sql = "SELECT * FROM folder_table_no_$p_f_id WHERE folder_id=$folder_id  OR folder_name='$folder_new_name'";
         $result = $mysqli->query($sql);
-        // echo"result-"; 
-        // print_r($result); 
-        // echo "-result"; 
+
         if ((!($result)) || $result->num_rows =="0" ) {
             $folder_new_name = "event".$folder_new_name; 
             break;
@@ -80,18 +70,12 @@ if ($req_type == "creat_fold") {
     //create new table  with table name = new_folder_name
     $sql = "CREATE TABLE folder_event_table_no_$folder_id( img_id  INT  primary key  AUTO_INCREMENT  ,img_org_name VARCHAR(150),img_new_name VARCHAR(150)  ,img_path VARCHAR(150) ,img_title VARCHAR(150),img_dicp VARCHAR(1000) ) ; ";
     $result = $mysqli->query($sql);
-    //  echo  $mysqli->error ;
-    // echo "result1-";
-    // print_r($result);
-    // echo "-result";
+
 
     if ($result == "1") {
         $sql = "INSERT INTO  folder_table_no_$p_f_id (folder_id, folder_name,folder_new_name,visi ) VALUES( '$folder_id', '$f_name' ,'$folder_new_name',1); ";
         $result = $mysqli->query($sql);
-//     echo "$sql<br>"; 
-//  echo "result-";
-//  print_r($result);
-//  echo "-result";
+
         if ($result == "1") {
           
 
@@ -104,24 +88,17 @@ if ($req_type == "creat_fold") {
             else{
                 echo json_encode(array("status" => "error", "message" => "Not able to Create Folder"));
             }
-            //    echo "$sql<br>"; 
-            // echo "temp$temp-<";
-            // echo "result-";
-            // print_r($result);
-            // echo "-result";
+
         }
 
-        // echo $conn->error_get_last; 
     }
-    // echo "ok";
 }else{
 
     //update the existing folder 
         $sql = "UPDATE folder_table_no_$p_f_id SET folder_name='$f_name' WHERE folder_id='$f_id_name' ; ";
         $result = $mysqli->query($sql);
         
-        // echo $sql  ; 
-        // echo $mysqli->error;
+
 
         if($result =="1"){
             echo json_encode(array("status" => "ok", "message" => "Updated Folder Name"));
@@ -129,10 +106,7 @@ if ($req_type == "creat_fold") {
         else{
             echo json_encode(array("status" => "error", "message" => "Not able to Update Folder Name"));
         }
-        // echo "updated fodler"; 
-        // echo "result-";
-        //     print_r($result);
-        //     echo "-result";
+
     }
 
 // echo "end"; 

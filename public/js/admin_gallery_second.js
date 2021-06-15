@@ -25,21 +25,12 @@ var img_close_modal_but = document.getElementById("img_close_modal_but");
 var delete_img_icon = document.getElementById("delete_img_icon"); 
 var img_box_img_part = document.getElementById("img_box_img_part"); 
 var select_fold_img = document.getElementById("select_fold_img"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
+
 
 var img_id_to_del_table = {}; 
 var not_upload_file_table = {}; 
 var not_upload_file_count = 0; 
 var upload_file_data ; 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
-// var upload_img_but = document.getElementById("upload_img_but"); 
 
 
 
@@ -76,11 +67,6 @@ function send_ajax(param, url, method = "post", set_header = true) {
 
 }
 
-// send_ajax("","./api_file/upload_file.php" ).then(data=>{
-//     console.log(data); 
-// }).catch(error=>{
-//     console.log(error); 
-// })
 
 function byte_to_unit(size) {
     if (size <= 1000) return { divi: 1, unit: "B" };
@@ -100,10 +86,6 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
 
    // i => i'th no of file to be uploaded 
 
-    // console.log("files aare ", upload_file_data);
-    // console.log( "------------------------------------"); 
-    // console.log( " i = "+ i +  " total file count   " + total_file_count + " curr file no " + curr_file_no); 
-   
     img_close_modal_but
     prog_bar.style.display="block"; 
     // for (let i = 0; i < upload_file_data.length; i++) {
@@ -146,7 +128,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
                 
                 }
                 else {
-                      console.log(res_data.error);
+                    //   console.log(res_data.error);
                  display_mess(JSON.parse(this.response),3000 )
                 }
                 // upload_img_but.innerHTML ="Upload"; 
@@ -176,7 +158,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
            if( i>=total_file_count){
                //at end of last upload ""\
                 //  display_mess(JSON.parse(this.response),3000 )
-                console.log("upload completed"); 
+                // console.log("upload completed"); 
                 window.location = window.location.pathname + window.location.search;
            }
 
@@ -188,7 +170,7 @@ function upload_file_to_server(i, total_file_count,curr_file_no ) {
     }      
 
  catch (error) {
-     console.log(error); 
+    //  console.log(error); 
  }
 }
      
@@ -199,7 +181,7 @@ upload_file_but.addEventListener("click",    ()=>{
      if (upload_file_data && upload_file_data.length > 0) {
         // total_file_count = upload_file_data.length  - Object.keys(not_upload_file_table).length;
     }else {
-        console.log("no filees found upload function "); 
+        // console.log("no filees found upload function "); 
             display_mess(  "no filees found upload function " ,3000 )
         return  ; 
     }
@@ -302,10 +284,7 @@ back_button_img.addEventListener("click", () => {
 
 delete_img_icon.addEventListener("click", (e) => {
  
-     
-    // console.log(img_box_img_part.firstElementChild.firstElementChild.style.display); 
-    // console.log(main_box.children); 
-    // window.location = "./admin_gallery_first.html";
+
     let s_data =  Object.keys(img_id_to_del_table); 
     if( s_data.length==0){
         // console.log("no data"); 
@@ -328,7 +307,7 @@ delete_img_icon.addEventListener("click", (e) => {
     send_ajax(param,"./api_file/admin_gallery_second.php")
      .then((data) => {
         display_mess(  (data ) ,3000 )
-        console.log((data));
+        // console.log((data));
         window.location = window.location.pathname + window.location.search;
     }).catch(error => {
         display_mess((error  ) ,3000 )
@@ -367,11 +346,10 @@ main_box.addEventListener("focusout", (e) => {
         f_name = f_name.replace(/<\/div>/g,"") ;
         f_name = f_name.replace(/<br>/g,"") ;
         f_name = f_name.replace(/[!@#$%^&*]/g,"-") ;
+        f_name = f_name.replace(/\"/g,"\'") ;
         f_name= f_name.trim(); 
         e.target.innerHTML=f_name; 
-        // console.log("after repl = ",f_name)
-      
-        // console.log("tyep + ",type); 
+
         let url = './api_file/admin_gallery_second.php'; 
         send_ajax("req_type="+type+ "&f_name="+f_name+"&f_id=" + p_f_id+ "&img_id="+f_id, url, "post")
         .then((data) => {
@@ -384,30 +362,12 @@ main_box.addEventListener("focusout", (e) => {
 
 
     }
-    console.log(e.target.className);
-    console.log(e.target.id);
+    // console.log(e.target.className);
+    // console.log(e.target.id);
 
 });
 
 
-
-// main_box.addEventListener("change", (e) => {
-//     console.log("checke"); 
-//     if (e.target.className == "img-select-box") {
-       
-//      img_id_to_del_table 
-
-//     }
-//     // console.log(e.target.id.split("-"));
-
-// });
-// var txt; 
-// if (confirm("Press a button!")) {
-//     txt = "You pressed OK!";
-//   } else {
-//     txt = "You pressed Cancel!";
-//   }
-//   console.log(txt)
 select_fold_img.addEventListener("click", (e) => {
       
     let elem_arr = img_box_img_part.children; 
@@ -424,9 +384,7 @@ select_fold_img.addEventListener("click", (e) => {
         elem_arr[i].style.border=bord; 
     }
 
-    
-    // console.log(img_box_img_part.children[0]); 
-    // window.location = "./admin_gallery_first.html";
+
 
 }); 
 
@@ -444,20 +402,11 @@ main_box.addEventListener("click", (e) => {
             delete img_id_to_del_table[img_id] ; 
             e.target.value="on"; 
         }
-        console.log(img_id_to_del_table );
+        // console.log(img_id_to_del_table );
             
         
       
 
     }
-    // console.log(e.target.id.split("-"));
 
 });
-
-// main_box.addEventListener("focusin", (e)=>{
-//     if(e.target.className=="folder_name"){
-
-//     }
-//     console.log(e.target.className + "foucs in "); 
-
-// }); 
