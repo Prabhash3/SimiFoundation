@@ -366,10 +366,20 @@ color: #040404;
 
 
 
+
     
    
 
   </div>
+
+  </div>
+
+
+
+<div><?php include 'footer.php'; ?></div>
+
+
+
 
 
   <!-- <script src="script.js"></script> -->
@@ -558,5 +568,7 @@ curr_child_no -=1;
 
 
 </body>
+
+
 
 </html>
