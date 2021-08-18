@@ -251,7 +251,7 @@ $visiblilty_html
 
   </div>
 
-  <input type="file" id="input_file" style="display: none;">
+  <input type="file" accept="image/*" id="input_file" style="display: none;">
 
 
 

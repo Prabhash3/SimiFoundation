@@ -219,7 +219,7 @@ $visiblilty_html
 
     back_button_img.addEventListener("click",()=>{ 
       // console.log("click" );
-      window.location="../admin//main/index.php"
+      window.location="/admin/main/index.php"
      }); 
 
     

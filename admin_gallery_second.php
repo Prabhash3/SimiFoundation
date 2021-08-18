@@ -190,7 +190,7 @@ else{
       <div id="drop_body">
         <div id="cancel_upload_but" class="div_but"> X </div>
         <div class="drop_detail">
-          <input type="file" multiple id="upload_file_input" hidden>
+          <input type="file" multiple id="upload_file_input" accept="image/*" hidden>
           <div id="browser_file_but" class="div_but"> Browse Files</div>
           <br> <br>
           <hr class="hor_rule">OR
@@ -318,7 +318,7 @@ else{
     $img_dicp = htmlentities($row['img_dicp'] && strlen($row['img_dicp'])>0?  $row['img_dicp'] : "Write Image Description here....");
     // echo "$img_path"; 
      echo "<div class='img-box' id='img_box_id-$img_id' >
-     <input type='checkbox' class='img-select-box' name='' id='img_c_b_id-$img_id'>
+     <input type='checkbox' class='img-select-box' name='' accept='image/*' id='img_c_b_id-$img_id'>
      <div class='img-body' style='".$img_path."' ></div>
      <div class='img-detail'> 
        <p class='img-title' contenteditable='true' id='img_t_id-$img_id'>     ".$img_title."</p>

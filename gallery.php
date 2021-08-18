@@ -333,8 +333,8 @@ color: #040404;
     // $img_path =  "background-image:url('./upload/". $row['img_path'] ."');";
     $img_path =  'background-image:url("'.'./upload/'.htmlentities($row['img_path']).'");';
     $img_id = htmlentities($row['img_id']);
-    $img_title = $row['img_title'] && strlen($row['img_title'])>0?  htmlentities($row['img_title']) : "Title here..."; 
-    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0? htmlentities( $row['img_dicp']) : "Write Image Description here....";
+    $img_title = $row['img_title'] && strlen($row['img_title'])>0 && trim($row['img_title']) !="Title here..." ?  htmlentities($row['img_title']) : " &nbsp;&nbsp;&nbsp;&nbsp;"; 
+    $img_dicp = $row['img_dicp'] && strlen($row['img_dicp'])>0 && trim( $row['img_dicp']) !="Write Image Description here...."? htmlentities( $row['img_dicp']) : "&nbsp;&nbsp;&nbsp;&nbsp;";
     // echo "$img_path"; 
      echo "<div class='img-box' id='img_box_id-$img_id' >
     
